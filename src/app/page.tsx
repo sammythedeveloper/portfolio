@@ -1,13 +1,14 @@
 // src/app/page.tsx
 import Hero from "@/components/widgets/Hero";
-import Navbar from "@/components/widgets/Nav";
+import SidebarNav from "@/components/widgets/SidebarNav";
+import Navbar from "@/components/widgets/SidebarNav";
 
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
       {/* Your reusable Hero section */}
       <Hero />
-      <Navbar/>
+      <SidebarNav />
       
       {/* You will add more sections here later, e.g., <Projects /> */}
     </main>

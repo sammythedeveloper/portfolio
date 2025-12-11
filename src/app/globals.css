@@ -1,10 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Define your "Color Anthem" */
-  --color-brand: light-dark(#7b2cbf, #bb86fc);
-  --color-brand-dark: #10002b;
+  --color-navy-base: #122637;
+  --color-gold-rich: #d4af37;
+  --color-text-main: #f8fafc;
 }
 
-/* Custom variant to support manual dark mode toggling */
-@custom-variant dark (&:where(.dark, .dark *));
+/* This forces the whole site to be navy */
+html,
+body {
+  background-color: var(--color-navy-base);
+  color: var(--color-text-main);
+  margin: 0;
+  padding: 0;
+}
