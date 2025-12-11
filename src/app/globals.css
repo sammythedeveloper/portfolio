@@ -1,15 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-base: #122637;
-  --color-gold-rich: #d4af37;
-  --color-text-main: #f8fafc;
+  --color-charcoal-base: #132537;
+  --color-charcoal-surface: #2A2A2A;
+
+  --color-copper-rich: #ffffff;
+  --color-copper-dark: #A05A2C;
+  --color-copper-light: #C98A4A;
+
+  --color-text-main: #F5F5F5;
+  --color-text-muted: #B0B0B0;
 }
 
-/* This forces the whole site to be navy */
 html,
 body {
-  background-color: var(--color-navy-base);
+  background-color: var(--color-charcoal-base);
   color: var(--color-text-main);
   margin: 0;
   padding: 0;
