@@ -12,7 +12,7 @@ export default function SidebarNav() {
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed left-4 top-1/4 w-20 flex flex-col items-center gap-4 py-3 bg-navy-base rounded-full border border-gold-rich/20 shadow-2xl z-50"
+      className="hidden md:flex fixed left-4 top-1/4 w-20 flex-col items-center gap-4 py-3 bg-bar-surface rounded-full border border-gold-rich/20 shadow-2xl z-50"
     >
       {NAV_ITEMS.map((item) => (
         <div
@@ -20,6 +20,11 @@ export default function SidebarNav() {
           className="relative flex items-center justify-center cursor-pointer w-12 h-12 group"
           onMouseEnter={() => setHovered(item.name)}
           onMouseLeave={() => setHovered(null)}
+          onClick={() => {
+            document.getElementById(item.id)?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
         >
           <motion.div
             className="absolute w-10 h-10 rounded-full bg-navy-hover/0 transition-colors duration-300"
@@ -39,9 +44,7 @@ export default function SidebarNav() {
               className="object-contain"
               style={{
                 filter:
-                  hovered === item.name
-                    ? "invert(74%) sepia(47%) saturate(682%) hue-rotate(6deg) brightness(92%) contrast(91%)"
-                    : "brightness(0) invert(1)",
+                  hovered === item.name ? "#132537" : "brightness(0) invert(1)",
               }}
             />
           </div>

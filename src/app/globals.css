@@ -2,11 +2,12 @@
 
 @theme {
   --color-charcoal-base: #132537;
-  --color-charcoal-surface: #2A2A2A;
+  --color-bar-surface: #132537;
 
-  --color-copper-rich: #ffffff;
-  --color-copper-dark: #A05A2C;
-  --color-copper-light: #C98A4A;
+  --color-co-rich: #ffffff;
+  --color-co-dark: #A05A2C;
+  --color-co-light: #C98A4A;
+  --color-co-simple: #10B981;
 
   --color-text-main: #F5F5F5;
   --color-text-muted: #B0B0B0;

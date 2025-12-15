@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useMemo } from "react";
+import { useEffect, useState } from "react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 import ReactIcon from "@/components/icons/React.svg";
 import AWSIcon from "@/components/icons/AWS.svg";
@@ -35,6 +37,27 @@ const techIcons = [
 ];
 
 export default function Hero() {
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      setTime(
+        new Intl.DateTimeFormat("en-CA", {
+          timeZone: "America/Toronto",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        }).format(new Date())
+      );
+    };
+
+    updateTime();
+
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const starColors = ["#B87333", "#C98A4A", "#FFFFFF", "#E5E7EB"];
 
   const stars = useMemo(
@@ -73,7 +96,32 @@ export default function Hero() {
   );
 
   return (
-    <section className="relative w-full h-screen bg-navy-base overflow-hidden">
+    <section
+      id="home"
+      className="relative w-full h-screen bg-navy-base overflow-hidden"
+    >
+      <div
+        className="
+    absolute
+    top-0
+    left-0
+    w-full
+    z-20
+    flex
+    justify-between
+    items-center
+    px-6
+    md:px-12
+    py-4
+    text-md
+    backdrop-blur-sm
+  "
+      >
+        <span className="tracking-wide"> Toronto, Ontario</span>
+
+        <span className="tracking-wide"> {time} EST</span>
+      </div>
+
       {/* PARTICLES */}
       <div className="absolute inset-0 z-0">
         {stars.map((star, i) => (
@@ -131,7 +179,7 @@ export default function Hero() {
 
       {/* FLOATING TECH ICONS */}
 
-      <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {floatingTechIcons.map((item, index) => {
           const Icon = item.Icon;
 
@@ -165,40 +213,46 @@ export default function Hero() {
 
       {/* HERO CONTENT */}
 
-     {/* --- UPDATED CONTENT LAYER: SPLIT-SCREEN --- */}
-<div className="relative z-10 flex flex-row items-center justify-center h-full gap-16 px-20">
-  
-  {/* TEXT SECTION (Left) */}
-  <div className="flex flex-col items-start text-left max-w-lg">
-    <h1 className="text-6xl font-bold text-white mb-2">Hello , I'm Samson</h1>
-    <h2 className="text-2xl text-[#10B981] font-semibold mb-4">Full-Stack Developer</h2>
-    <p className="text-gray-400 mb-8 text-lg">
-      Building scalable applications and intuitive user interfaces with a focus on clean, maintainable code.
-    </p>
-    
-    <div className="flex gap-4">
-      <button className="px-6 py-2 border border-gray-600 text-white rounded-md hover:bg-white/10 transition">
-        GitHub profile
-      </button>
-      <button className="px-6 py-2 border border-gray-600 text-white rounded-md hover:bg-white/10 transition">
-        Resume
-      </button>
-    </div>
-  </div>
+      <div className="relative z-10 flex flex-row items-center justify-center h-full gap-16 px-20 ">
+        <div className="flex flex-col items-start text-left max-w-lg">
+          <h1 className="text-6xl font-bold text-white mb-2">
+            Hello ,I'm Samson
+          </h1>
+          <h2 className="text-2xl text-co-simple font-semibold mb-4">
+            Full-Stack Developer
+          </h2>
+          <p className="text-gray-400 mb-8 text-lg">
+            Building scalable applications and intuitive user interfaces with a
+            focus on clean, maintainable code.
+          </p>
 
-  {/* IMAGE CARD SECTION (Right) */}
-  <div className="relative w-72 h-72 bg-[#0F172A] rounded-2xl border border-gray-800 p-4 shadow-2xl flex items-center justify-center">
-    <div className="relative w-full h-full rounded-xl overflow-hidden">
-      <Image
-        src="https://framerusercontent.com/images/G7pAzXNdA4oxyw4kbTVYB0npiM.png?scale-down-to=512&width=1254&height=1254"
-        alt="Samson"
-        fill
-        className="object-cover"
-        priority
-      />
-    </div>
-  </div>
-</div>
+          <div className="flex gap-4">
+            <button className="px-6 py-2 border border-gray-600 text-white rounded-md hover:bg-white/10 transition flex items-center gap-2">
+              <FaGithub className="w-5 h-5" />
+              GitHub
+            </button>
+            <button className="px-6 py-2 border border-gray-600 text-white rounded-md hover:bg-white/10 transition">
+              Resume
+            </button>
+            <button className="px-6 py-2 border border-gray-600 text-white rounded-md hover:bg-white/10 transition flex items-center gap-2">
+              <FaLinkedin className="w-5 h-5" />
+              LinkedIn
+            </button>
+          </div>
+        </div>
+
+        <div className="hidden lg:flex relative w-72 h-72 bg-[#0F172A] rounded-2xl border border-gray-800 p-4 shadow-2xl items-center justify-center">
+          <div className="relative w-full h-full rounded-xl overflow-hidden">
+            <Image
+              src="https://framerusercontent.com/images/G7pAzXNdA4oxyw4kbTVYB0npiM.png?scale-down-to=512&width=1254&height=1254"
+              alt="Samson"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
