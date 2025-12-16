@@ -38,7 +38,7 @@ export default function TechStack() {
   return (
     <section
       id="stack"
-      className="py-20 bg-navy-base text-white flex flex-col items-center px-6"
+      className="min-h-[40vh] flex flex-col justify-center items-center py-20 bg-charcoal-base text-white px-6"
     >
       {/* Header */}
       <p className="text-xs tracking-[0.2em] text-gray-500 uppercase mb-4">

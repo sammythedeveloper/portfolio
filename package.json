@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@studio-freight/react-lenis": "^0.0.47",
     "@tsparticles/engine": "^4.3.2",
     "@tsparticles/react": "^4.3.2",
     "@tsparticles/slim": "^4.3.2",
