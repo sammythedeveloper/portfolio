@@ -1,36 +1,39 @@
 "use client";
 import React from "react";
-import ReactIcon from "@/components/icons/React.svg";
-import AWSIcon from "@/components/icons/AWS.svg";
-import GitIcon from "@/components/icons/GitHub.svg";
-import BootstrapIcon from "@/components/icons/Bootstrap.svg";
-import CSharpIcon from "@/components/icons/CSharp.svg";
-import CSSIcon from "@/components/icons/CSS3.svg";
-import ExpressIcon from "@/components/icons/Express.svg";
-import JavaScriptIcon from "@/components/icons/JavaScript.svg";
-import HTMLIcon from "@/components/icons/HTML5.svg";
-import TypeScriptIcon from "@/components/icons/TypeScript.svg";
-import NodeIcon from "@/components/icons/Node.js.svg";
-import MongoDBIcon from "@/components/icons/MongoDB.svg";
-import DockerIcon from "@/components/icons/Docker.svg";
-import Postgres from "@/components/icons/PostgresSQL.svg";
+import { motion } from "framer-motion";
+import ReactJs from "@/components/icons/React.svg";
+import AWS from "@/components/icons/AWS.svg";
+import Git from "@/components/icons/GitHub.svg";
+import Bootstrap from "@/components/icons/Bootstrap.svg";
+import CSharp from "@/components/icons/CSharp.svg";
+import CSS3 from "@/components/icons/CSS3.svg";
+import Express from "@/components/icons/Express.svg";
+import JavaScript from "@/components/icons/JavaScript.svg";
+import HTML5 from "@/components/icons/HTML5.svg";
+import TypeScript from "@/components/icons/TypeScript.svg";
+import Node from "@/components/icons/Node.js.svg";
+import MongoDB from "@/components/icons/MongoDB.svg";
+import Docker from "@/components/icons/Docker.svg";
+import PostgresSQL from "@/components/icons/PostgresSQL.svg";
 import MySQL from "@/components/icons/MySQL.svg";
+import ESLint from "@/components/icons/ESLint.svg";
 
 const technologies = [
-  { name: "HTML5", Icon: HTMLIcon },
-  { name: "CSS3", Icon: CSSIcon },
-  { name: "JavaScript", Icon: JavaScriptIcon },
-  { name: "React", Icon: ReactIcon },
-  { name: "Express", Icon: ExpressIcon },
-  { name: "TypeScript", Icon: TypeScriptIcon },
-  { name: "Bootstrap", Icon: BootstrapIcon },
-  { name: "PostgreSQL", Icon: Postgres },
-  { name: "CSharp", Icon: CSharpIcon },
-  { name: "Node.js", Icon: NodeIcon },
-  { name: "MongoDB", Icon: MongoDBIcon },
-  { name: "Docker", Icon: DockerIcon },
-  { name: "AWS", Icon: AWSIcon },
-  { name: "Git", Icon: GitIcon },
+  { name: "HTML5", Icon: HTML5 },
+  { name: "CSS3", Icon: CSS3 },
+  { name: "JavaScript", Icon: JavaScript },
+  { name: "React", Icon: ReactJs },
+  { name: "Express", Icon: Express },
+  { name: "TypeScript", Icon: TypeScript },
+  { name: "ESLint", Icon: ESLint },
+  { name: "Git", Icon: Git },
+  { name: "C#", Icon: CSharp },
+  { name: "PostgresSQL", Icon: PostgresSQL },
+  { name: "Bootstrap", Icon: Bootstrap },
+  { name: "AWS", Icon: AWS },
+  { name: "Node.js", Icon: Node },
+  { name: "MongoDB", Icon: MongoDB },
+  { name: "Docker", Icon: Docker },
   { name: "MySQL", Icon: MySQL },
 ];
 
@@ -38,28 +41,36 @@ export default function TechStack() {
   return (
     <section
       id="stack"
-      className="min-h-[40vh] flex flex-col justify-center items-center py-20 bg-charcoal-base text-white px-6"
+      className="py-20 bg-charcoal-base text-white overflow-hidden"
     >
-      {/* Header */}
-      <p className="text-xs tracking-[0.2em] text-gray-500 uppercase mb-4">
-        Tech Stack
-      </p>
-      <h2 className="text-4xl font-bold mb-4">Tools I Build With</h2>
-      <p className="text-gray-400 mb-12 max-w-md text-center">
-        A curated set of technologies I rely on to build modern web experiences
-      </p>
+      <div className="flex flex-col items-center mb-12">
+        <p className="text-xs tracking-[0.2em] text-gray-500 uppercase mb-4">
+          Tech Stack
+        </p>
+        <h2 className="text-4xl font-bold mb-4">Tools I Build With</h2>
+      </div>
 
-      {/* Responsive Grid/Flex Container */}
-      <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
-        {technologies.map((tech) => (
-          <div
-            key={tech.name}
-            className="flex items-center gap-2 px-5 py-3 bg-132537 border border-gray-800 rounded-full hover:border-gray-600 transition-colors cursor-default"
-          >
-            <tech.Icon className="w-5 h-5" />
-            <span className="font-medium text-sm">{tech.name}</span>
-          </div>
-        ))}
+      {/* Marquee Wrapper */}
+      <div className="flex overflow-hidden mask-fade-edges">
+        <motion.div
+          initial={{ x: 0 }}
+          animate={{ x: "-50%" }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="flex gap-6 pr-6"
+        >
+          {[...technologies, ...technologies].map((tech, index) => (
+            <motion.div
+              key={`${tech.name}-${index}`}
+              whileHover={{ scale: 1.1, y: -5 }}
+              className="flex items-center gap-3 px-6 py-4 mt-6 bg-bar-surface border border-gray-800 rounded-2xl cursor-pointer hover:border-gray-500 transition-colors shrink-0"
+            >
+              <tech.Icon className="w-6 h-6" />
+              <span className="font-semibold text-sm whitespace-nowrap">
+                {tech.name}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
