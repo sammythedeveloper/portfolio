@@ -12,7 +12,19 @@ export default function SidebarNav() {
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="hidden md:flex fixed left-4 top-1/4 w-20 flex-col items-center gap-4 py-3 bg-bar-surface rounded-full border border-gold-rich/20 shadow-2xl z-50"
+      className="
+      hidden md:flex
+      fixed left-4 top-1/4
+      w-20
+      flex-col items-center gap-4
+      py-3
+      bg-bar-surface/60
+      backdrop-blur-xl
+      rounded-full
+      border border-white/10
+      shadow-2xl
+      z-50
+    "
     >
       {NAV_ITEMS.map((item) => (
         <div
