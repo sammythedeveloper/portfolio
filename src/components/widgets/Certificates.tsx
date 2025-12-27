@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Award, Calendar, ExternalLink } from "lucide-react";
+import { Award, Calendar, ExternalLink, HeartHandshake } from "lucide-react";
 
 interface CertificateItem {
   title: string;
@@ -53,6 +53,50 @@ const certificates: CertificateItem[] = [
     date: "2025",
     verificationUrl:
       "https://coursera.org/share/d67b8665b73a37cd366bdf5949532d42",
+  },
+];
+
+interface VolunteerItem {
+  organization: string;
+  role: string;
+  date: string;
+  description: string[];
+}
+
+const volunteerExperience: VolunteerItem[] = [
+  {
+    organization: "Art+Health",
+    role: "Community Volunteer",
+    date: "2025",
+    description: [
+      "Supported a nonprofit organization by assisting with digital resources, online communication, and community outreach initiatives for newcomers, youth, seniors, and families in the Ethiopian and Eritrean communities.",
+      "Collaborated with volunteers to organize information and support initiatives that improved community engagement.",
+      "Developed strong communication, teamwork, and organizational skills while working with diverse community members.",
+    ],
+  },
+  {
+    organization: "ISC2 Toronto Chapter",
+    role: "Professional Member",
+    date: "2025",
+    description: [
+      "Active member of the ISC2 Toronto Chapter, engaging in cybersecurity networking, professional development, and knowledge-sharing events within the local security community.",
+    ],
+  },
+  {
+    organization: "YMCA Black Achievers Mentorship Program",
+    role: "Volunteer",
+    date: "2024",
+    description: [
+      "Contribute to initiatives that empower Black youth through mentorship, leadership development, and community service.",
+    ],
+  },
+  {
+    organization: "Habesha Youth Association (HYA)",
+    role: "Community Volunteer",
+    date: "2023",
+    description: [
+      "Support Ethiopian and Eritrean youth in Toronto by participating in networking, mentorship, and community engagement initiatives that foster personal and professional growth.",
+    ],
   },
 ];
 
@@ -188,6 +232,58 @@ export default function Certificates() {
               </div>
             </div>
           ))}
+        </motion.div>
+      </div>
+      {/* Volunteer Section */}
+      <div className="max-w-5xl mx-auto px-6 mt-24">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl font-bold text-co-rich">
+            Volunteer Experience
+          </h2>
+
+          <p className="mt-4 text-sub-rich max-w-2xl">
+            Giving back through mentoring, technical support, and community
+            engagement.
+          </p>
+          <div className="mt-10 grid gap-6">
+            {volunteerExperience.map((item, index) => (
+              <div
+                key={index}
+                className="rounded-3xl border border-white/10 bg-charcoal-base p-6 hover:border-white/20 transition"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex gap-4">
+                    <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/5 text-co-rich">
+                      <HeartHandshake size={24} />
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-white">
+                        {item.role}
+                      </h3>
+                      <p className="text-sub-rich">{item.organization}</p>
+                    </div>
+                  </div>
+
+                  <span className="flex items-center gap-1 text-sm text-sub-rich">
+                    <Calendar size={14} />
+                    {item.date}
+                  </span>
+                </div>
+
+                <ul className="mt-5 list-disc pl-5 space-y-2 text-sub-rich leading-relaxed">
+                  {item.description.map((point, idx) => (
+                    <li key={idx}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
