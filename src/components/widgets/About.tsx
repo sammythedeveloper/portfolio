@@ -5,7 +5,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="min-h-[30vh] flex flex-col justify-center items-center py-20 bg-second-base text-white px-6"
+      className="min-h-[40vh] flex flex-col justify-center items-center py-20 bg-second-base text-white px-6"
     >
       <h1 className="text-6xl font-bold mb-6">About Me</h1>
       <div className="flex flex-wrap justify-center gap-4 max-w-3xl">

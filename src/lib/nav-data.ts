@@ -24,11 +24,6 @@ export const NAV_ITEMS = [
     id: "projects",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/18510/18510347.png",
   },
-  {
-    name: "Documentation",
-    id: "documentation",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/2541/2541979.png",
-  },
 
   {
     name: "Certficates",

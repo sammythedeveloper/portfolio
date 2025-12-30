@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useMemo } from "react";
 import { useEffect, useState } from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
@@ -36,6 +35,64 @@ const techIcons = [
   DockerIcon,
 ];
 
+const starColors = ["#B87333", "#C98A4A", "#FFFFFF", "#E5E7EB"];
+
+type Star = {
+  shapeType: number;
+  size: number;
+  color: string;
+  left: number;
+  top: number;
+  xMove: number;
+  yMove: number;
+  duration: number;
+  delay: number;
+};
+
+type FloatingIcon = {
+  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  left: number;
+  top: number;
+  size: number;
+  xMove: number;
+  yMove: number;
+  duration: number;
+  delay: number;
+};
+
+// STATIC DATA = NO HYDRATION ISSUE
+
+const stars: Star[] = Array.from({ length: 120 }, (_, i) => ({
+  shapeType: i % 3,
+  size: 2 + (i % 5),
+  color: starColors[i % starColors.length],
+
+  left: (i * 37) % 100,
+  top: (i * 53) % 100,
+
+  xMove: i % 2 === 0 ? 300 : -300,
+  yMove: i % 3 === 0 ? -200 : 200,
+
+  duration: 5 + (i % 5),
+  delay: i * 0.1,
+}));
+
+const floatingTechIcons: FloatingIcon[] = techIcons.map((Icon, index) => ({
+  Icon,
+
+  left: (index * 31) % 100,
+  top: (index * 47) % 100,
+
+  size: 40,
+
+  xMove: index % 2 === 0 ? 300 : -300,
+
+  yMove: index % 2 === 0 ? -200 : 200,
+
+  duration: 60 + index * 2,
+  delay: index,
+}));
+
 export default function Hero() {
   const [time, setTime] = useState("");
 
@@ -58,76 +115,47 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  const starColors = ["#B87333", "#C98A4A", "#FFFFFF", "#E5E7EB"];
-
-  const stars = useMemo(
-    () =>
-      Array.from({ length: 120 }, () => ({
-        shapeType: Math.floor(Math.random() * 3),
-        size: Math.random() * 6 + 2,
-        color: starColors[Math.floor(Math.random() * starColors.length)],
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        xMove: (Math.random() - 0.5) * 1000,
-        yMove: (Math.random() - 0.5) * 1000,
-        duration: 5 + Math.random() * 5,
-        delay: Math.random() * 10,
-      })),
-    []
-  );
-
-  const floatingTechIcons = useMemo(
-    () =>
-      techIcons.map((Icon) => ({
-        Icon,
-
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-
-        size: Math.random() * 20 + 35,
-
-        xMove: (Math.random() - 0.5) * 500,
-        yMove: (Math.random() - 0.5) * 500,
-
-        duration: 50 + Math.random() * 30,
-        delay: Math.random() * 10,
-      })),
-    []
-  );
-
   return (
     <section
       id="home"
       className="relative w-full h-screen bg-navy-base overflow-hidden"
     >
+      {/* TOP BAR */}
       <div
         className="
-    absolute
-    top-0
-    left-0
-    w-full
-    z-20
-    flex
-    justify-between
-    items-center
-    px-6
-    md:px-12
-    py-4
-    text-md
-    backdrop-blur-sm
-  "
+          absolute
+          top-0
+          left-0
+          w-full
+          z-20
+          flex
+          justify-between
+          items-center
+          px-6
+          md:px-12
+          py-4
+          text-md
+          backdrop-blur-sm
+        "
       >
-        <span className="tracking-wide"> Toronto, Ontario</span>
+        <span className="tracking-wide">Toronto, Ontario</span>
 
-        <span className="tracking-wide"> {time} EST</span>
+        <span className="tracking-wide">{time} EST</span>
       </div>
 
       {/* PARTICLES */}
+
       <div className="absolute inset-0 z-0">
         {stars.map((star, i) => (
           <motion.div
             key={i}
-            className="absolute flex items-center justify-center pointer-events-none"
+            className="
+              absolute
+              flex
+              items-center
+              justify-center
+              pointer-events-none
+            "
             style={{
               left: `${star.left}%`,
               top: `${star.top}%`,
@@ -137,6 +165,7 @@ export default function Hero() {
             animate={{
               x: [0, star.xMove],
               y: [0, star.yMove],
+
               opacity: [0, 0.8, 0],
 
               rotate: star.shapeType !== 0 ? [0, 360] : 0,
@@ -144,8 +173,8 @@ export default function Hero() {
             transition={{
               duration: star.duration,
               repeat: Infinity,
-              ease: "linear",
               repeatType: "reverse",
+              ease: "linear",
               delay: star.delay,
             }}
           >
@@ -155,7 +184,19 @@ export default function Hero() {
                 fill={star.color}
                 className="w-full h-full"
               >
-                <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                <path
+                  d="
+                    M12 0
+                    L14.59 9.41
+                    L24 12
+                    L14.59 14.59
+                    L12 24
+                    L9.41 14.59
+                    L0 12
+                    L9.41 9.41
+                    L12 0
+                  "
+                />
               </svg>
             ) : star.shapeType === 2 ? (
               <svg
@@ -163,11 +204,23 @@ export default function Hero() {
                 fill={star.color}
                 className="w-full h-full"
               >
-                <path d="M12 0L24 12L12 24L0 12L12 0Z" />
+                <path
+                  d="
+                    M12 0
+                    L24 12
+                    L12 24
+                    L0 12
+                    Z
+                  "
+                />
               </svg>
             ) : (
               <div
-                className="w-full h-full rounded-full"
+                className="
+                    w-full
+                    h-full
+                    rounded-full
+                  "
                 style={{
                   backgroundColor: star.color,
                 }}
@@ -177,16 +230,26 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* FLOATING TECH ICONS */}
+      {/* FLOATING TECHNOLOGY ICONS */}
 
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div
+        className="
+          absolute
+          inset-0
+          pointer-events-none
+          overflow-hidden
+        "
+      >
         {floatingTechIcons.map((item, index) => {
           const Icon = item.Icon;
 
           return (
             <motion.div
               key={index}
-              className="absolute opacity-10"
+              className="
+                    absolute
+                    opacity-10
+                  "
               style={{
                 left: `${item.left}%`,
                 top: `${item.top}%`,
@@ -205,7 +268,12 @@ export default function Hero() {
                 delay: item.delay,
               }}
             >
-              <Icon className="w-full h-full" />
+              <Icon
+                className="
+                      w-full
+                      h-full
+                    "
+              />
             </motion.div>
           );
         })}
@@ -213,36 +281,145 @@ export default function Hero() {
 
       {/* HERO CONTENT */}
 
-      <div className="relative z-10 flex flex-row items-center justify-center h-full gap-16 px-20 ">
-        <div className="flex flex-col items-start text-left max-w-lg">
-          <h1 className="text-6xl font-bold text-white mb-2">
-            Hello ,I'm Samson
+      <div
+        className="
+          relative
+          z-10
+          flex
+          flex-row
+          items-center
+          justify-center
+          h-full
+          gap-16
+          px-20
+        "
+      >
+        <div
+          className="
+            flex
+            flex-col
+            items-start
+            text-left
+            max-w-lg
+          "
+        >
+          <h1
+            className="
+              text-6xl
+              font-bold
+              text-white
+              mb-2
+            "
+          >
+            Hello, I'm Samson
           </h1>
-          <h2 className="text-2xl text-co-simple font-semibold mb-4">
+
+          <h2
+            className="
+              text-2xl
+              text-co-simple
+              font-semibold
+              mb-4
+            "
+          >
             Full-Stack Developer
           </h2>
-          <p className="text-gray-400 mb-8 text-lg">
+
+          <p
+            className="
+              text-gray-400
+              mb-8
+              text-lg
+            "
+          >
             Building scalable applications and intuitive user interfaces with a
             focus on clean, maintainable code.
           </p>
 
           <div className="flex gap-4">
-            <button className="px-6 py-2 border border-gray-600 text-white rounded-md hover:bg-white/10 transition flex items-center gap-2">
+            <button
+              className="
+                px-6
+                py-2
+                border
+                border-gray-600
+                text-white
+                rounded-md
+                hover:bg-white/10
+                transition
+                flex
+                items-center
+                gap-2
+              "
+            >
               <FaGithub className="w-5 h-5" />
               GitHub
             </button>
-            <button className="px-6 py-2 border border-gray-600 text-white rounded-md hover:bg-white/10 transition">
+
+            <button
+              className="
+                px-6
+                py-2
+                border
+                border-gray-600
+                text-white
+                rounded-md
+                hover:bg-white/10
+                transition
+              "
+            >
               Resume
             </button>
-            <button className="px-6 py-2 border border-gray-600 text-white rounded-md hover:bg-white/10 transition flex items-center gap-2">
+
+            <button
+              className="
+                px-6
+                py-2
+                border
+                border-gray-600
+                text-white
+                rounded-md
+                hover:bg-white/10
+                transition
+                flex
+                items-center
+                gap-2
+              "
+            >
               <FaLinkedin className="w-5 h-5" />
               LinkedIn
             </button>
           </div>
         </div>
 
-        <div className="hidden lg:flex relative w-72 h-72 bg-[#0F172A] rounded-2xl border border-gray-800 p-4 shadow-2xl items-center justify-center">
-          <div className="relative w-full h-full rounded-xl overflow-hidden">
+        {/* PROFILE IMAGE */}
+
+        <div
+          className="
+            hidden
+            lg:flex
+            relative
+            w-72
+            h-72
+            bg-[#0F172A]
+            rounded-2xl
+            border
+            border-gray-800
+            p-4
+            shadow-2xl
+            items-center
+            justify-center
+          "
+        >
+          <div
+            className="
+              relative
+              w-full
+              h-full
+              rounded-xl
+              overflow-hidden
+            "
+          >
             <Image
               src="https://framerusercontent.com/images/G7pAzXNdA4oxyw4kbTVYB0npiM.png?scale-down-to=512&width=1254&height=1254"
               alt="Samson"
