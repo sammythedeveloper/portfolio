@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
-import Github from "@/components/icons/GitHub.svg";
+import { Github} from "lucide-react";
 
 interface ProjectModalProps {
   project: {
@@ -148,7 +148,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 rel="noreferrer"
                 className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium  hover:bg-co-rich hover:text-black transition"
               >
-                GitHub <Github size={14} />
+                GitHub <Github className="text-white" size={14} />
               </a>
               <a
                 href={project.live}
