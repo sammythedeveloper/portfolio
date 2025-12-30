@@ -14,15 +14,17 @@ export const NAV_ITEMS = [
     id: "stack",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/3573/3573187.png",
   },
-  {
-    name: "Experience",
-    id: "experience",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/1063/1063299.png",
-  },
+
   {
     name: "Projects",
     id: "projects",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/18510/18510347.png",
+  },
+  
+  {
+    name: "Experience",
+    id: "experience",
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/1063/1063299.png",
   },
 
   {

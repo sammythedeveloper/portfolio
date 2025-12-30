@@ -2,10 +2,10 @@ export const projects = [
   {
     title: "Devpulse",
     description:
-      "A modern full-stack platform focused on delivering efficient and user-friendly solutions.",
+      "An AI-powered personalized assistant that uses user input metrics to generate real-time, data-driven recommendations.",
     purpose:
-      "Devpulse is designed to help users manage workflows efficiently with a modern full-stack architecture.",
-    image: "/projects/devpulse.png",
+      "The purpose is to leverage AI and user data to provide intelligent, adaptive recommendations that improve user experience and decision-making.",
+    image: "/projects/assistance.jpg",
 
     techStack: [
       "Next.js",

@@ -5,6 +5,7 @@ import SidebarNav from "@/components/widgets/SidebarNav";
 import TechStack from "@/components/widgets/TechStack";
 import ParallaxSection from "@/components/ui/ParallaxSection"; // Our new component
 import Projects from "@/components/widgets/Projects";
+import Experience from "@/components/widgets/Experience";
 
 export default function Home() {
   return (
@@ -26,8 +27,12 @@ export default function Home() {
       </ParallaxSection>
       
       <ParallaxSection>
-        <About />
+        <Experience/>
       </ParallaxSection>
+
+      
+      
+
     </main>
   );
 }
