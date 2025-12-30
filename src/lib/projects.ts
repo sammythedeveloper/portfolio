@@ -26,7 +26,7 @@ export const projects = [
 
     documentation:
       "https://www.notion.so/DevPluse-AI-35e8bd3daece80b39e33e7b092a21c58?source=copy_link",
-    live: "main.d32a0gc1jhgn6.amplifyapp.com/",
+    live: "https://main.d32a0gc1jhgn6.amplifyapp.com/",
     repo: "https://github.com/sammythedeveloper/hassistance",
   },
 
@@ -52,7 +52,7 @@ export const projects = [
     ],
 
     documentation: "#",
-    live: "booking-pcmm.onrender.com/listings",
+    live: "https://booking-pcmm.onrender.com/listings",
     repo: "https://github.com/sammythedeveloper/Booking",
   },
 
@@ -78,7 +78,7 @@ export const projects = [
 
     documentation:
       "https://www.notion.so/Slate-39a8bd3daece80b78818ce543a883d8c?source=copy_link",
-    live: "slate-fawn-one.vercel.app/",
+    live: "https://slate-fawn-one.vercel.app/",
     repo: "https://github.com/sammythedeveloper/Slate_backend/tree/main/membership-server",
   },
 
@@ -103,7 +103,7 @@ export const projects = [
     ],
 
     documentation: "#",
-    live: "sammythedeveloper.github.io/Nova-shop",
+    live: "https://sammythedeveloper.github.io/Nova-shop/",
     repo: "https://github.com/sammythedeveloper/Nova-shop",
   },
 
@@ -128,7 +128,7 @@ export const projects = [
     documentation:
       "https://www.notion.so/Stacky-36e8bd3daece80ab90c5d6823b2fa655?source=copy_link",
     live: "https://stackyapp.vercel.app/",
-    repo: "#",
+    repo: "https://github.com/sammythedeveloper/Stacky",
   },
 
   {

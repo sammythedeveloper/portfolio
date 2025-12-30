@@ -207,6 +207,22 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 GitHub
                 <Github size={16} />
               </a>
+              <a
+                href={project.live}
+                target="_blank"
+                className="
+                  flex
+                  items-center
+                  gap-2
+                  px-6
+                  py-3
+                  rounded-full
+                  border
+                  border-white/20
+                "
+              >
+                Live
+              </a>
             </div>
           </motion.div>
         </motion.div>
