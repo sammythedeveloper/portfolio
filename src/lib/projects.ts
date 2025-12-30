@@ -110,7 +110,7 @@ export const projects = [
   {
     title: "Stacky",
     description:
-      "utilizes cutting-edge frameworks for both frontend reactivity and backend robustness",
+      "Utilizes cutting-edge frameworks for both frontend reactivity and backend robustness",
 
     purpose: "Stacky helps developers manage and organize technical resources.",
 

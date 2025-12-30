@@ -41,13 +41,15 @@ export default function TechStack() {
   return (
     <section
       id="stack"
-      className="py-20 bg-charcoal-base text-white overflow-hidden"
+      className="py-20 bg-charcoal-base text-sub-rich overflow-hidden"
     >
       <div className="flex flex-col items-center mb-12">
-        <p className="text-xs tracking-[0.2em] text-gray-500 uppercase mb-4">
+        <p className="text-xs tracking-[0.2em] text-co-rich uppercase mb-4">
           Tech Stack
         </p>
-        <h2 className="text-4xl font-bold mb-4">Tools I Build With</h2>
+        <h2 className="text-4xl font-bold mb-4 text-co-rich ">
+          Tools I Build With
+        </h2>
       </div>
 
       {/* Marquee Wrapper */}
@@ -62,7 +64,7 @@ export default function TechStack() {
             <motion.div
               key={`${tech.name}-${index}`}
               whileHover={{ scale: 1.1, y: -5 }}
-              className="flex items-center gap-3 px-6 py-4 mt-6 bg-bar-surface border border-gray-800 rounded-2xl cursor-pointer hover:border-gray-500 transition-colors shrink-0"
+              className="flex items-center gap-3 px-6 py-4 mt-6 bg-bar-surface border border-gray-800 rounded-2xl cursor-pointer hover:border-sub-rich transition-colors shrink-0"
             >
               <tech.Icon className="w-6 h-6" />
               <span className="font-semibold text-sm whitespace-nowrap">

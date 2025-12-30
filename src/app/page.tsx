@@ -24,6 +24,10 @@ export default function Home() {
       <ParallaxSection>
         <Projects />
       </ParallaxSection>
+      
+      <ParallaxSection>
+        <About />
+      </ParallaxSection>
     </main>
   );
 }

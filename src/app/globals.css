@@ -5,13 +5,14 @@
   --color-second-base: #112638;
   --color-bar-surface: #132537;
 
-  --color-co-rich: #ffffff;
-  --color-co-dark: #A05A2C;
-  --color-co-light: #C98A4A;
-  --color-co-simple: #10B981;
+  --color-co-rich: #c89549;
+  --color-sub-rich: #a1a1aa;
+  --color-co-dark: #a05a2c;
+  --color-co-light: #c98a4a;
+  --color-co-simple: #10b981;
 
-  --color-text-main: #F5F5F5;
-  --color-text-muted: #B0B0B0;
+  --color-text-main: #f5f5f5;
+  --color-text-muted: #b0b0b0;
 }
 
 html,

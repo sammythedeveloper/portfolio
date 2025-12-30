@@ -307,7 +307,7 @@ export default function Hero() {
             className="
               text-6xl
               font-bold
-              text-white
+              text-co-rich
               mb-2
             "
           >
@@ -317,7 +317,7 @@ export default function Hero() {
           <h2
             className="
               text-2xl
-              text-co-simple
+              text-sub-rich
               font-semibold
               mb-4
             "
@@ -327,7 +327,7 @@ export default function Hero() {
 
           <p
             className="
-              text-gray-400
+            text-sub-rich
               mb-8
               text-lg
             "
@@ -343,9 +343,10 @@ export default function Hero() {
                 py-2
                 border
                 border-gray-600
-                text-white
+                text-sub-rich
                 rounded-md
-                hover:bg-white/10
+                hover:bg-co-rich
+                hover:text-black
                 transition
                 flex
                 items-center
@@ -362,9 +363,10 @@ export default function Hero() {
                 py-2
                 border
                 border-gray-600
-                text-white
+                text-sub-rich
                 rounded-md
-                hover:bg-white/10
+                hover:bg-co-rich
+                hover:text-black
                 transition
               "
             >
@@ -377,9 +379,10 @@ export default function Hero() {
                 py-2
                 border
                 border-gray-600
-                text-white
+                text-sub-rich
                 rounded-md
-                hover:bg-white/10
+                hover:bg-co-rich
+                hover:text-black
                 transition
                 flex
                 items-center
