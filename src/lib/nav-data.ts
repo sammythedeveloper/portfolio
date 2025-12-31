@@ -20,11 +20,11 @@ export const NAV_ITEMS = [
     id: "projects",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/18510/18510347.png",
   },
-  
+
   {
     name: "Experience",
     id: "experience",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/1063/1063299.png",
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/522/522561.png",
   },
 
   {
