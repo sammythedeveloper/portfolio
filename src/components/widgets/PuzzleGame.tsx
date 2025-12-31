@@ -1,180 +1,360 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, Award, Sparkles, HelpCircle } from "lucide-react";
+import { RotateCcw, Award, Sparkles, Play } from "lucide-react";
 
-// A 3x3 puzzle grid (8 numbered tiles, 1 empty tile represented by 0)
-const WINNING_BOARD = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+const LEVELS = [
+  {
+    id: 1,
+    rows: 3,
+    cols: 4,
+    image: "/projects/puzzel1.jpg",
+  },
+  {
+    id: 2,
+    rows: 4,
+    cols: 4,
+    image: "/projects/puzzel2.jpg",
+  },
+];
 
 export default function PuzzleGame() {
-  const [board, setBoard] = useState<number[]>(WINNING_BOARD);
-  const [isWon, setIsWon] = useState(false);
+  const [level, setLevel] = useState(0);
+
+  const current = LEVELS[level];
+
+  const totalPieces = current.rows * current.cols;
+
+  const createSolvedBoard = () => {
+    return [...Array(totalPieces - 1).keys()].map((i) => i + 1).concat(0);
+  };
+
+  const [board, setBoard] = useState<number[]>(createSolvedBoard());
+
   const [moves, setMoves] = useState(0);
+  const [won, setWon] = useState(false);
 
-  // Helper function to check if a tile can move to the empty space (0)
   const canMove = (index: number) => {
-    const emptyIndex = board.indexOf(0);
-    const row = Math.floor(index / 3);
-    const col = index % 3;
-    const emptyRow = Math.floor(emptyIndex / 3);
-    const emptyCol = emptyIndex % 3;
+    const empty = board.indexOf(0);
 
-    // A tile can move if it's directly next to, above, or below the empty tile
+    const row = Math.floor(index / current.cols);
+    const col = index % current.cols;
+
+    const emptyRow = Math.floor(empty / current.cols);
+    const emptyCol = empty % current.cols;
+
     return Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1;
   };
 
-  // Move tile action handler
-  const handleTileClick = (index: number) => {
-    if (isWon || !canMove(index)) return;
+  const moveTile = (index: number) => {
+    if (!canMove(index) || won) return;
 
-    const emptyIndex = board.indexOf(0);
-    const newBoard = [...board];
+    const empty = board.indexOf(0);
 
-    // Swap the clicked tile with the empty space
-    newBoard[emptyIndex] = board[index];
-    newBoard[index] = 0;
+    const next = [...board];
 
-    setBoard(newBoard);
+    next[empty] = board[index];
+    next[index] = 0;
+
+    setBoard(next);
     setMoves((prev) => prev + 1);
   };
 
-  // Check for win condition
-  useEffect(() => {
-    if (moves > 0 && board.every((val, i) => val === WINNING_BOARD[i])) {
-      setIsWon(true);
-    }
-  }, [board, moves]);
+  const shuffle = () => {
+    let shuffled = createSolvedBoard();
 
-  // Shuffle board function (Makes sure the generated board is actually solvable)
-  const shuffleBoard = () => {
-    let currentBoard = [...WINNING_BOARD];
-    let shuffleMoves = 0;
+    const amount = level === 0 ? 80 : 120;
 
-    while (shuffleMoves < 40) {
-      const emptyIndex = currentBoard.indexOf(0);
-      const validIndices: number[] = [];
+    for (let i = 0; i < amount; i++) {
+      const empty = shuffled.indexOf(0);
 
-      // Find all movable neighbor tiles around the empty slot
-      for (let i = 0; i < 9; i++) {
-        const row = Math.floor(i / 3);
-        const col = i % 3;
-        const emptyRow = Math.floor(emptyIndex / 3);
-        const emptyCol = emptyIndex % 3;
+      const possible: number[] = [];
+
+      for (let j = 0; j < shuffled.length; j++) {
+        const row = Math.floor(j / current.cols);
+        const col = j % current.cols;
+
+        const emptyRow = Math.floor(empty / current.cols);
+
+        const emptyCol = empty % current.cols;
+
         if (Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1) {
-          validIndices.push(i);
+          possible.push(j);
         }
       }
 
-      // Pick a random movable tile and swap it
-      const randomIndex =
-        validIndices[Math.floor(Math.random() * validIndices.length)];
-      currentBoard[emptyIndex] = currentBoard[randomIndex];
-      currentBoard[randomIndex] = 0;
-      shuffleMoves++;
+      const random = possible[Math.floor(Math.random() * possible.length)];
+
+      [shuffled[random], shuffled[empty]] = [shuffled[empty], shuffled[random]];
     }
 
-    setBoard(currentBoard);
-    setIsWon(false);
+    setBoard(shuffled);
     setMoves(0);
+    setWon(false);
   };
 
-  // Auto-shuffle on component initial mount
   useEffect(() => {
-    shuffleBoard();
-  }, []);
+    const solved = board.every(
+      (value, index) =>
+        value === index + 1 || (index === board.length - 1 && value === 0)
+    );
+
+    if (solved && moves > 0) {
+      setWon(true);
+    }
+  }, [board, moves]);
+
+  useEffect(() => {
+    shuffle();
+  }, [level]);
+
+  const nextLevel = () => {
+    setLevel(1);
+  };
+
+  const openReward = () => {
+    window.open("https://www.youtube.com/watch?v=SRwDRg5MVSo", "_blank");
+  };
 
   return (
-    <section id="terminal-game" className="w-full px-6 py-32 bg-transparent">
-      <div className="max-w-4xl mx-auto flex flex-col items-center">
-        {/* Header Title Info */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white tracking-tight flex items-center justify-center gap-3">
-            Take a Break <HelpCircle className="text-co-rich w-8 h-8" />
+    <section id="terminal-game" className="w-full px-6 py-32">
+      <div
+        className="
+max-w-4xl
+mx-auto
+flex
+flex-col
+items-center
+"
+      >
+        <div className="text-center mb-10">
+          <h2
+            className="
+text-4xl
+font-bold
+text-white
+flex
+items-center
+justify-center
+gap-3
+"
+          >
+            Puzzle Challenge
+            <Sparkles className="text-co-rich" />
           </h2>
-          <p className="mt-3 text-sub-rich max-w-md">
-            Slide the mixed tiles into sequential order ($1 \rightarrow 8$) to
-            clear the empty space at the bottom right.
+
+          <p className="mt-3 text-sub-rich font-mono">
+            Level {level + 1}
+            {" • "}
+            {totalPieces} Pieces
           </p>
         </div>
 
-        {/* Dashboard Status Controls Panel */}
-        <div className="w-full max-w-[340px] flex items-center justify-between mb-6 px-2 text-sm font-mono text-sub-rich">
-          <div className="flex items-center gap-1">
-            <span>Moves:</span>
-            <span className="text-white font-bold">{moves}</span>
-          </div>
+        <div
+          className="
+w-full
+max-w-[500px]
+flex
+justify-between
+items-center
+mb-5
+text-sm
+font-mono
+text-sub-rich
+"
+        >
+          <span>
+            Moves:
+            <b className="text-white ml-2">{moves}</b>
+          </span>
+
           <button
-            onClick={shuffleBoard}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.08] text-white hover:text-co-rich transition-all duration-200"
+            onClick={shuffle}
+            className="
+flex
+items-center
+gap-2
+px-4
+py-2
+rounded-xl
+border
+border-white/10
+bg-white/5
+text-white
+hover:bg-white/10
+transition
+"
           >
-            <RotateCcw size={14} />
-            <span>Reset</span>
+            <RotateCcw size={15} />
+            Reset
           </button>
         </div>
 
-        {/* The Game Matrix Board wrapper */}
-        <div className="relative p-4 rounded-3xl bg-charcoal-base border border-white/10 shadow-2xl overflow-hidden w-full max-w-[340px] aspect-square flex flex-col justify-center">
-          <div className="grid grid-cols-3 gap-3 h-full">
-            {board.map((tile, index) => {
-              const isMovable = canMove(index) && !isWon;
+        <div
+          className="
+relative
+w-full
+max-w-[500px]
+p-3
+rounded-3xl
+bg-charcoal-base
+border
+border-white/10
+shadow-2xl
+"
+          style={{
+            aspectRatio: `${current.cols}/${current.rows}`,
+          }}
+        >
+          <div
+            className="
+grid
+gap-1
+w-full
+h-full
+"
+            style={{
+              gridTemplateColumns: `repeat(${current.cols}, minmax(0,1fr))`,
+            }}
+          >
+            {board.map((piece, index) => {
+              if (piece === 0) {
+                return <div key={index} />;
+              }
+
+              const movable = canMove(index) && !won;
+
+              const original = piece - 1;
+
+              const pieceX = original % current.cols;
+
+              const pieceY = Math.floor(original / current.cols);
+
+              const x = (pieceX * 100) / (current.cols - 1);
+
+              const y = (pieceY * 100) / (current.rows - 1);
+
               return (
                 <motion.button
-                  key={`tile-${tile}-${index}`}
+                  key={`${piece}-${index}`}
                   layout
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  onClick={() => handleTileClick(index)}
-                  disabled={tile === 0 || isWon}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 25,
+                  }}
+                  onClick={() => moveTile(index)}
                   className={`
-                    w-full h-full rounded-2xl flex items-center justify-center font-mono text-2xl font-bold transition-all duration-200
-                    ${tile === 0 ? "opacity-0 pointer-events-none" : ""}
-                    ${
-                      isMovable
-                        ? "bg-white/[0.03] border border-white/10 text-white cursor-pointer hover:border-co-rich/40 hover:bg-white/[0.06]"
-                        : "bg-white/[0.01] border border-white/5 text-sub-rich/40 cursor-not-allowed"
-                    }
-                  `}
+overflow-hidden
+rounded-lg
+border
+aspect-square
+
+${movable ? "border-co-rich/50" : "border-white/10"}
+
+`}
                 >
-                  {tile !== 0 && tile}
+                  <div
+                    className="w-full h-full"
+                    style={{
+                      backgroundImage: `url(${current.image})`,
+                      backgroundSize: `${current.cols * 100}% ${
+                        current.rows * 100
+                      }%`,
+                      backgroundPosition: `${x}% ${y}%`,
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  />
                 </motion.button>
               );
             })}
           </div>
 
-          {/* Smooth overlay triggered on state success resolution */}
           <AnimatePresence>
-            {isWon && (
+            {won && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="absolute inset-0 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center"
+                initial={{
+                  opacity: 0,
+                  scale: 0.95,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                }}
+                className="
+absolute
+inset-0
+rounded-3xl
+bg-black/90
+backdrop-blur-md
+flex
+items-center
+justify-center
+"
               >
-                <motion.div
-                  initial={{ y: 20 }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.1, type: "spring" }}
-                  className="flex flex-col items-center"
-                >
-                  <div className="p-4 bg-co-rich/10 text-co-rich border border-co-rich/20 rounded-full mb-4 animate-bounce">
-                    <Award size={36} />
+                <div className="text-center p-6">
+                  <div
+                    className="
+mx-auto
+mb-5
+w-fit
+p-4
+rounded-full
+bg-co-rich/10
+text-co-rich
+"
+                  >
+                    <Award size={40} />
                   </div>
-                  <h3 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-                    Puzzle Solved!{" "}
-                    <Sparkles size={20} className="text-co-rich" />
+
+                  <h3
+                    className="
+text-3xl
+font-bold
+text-white
+"
+                  >
+                    {level === 0 ? "Level Complete 🎉" : "Secret Unlocked 🏆"}
                   </h3>
-                  <p className="mt-2 text-sm text-sub-rich/80 max-w-[240px] leading-relaxed">
-                    Excellent problem-solving logic. Let's apply that to your
-                    product pipeline!
+
+                  <p
+                    className="
+mt-3
+text-sub-rich
+"
+                  >
+                    {level === 0
+                      ? "Ready for the final puzzle?"
+                      : "Enjoy my youtube video."}
                   </p>
 
-                  <a
-                    href="#contact"
-                    className="mt-6 px-5 py-2.5 bg-white text-black text-xs font-bold font-mono uppercase tracking-wider rounded-xl transition-transform active:scale-95 hover:bg-white/90"
+                  <button
+                    onClick={level === 0 ? nextLevel : openReward}
+                    className="
+mt-7
+px-6
+py-3
+rounded-xl
+bg-white
+text-black
+font-bold
+flex
+items-center
+gap-2
+mx-auto
+"
                   >
-                    Hire Samson
-                  </a>
-                </motion.div>
+                    {level === 0 ? (
+                      "Level 2 →"
+                    ) : (
+                      <>
+                        <Play size={16} />
+                        Watch Video
+                      </>
+                    )}
+                  </button>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
