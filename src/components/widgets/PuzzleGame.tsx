@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, Award, Sparkles, Play } from "lucide-react";
+import {
+  RotateCcw,
+  Trophy,
+  Sparkles,
+  ArrowRight,
+  Play,
+  MousePointer2,
+} from "lucide-react";
 
 const LEVELS = [
   {
@@ -31,7 +38,6 @@ export default function PuzzleGame() {
   };
 
   const [board, setBoard] = useState<number[]>(createSolvedBoard());
-
   const [moves, setMoves] = useState(0);
   const [won, setWon] = useState(false);
 
@@ -44,14 +50,15 @@ export default function PuzzleGame() {
     const emptyRow = Math.floor(empty / current.cols);
     const emptyCol = empty % current.cols;
 
-    return Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1;
+    return (
+      Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1
+    );
   };
 
   const moveTile = (index: number) => {
     if (!canMove(index) || won) return;
 
     const empty = board.indexOf(0);
-
     const next = [...board];
 
     next[empty] = board[index];
@@ -76,17 +83,24 @@ export default function PuzzleGame() {
         const col = j % current.cols;
 
         const emptyRow = Math.floor(empty / current.cols);
-
         const emptyCol = empty % current.cols;
 
-        if (Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1) {
+        if (
+          Math.abs(row - emptyRow) +
+            Math.abs(col - emptyCol) ===
+          1
+        ) {
           possible.push(j);
         }
       }
 
-      const random = possible[Math.floor(Math.random() * possible.length)];
+      const random =
+        possible[Math.floor(Math.random() * possible.length)];
 
-      [shuffled[random], shuffled[empty]] = [shuffled[empty], shuffled[random]];
+      [shuffled[random], shuffled[empty]] = [
+        shuffled[empty],
+        shuffled[random],
+      ];
     }
 
     setBoard(shuffled);
@@ -97,7 +111,8 @@ export default function PuzzleGame() {
   useEffect(() => {
     const solved = board.every(
       (value, index) =>
-        value === index + 1 || (index === board.length - 1 && value === 0)
+        value === index + 1 ||
+        (index === board.length - 1 && value === 0)
     );
 
     if (solved && moves > 0) {
@@ -114,250 +129,365 @@ export default function PuzzleGame() {
   };
 
   const openReward = () => {
-    window.open("https://www.youtube.com/watch?v=SRwDRg5MVSo", "_blank");
+    window.open(
+      "https://www.youtube.com/watch?v=SRwDRg5MVSo",
+      "_blank"
+    );
   };
 
   return (
-    <section id="terminal-game" className="w-full px-6 py-32">
-      <div
-        className="
-max-w-4xl
-mx-auto
-flex
-flex-col
-items-center
-"
-      >
-        <div className="text-center mb-10">
-          <h2
-            className="
-text-4xl
-font-bold
-text-white
-flex
-items-center
-justify-center
-gap-3
-"
-          >
-            Puzzle Challenge
-            <Sparkles className="text-co-rich" />
-          </h2>
+    <section
+      id="terminal-game"
+      className="relative w-full overflow-hidden py-28 md:py-36 px-6"
+    >
+      {/* Ambient background */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-1/3 h-80 w-80 -translate-x-1/2 rounded-full bg-co-rich/5 blur-[120px]" />
+      </div>
 
-          <p className="mt-3 text-sub-rich font-mono">
-            Level {level + 1}
-            {" • "}
-            {totalPieces} Pieces
-          </p>
-        </div>
-
-        <div
-          className="
-w-full
-max-w-[500px]
-flex
-justify-between
-items-center
-mb-5
-text-sm
-font-mono
-text-sub-rich
-"
+      <div className="relative max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center"
         >
-          <span>
-            Moves:
-            <b className="text-white ml-2">{moves}</b>
-          </span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
+            <Sparkles
+              size={14}
+              className="text-co-rich"
+            />
 
-          <button
-            onClick={shuffle}
-            className="
-flex
-items-center
-gap-2
-px-4
-py-2
-rounded-xl
-border
-border-white/10
-bg-white/5
-text-white
-hover:bg-white/10
-transition
-"
-          >
-            <RotateCcw size={15} />
-            Reset
-          </button>
-        </div>
-
-        <div
-          className="
-relative
-w-full
-max-w-[500px]
-p-3
-rounded-3xl
-bg-charcoal-base
-border
-border-white/10
-shadow-2xl
-"
-          style={{
-            aspectRatio: `${current.cols}/${current.rows}`,
-          }}
-        >
-          <div
-            className="
-grid
-gap-1
-w-full
-h-full
-"
-            style={{
-              gridTemplateColumns: `repeat(${current.cols}, minmax(0,1fr))`,
-            }}
-          >
-            {board.map((piece, index) => {
-              if (piece === 0) {
-                return <div key={index} />;
-              }
-
-              const movable = canMove(index) && !won;
-
-              const original = piece - 1;
-
-              const pieceX = original % current.cols;
-
-              const pieceY = Math.floor(original / current.cols);
-
-              const x = (pieceX * 100) / (current.cols - 1);
-
-              const y = (pieceY * 100) / (current.rows - 1);
-
-              return (
-                <motion.button
-                  key={`${piece}-${index}`}
-                  layout
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 25,
-                  }}
-                  onClick={() => moveTile(index)}
-                  className={`
-overflow-hidden
-rounded-lg
-border
-aspect-square
-
-${movable ? "border-co-rich/50" : "border-white/10"}
-
-`}
-                >
-                  <div
-                    className="w-full h-full"
-                    style={{
-                      backgroundImage: `url(${current.image})`,
-                      backgroundSize: `${current.cols * 100}% ${
-                        current.rows * 100
-                      }%`,
-                      backgroundPosition: `${x}% ${y}%`,
-                      backgroundRepeat: "no-repeat",
-                    }}
-                  />
-                </motion.button>
-              );
-            })}
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-sub-rich">
+              Interactive Playground
+            </span>
           </div>
 
-          <AnimatePresence>
-            {won && (
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  scale: 0.95,
+          <h2 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white">
+            Solve the{" "}
+            <span className="text-co-rich">
+              puzzle.
+            </span>
+          </h2>
+
+          <p className="mx-auto mt-5 max-w-xl text-sub-rich leading-relaxed">
+            A little interactive challenge for anyone who made it
+            this far. Put the pieces together and see what happens.
+          </p>
+        </motion.div>
+
+        {/* Game Layout */}
+        <div className="mt-14 grid lg:grid-cols-[1fr_320px] gap-6 max-w-5xl mx-auto items-stretch">
+          {/* Puzzle */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            viewport={{ once: true }}
+            className="
+              relative
+              rounded-[2rem]
+              border border-white/10
+              bg-charcoal-base
+              p-3 sm:p-4
+              shadow-2xl
+            "
+          >
+            <div
+              className="relative w-full overflow-hidden rounded-2xl"
+              style={{
+                aspectRatio: `${current.cols}/${current.rows}`,
+              }}
+            >
+              <div
+                className="grid w-full h-full gap-1.5"
+                style={{
+                  gridTemplateColumns: `repeat(${current.cols}, minmax(0, 1fr))`,
                 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                }}
-                className="
-absolute
-inset-0
-rounded-3xl
-bg-black/90
-backdrop-blur-md
-flex
-items-center
-justify-center
-"
               >
-                <div className="text-center p-6">
-                  <div
-                    className="
-mx-auto
-mb-5
-w-fit
-p-4
-rounded-full
-bg-co-rich/10
-text-co-rich
-"
-                  >
-                    <Award size={40} />
-                  </div>
+                {board.map((piece, index) => {
+                  if (piece === 0) {
+                    return (
+                      <div
+                        key={index}
+                        className="rounded-xl bg-black/20 border border-white/[0.03]"
+                      />
+                    );
+                  }
 
-                  <h3
-                    className="
-text-3xl
-font-bold
-text-white
-"
-                  >
-                    {level === 0 ? "Level Complete 🎉" : "Secret Unlocked 🏆"}
-                  </h3>
+                  const movable = canMove(index) && !won;
 
-                  <p
-                    className="
-mt-3
-text-sub-rich
-"
-                  >
-                    {level === 0
-                      ? "Ready for the final puzzle?"
-                      : "Enjoy my youtube video."}
-                  </p>
+                  const original = piece - 1;
 
-                  <button
-                    onClick={level === 0 ? nextLevel : openReward}
+                  const pieceX =
+                    original % current.cols;
+
+                  const pieceY = Math.floor(
+                    original / current.cols
+                  );
+
+                  const x =
+                    (pieceX * 100) /
+                    (current.cols - 1);
+
+                  const y =
+                    (pieceY * 100) /
+                    (current.rows - 1);
+
+                  return (
+                    <motion.button
+                      key={`${piece}-${index}`}
+                      layout
+                      transition={{
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 28,
+                      }}
+                      whileHover={
+                        movable
+                          ? {
+                              scale: 0.97,
+                            }
+                          : {}
+                      }
+                      whileTap={
+                        movable
+                          ? {
+                              scale: 0.93,
+                            }
+                          : {}
+                      }
+                      onClick={() =>
+                        moveTile(index)
+                      }
+                      className={`
+                        relative
+                        overflow-hidden
+                        rounded-xl
+                        border
+                        transition-all
+                        duration-200
+                        ${
+                          movable
+                            ? "border-co-rich/60 shadow-[0_0_20px_rgba(255,255,255,0.05)]"
+                            : "border-white/5"
+                        }
+                      `}
+                    >
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          backgroundImage: `url(${current.image})`,
+                          backgroundSize: `${current.cols * 100}% ${
+                            current.rows * 100
+                          }%`,
+                          backgroundPosition: `${x}% ${y}%`,
+                          backgroundRepeat: "no-repeat",
+                        }}
+                      />
+
+                      {movable && (
+                        <div className="absolute inset-0 bg-white/5" />
+                      )}
+                    </motion.button>
+                  );
+                })}
+              </div>
+
+              {/* Win State */}
+              <AnimatePresence>
+                {won && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     className="
-mt-7
-px-6
-py-3
-rounded-xl
-bg-white
-text-black
-font-bold
-flex
-items-center
-gap-2
-mx-auto
-"
+                      absolute
+                      inset-0
+                      flex
+                      items-center
+                      justify-center
+                      bg-black/75
+                      backdrop-blur-md
+                    "
                   >
-                    {level === 0 ? (
-                      "Level 2 →"
-                    ) : (
-                      <>
-                        <Play size={16} />
-                        Watch Video
-                      </>
-                    )}
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                        y: 20,
+                        scale: 0.95,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                      }}
+                      className="text-center"
+                    >
+                      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-co-rich text-black shadow-lg">
+                        <Trophy size={30} />
+                      </div>
+
+                      <h3 className="mt-5 text-2xl font-bold text-white">
+                        {level === 0
+                          ? "Nice work."
+                          : "You solved it."}
+                      </h3>
+
+                      <p className="mt-2 text-sm text-sub-rich">
+                        Completed in {moves} moves
+                      </p>
+
+                      <button
+                        onClick={
+                          level === 0
+                            ? nextLevel
+                            : openReward
+                        }
+                        className="
+                          mt-6
+                          inline-flex
+                          items-center
+                          gap-2
+                          rounded-xl
+                          bg-white
+                          px-5
+                          py-3
+                          text-sm
+                          font-semibold
+                          text-black
+                          transition-transform
+                          hover:scale-105
+                        "
+                      >
+                        {level === 0 ? (
+                          <>
+                            Next Challenge
+                            <ArrowRight size={16} />
+                          </>
+                        ) : (
+                          <>
+                            <Play size={15} />
+                            Unlock Reward
+                          </>
+                        )}
+                      </button>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+
+          {/* Sidebar */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            viewport={{ once: true }}
+            className="
+              flex
+              flex-col
+              rounded-[2rem]
+              border border-white/10
+              bg-charcoal-base
+              p-6
+            "
+          >
+            {/* Level */}
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-sub-rich">
+                  Challenge
+                </span>
+
+                <span className="text-sm font-bold text-co-rich">
+                  0{level + 1}
+                </span>
+              </div>
+
+              <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/5">
+                <motion.div
+                  animate={{
+                    width: level === 0 ? "50%" : "100%",
+                  }}
+                  className="h-full rounded-full bg-co-rich"
+                />
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="mt-10 grid grid-cols-2 gap-3">
+              <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
+                <p className="text-xs text-sub-rich">
+                  Pieces
+                </p>
+
+                <p className="mt-2 text-2xl font-bold text-white">
+                  {totalPieces}
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
+                <p className="text-xs text-sub-rich">
+                  Moves
+                </p>
+
+                <p className="mt-2 text-2xl font-bold text-white">
+                  {moves}
+                </p>
+              </div>
+            </div>
+
+            {/* Instructions */}
+            <div className="mt-8">
+              <div className="flex items-center gap-2 text-white">
+                <MousePointer2
+                  size={16}
+                  className="text-co-rich"
+                />
+
+                <span className="text-sm font-semibold">
+                  How to play
+                </span>
+              </div>
+
+              <p className="mt-3 text-sm leading-relaxed text-sub-rich">
+                Click a tile next to the empty space to move it.
+                Arrange every piece back into the original image.
+              </p>
+            </div>
+
+            {/* Reset */}
+            <button
+              onClick={shuffle}
+              className="
+                mt-auto
+                pt-8
+                flex
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                border border-white/10
+                bg-white/[0.03]
+                px-4
+                py-3
+                text-sm
+                font-semibold
+                text-sub-rich
+                transition-all
+                hover:border-white/20
+                hover:bg-white/[0.06]
+                hover:text-white
+              "
+            >
+              <RotateCcw size={15} />
+              Shuffle Puzzle
+            </button>
+          </motion.div>
         </div>
       </div>
     </section>
