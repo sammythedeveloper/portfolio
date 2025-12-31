@@ -9,11 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@studio-freight/react-lenis": "^0.0.47",
     "@tsparticles/engine": "^4.3.2",
     "@tsparticles/react": "^4.3.2",
     "@tsparticles/slim": "^4.3.2",
     "framer-motion": "^12.42.2",
+    "lenis": "^1.3.25",
     "lucide-react": "^0.263.1",
     "next": "16.2.10",
     "next-themes": "^0.4.6",
