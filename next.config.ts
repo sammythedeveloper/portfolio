@@ -14,10 +14,6 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  experimental: {
-    turbopack: {},
-  },
-
   webpack(config) {
     const assetRule = config.module.rules.find((rule: any) =>
       rule.test?.test?.(".svg")
