@@ -66,10 +66,10 @@ export default function Contact() {
                 viewport={{ once: true }}
               >
                 <h2 className="text-5xl font-bold text-co-rich tracking-tight">
-                  Let's Connect
+                  Let&apos;s Connect
                 </h2>
                 <p className="mt-4 text-sub-rich leading-relaxed">
-                  I'm always open to discussing full-stack opportunities,
+                  I&apos;m always open to discussing full-stack opportunities,
                   project collaborations. Drop me a
                   line!
                 </p>
