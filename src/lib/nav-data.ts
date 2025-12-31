@@ -22,6 +22,12 @@ export const NAV_ITEMS = [
   },
 
   {
+    name: "Education",
+    id: "education",
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/864/864685.png",
+  },
+
+  {
     name: "Experience",
     id: "experience",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/522/522561.png",
