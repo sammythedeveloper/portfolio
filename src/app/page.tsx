@@ -7,6 +7,8 @@ import ParallaxSection from "@/components/ui/ParallaxSection"; // Our new compon
 import Projects from "@/components/widgets/Projects";
 import Experience from "@/components/widgets/Experience";
 import Certificates from "@/components/widgets/Certificates";
+import Contact from "@/components/widgets/Contact";
+import PuzzleGame from "@/components/widgets/PuzzleGame";
 
 export default function Home() {
   return (
@@ -35,6 +37,14 @@ export default function Home() {
         <Certificates/>
       </ParallaxSection>
 
+      <ParallaxSection>
+        <PuzzleGame/>
+      </ParallaxSection>
+
+      <ParallaxSection>
+        <Contact/>
+      </ParallaxSection>
+      
     </main>
   );
 }
