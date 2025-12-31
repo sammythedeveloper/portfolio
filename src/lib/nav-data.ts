@@ -2,7 +2,7 @@ export const NAV_ITEMS = [
   {
     name: "Home",
     id: "home",
-    iconUrl: " https://cdn-icons-png.flaticon.com/128/1946/1946488.png",
+    iconUrl: " https://cdn-icons-png.flaticon.com/128/2549/2549900.png",
   },
   {
     name: "About",
