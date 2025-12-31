@@ -9,13 +9,13 @@ const LEVELS = [
     id: 1,
     rows: 3,
     cols: 4,
-    image: "/projects/puzzel1.jpg",
+    image: "/puzzel1.jpg",
   },
   {
     id: 2,
     rows: 4,
     cols: 4,
-    image: "/projects/puzzel2.jpg",
+    image: "/puzzel2.jpg",
   },
 ];
 
