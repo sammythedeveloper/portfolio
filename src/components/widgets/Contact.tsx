@@ -70,7 +70,7 @@ export default function Contact() {
                 </h2>
                 <p className="mt-4 text-sub-rich leading-relaxed">
                   I'm always open to discussing full-stack opportunities,
-                  project collaborations, or smart AI integrations. Drop me a
+                  project collaborations. Drop me a
                   line!
                 </p>
               </motion.div>
@@ -100,7 +100,7 @@ export default function Contact() {
               </p>
               <div className="flex flex-col gap-2">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/sammythedeveloper"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-between group p-3 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-300"
@@ -116,7 +116,7 @@ export default function Contact() {
                 </a>
 
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/samson-daba-29b877231/"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-between group p-3 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-300"
@@ -152,7 +152,7 @@ export default function Contact() {
                     htmlFor="name"
                     className="text-sm font-medium text-sub-rich"
                   >
-                    Your Name
+                    Name
                   </label>
                   <input
                     type="text"
@@ -162,7 +162,7 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormState({ ...formState, name: e.target.value })
                     }
-                    placeholder="John Doe"
+                    placeholder="Name"
                     className="
                       w-full bg-white/[0.02] border border-white/10 rounded-2xl px-4 py-3.5 
                       text-white placeholder-white/20 text-sm outline-none transition-all duration-300
@@ -187,7 +187,7 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormState({ ...formState, email: e.target.value })
                     }
-                    placeholder="john@example.com"
+                    placeholder="Email"
                     className="
                       w-full bg-white/[0.02] border border-white/10 rounded-2xl px-4 py-3.5 
                       text-white placeholder-white/20 text-sm outline-none transition-all duration-300

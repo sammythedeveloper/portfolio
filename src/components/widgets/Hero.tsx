@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
+import me from "../../../public/IMG_0448.jpg";
 
 import ReactIcon from "@/components/icons/React.svg";
 import AWSIcon from "@/components/icons/AWS.svg";
@@ -337,61 +338,32 @@ export default function Hero() {
           </p>
 
           <div className="flex gap-4">
-            <button
-              className="
-                px-6
-                py-2
-                border
-                border-gray-600
-                text-sub-rich
-                rounded-md
-                hover:bg-co-rich
-                hover:text-black
-                transition
-                flex
-                items-center
-                gap-2
-              "
+            <a
+              href="https://github.com/sammythedeveloper"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=" px-6 py-2 border border-gray-600 text-sub-rich rounded-md hover:bg-co-rich hover:text-black transition flex items-center gap-2 "
             >
               <FaGithub className="w-5 h-5" />
               GitHub
-            </button>
-
-            <button
-              className="
-                px-6
-                py-2
-                border
-                border-gray-600
-                text-sub-rich
-                rounded-md
-                hover:bg-co-rich
-                hover:text-black
-                transition
-              "
+            </a>
+            <a
+              href="/path-to-your-resume.pdf" // Or a Google Drive link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2 border border-gray-600 text-sub-rich rounded-md hover:bg-co-rich hover:text-black transition inline-block text-center "
             >
               Resume
-            </button>
-
-            <button
-              className="
-                px-6
-                py-2
-                border
-                border-gray-600
-                text-sub-rich
-                rounded-md
-                hover:bg-co-rich
-                hover:text-black
-                transition
-                flex
-                items-center
-                gap-2
-              "
+            </a>
+            <a
+              href="https://www.linkedin.com/in/samson-daba-29b877231/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=" px-6 py-2 border border-gray-600 text-sub-rich rounded-md hover:bg-co-rich hover:text-black transition flex items-center gap-2"
             >
               <FaLinkedin className="w-5 h-5" />
               LinkedIn
-            </button>
+            </a>
           </div>
         </div>
 
@@ -399,35 +371,34 @@ export default function Hero() {
 
         <div
           className="
-            hidden
-            lg:flex
-            relative
-            w-72
-            h-72
-            bg-[#0F172A]
-            rounded-2xl
-            border
-            border-gray-800
-            p-4
-            shadow-2xl
-            items-center
-            justify-center
-          "
+    hidden
+    lg:flex
+    relative
+    w-56
+    h-56
+    rounded-full
+    border
+    border-gray-800
+    p-4
+    shadow-2xl
+    items-center
+    justify-center
+  "
         >
           <div
             className="
-              relative
-              w-full
-              h-full
-              rounded-xl
-              overflow-hidden
-            "
+      relative
+      w-full
+      h-full
+      rounded-full
+      overflow-hidden
+    "
           >
             <Image
-              src="https://framerusercontent.com/images/G7pAzXNdA4oxyw4kbTVYB0npiM.png?scale-down-to=512&width=1254&height=1254"
+              src={me}
               alt="Samson"
               fill
-              className="object-cover"
+              className="object-contain"
               priority
             />
           </div>

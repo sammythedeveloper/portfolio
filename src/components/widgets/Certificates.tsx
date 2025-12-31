@@ -49,7 +49,7 @@ export default function Certificates() {
   const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <section id="certificates" className="w-full py-32 overflow-hidden">
+    <section id="certficates" className="w-full py-32 overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 mb-16">
         {/* Header Section */}
         <motion.div
