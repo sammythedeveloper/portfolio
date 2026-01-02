@@ -5,10 +5,12 @@ import SidebarNav from "@/components/widgets/SidebarNav";
 import TechStack from "@/components/widgets/TechStack";
 import ParallaxSection from "@/components/ui/ParallaxSection"; // Our new component
 import Projects from "@/components/widgets/Projects";
+import Education from "@/components/widgets/Education";
 import Experience from "@/components/widgets/Experience";
 import Certificates from "@/components/widgets/Certificates";
 import Contact from "@/components/widgets/Contact";
 import PuzzleGame from "@/components/widgets/PuzzleGame";
+import Footer from "@/components/widgets/Footer";
 
 export default function Home() {
   return (
@@ -28,6 +30,10 @@ export default function Home() {
       <ParallaxSection>
         <Projects />
       </ParallaxSection>
+
+      <ParallaxSection>
+        <Education/>
+      </ParallaxSection>
       
       <ParallaxSection>
         <Experience/>
@@ -43,6 +49,10 @@ export default function Home() {
 
       <ParallaxSection>
         <Contact/>
+      </ParallaxSection>
+
+      <ParallaxSection>
+        <Footer/>
       </ParallaxSection>
       
     </main>
