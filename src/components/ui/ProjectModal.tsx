@@ -120,7 +120,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </section>
 
               <section>
-                <h3 className="text-xl font-semibold text-co-rich">Features</h3>
+                <h3 className="text-xl font-semibold text-co-rich">Details</h3>
                 <ul className="mt-3 space-y-2 text-sub-rich text-sm md:text-base">
                   {project.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
