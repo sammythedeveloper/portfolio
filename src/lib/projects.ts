@@ -79,6 +79,40 @@ export const projects = [
     live: "https://slate-fawn-one.vercel.app/",
     repo: "https://github.com/sammythedeveloper/Slate_backend/tree/main/membership-server",
   },
+  {
+    title: "Finance",
+    description:
+      "A financial dashboard designed to visualize and manage personal finances.",
+
+    purpose:
+      "A full-stack personal finance management application built with Vue.js and ASP.NET Core, designed to demonstrate secure authentication, transaction management, spending categorization, relational data persistence, and a production-style cloud deployment workflow.",
+
+    image: "/projects/finance.jpg",
+
+    techStack: [
+      "Vue.js",
+      "TypeScript",
+      "ASP.NET Core",
+      "Entity Framework Core",
+      "PostgreSQL",
+      "JWT",
+      "Railway",
+      "Vercel",
+    ],
+
+    features: [
+      "Implements secure JWT-based authentication with ASP.NET Core Identity's PasswordHasher for protected user accounts and password storage.",
+      "Provides a complete financial transaction workflow, allowing users to create, manage, and categorize transactions to organize and analyze spending activity.",
+      "Uses PostgreSQL with Entity Framework Core migrations for structured relational data management and repeatable database schema changes.",
+      "Built a RESTful ASP.NET Core API that separates business logic and data access from the Vue.js frontend, creating a clean client-server architecture.",
+      "RESTful API built with ASP.NET Core.",
+      "Deployed across Railway and Vercel, with the ASP.NET Core backend and PostgreSQL database hosted on Railway and the responsive Vue.js financial dashboard deployed on Vercel."
+    ],
+
+    documentation: "",
+    live: "https://finflow-client-one.vercel.app/login",
+    repo: "https://github.com/sammythedeveloper/finflow_client",
+  },
 
   {
     title: "Ecommerce",
@@ -129,38 +163,5 @@ export const projects = [
     repo: "https://github.com/sammythedeveloper/Stacky",
   },
 
-  {
-    title: "Finance",
-    description:
-      "A financial dashboard designed to visualize and manage personal finances.",
-
-    purpose:
-      "A full-stack personal finance management application built with Vue.js and ASP.NET Core, designed to demonstrate secure authentication, transaction management, spending categorization, relational data persistence, and a production-style cloud deployment workflow.",
-
-    image: "/projects/finance.jpg",
-
-    techStack: [
-      "Vue.js",
-      "TypeScript",
-      "ASP.NET Core",
-      "Entity Framework Core",
-      "PostgreSQL",
-      "JWT",
-      "Railway",
-      "Vercel",
-    ],
-
-    features: [
-      "Implements secure JWT-based authentication with ASP.NET Core Identity's PasswordHasher for protected user accounts and password storage.",
-      "Provides a complete financial transaction workflow, allowing users to create, manage, and categorize transactions to organize and analyze spending activity.",
-      "Uses PostgreSQL with Entity Framework Core migrations for structured relational data management and repeatable database schema changes.",
-      "Built a RESTful ASP.NET Core API that separates business logic and data access from the Vue.js frontend, creating a clean client-server architecture.",
-      "RESTful API built with ASP.NET Core.",
-      "Deployed across Railway and Vercel, with the ASP.NET Core backend and PostgreSQL database hosted on Railway and the responsive Vue.js financial dashboard deployed on Vercel."
-    ],
-
-    documentation: "",
-    live: "https://finflow-client-one.vercel.app/login",
-    repo: "https://github.com/sammythedeveloper/finflow_client",
-  },
+ 
 ];
