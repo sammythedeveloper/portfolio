@@ -50,7 +50,7 @@ const experiences: ExperienceItem[] = [
     ],
   },
   {
-    role: "Full Stack Developer",
+    role: "Junior Full Stack Developer",
     company: "Evangadi Network",
     location: "Remote ,Silverspring, MD",
     period: "2024",
