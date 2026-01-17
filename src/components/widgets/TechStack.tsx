@@ -158,7 +158,6 @@ function TechModule({
         ${className}
       `}
     >
-
       <div className="relative p-5">
         {/* Label */}
         <div className="flex items-center justify-center text-center mb-2">
@@ -429,7 +428,10 @@ export default function TechStack() {
           Tech Stack
         </p>
 
-        <h2 className="text-3xl font-medium uppercase tracking-[0.2em] text-co-rich">
+        <h2
+          style={{ fontFamily: "var(--font-serif)" }}
+          className="text-4xl font-normal tracking-tight text-text-main md:text-5xl"
+        >
           Development Toolkit
         </h2>
 

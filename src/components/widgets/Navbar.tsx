@@ -1,11 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useState, useSyncExternalStore, useRef } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
-import { Sun, Moon } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "next-themes";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "@/lib/nav-data";
+
+// Your photo in /public. Change the file name if yours is different.
+const PROFILE_PHOTO = "/IMG_1980.PNG";
 
 const emptySubscribe = () => () => {};
 
@@ -19,11 +22,13 @@ function useMounted() {
 
 export default function SidebarNav() {
   const [active, setActive] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const mounted = useMounted();
 
   const switchSoundRef = useRef<HTMLAudioElement | null>(null);
 
+  // Load the switch sound once
   useEffect(() => {
     const sound = new Audio("/sound/sound.mp3");
     sound.preload = "auto";
@@ -35,6 +40,7 @@ export default function SidebarNav() {
     };
   }, []);
 
+  // Track which section is in view
   useEffect(() => {
     const sections = NAV_ITEMS.map((item) =>
       document.getElementById(item.id)
@@ -46,9 +52,7 @@ export default function SidebarNav() {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visible[0]) {
-          setActive(visible[0].target.id);
-        }
+        if (visible[0]) setActive(visible[0].target.id);
       },
       {
         rootMargin: "-35% 0px -45% 0px",
@@ -57,11 +61,23 @@ export default function SidebarNav() {
     );
 
     sections.forEach((section) => observer.observe(section));
-
     return () => observer.disconnect();
   }, []);
 
-  const scrollToSection = (id: string) => {
+  // Close on Escape
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  const scrollTo = (id: string) => {
+    setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -78,134 +94,151 @@ export default function SidebarNav() {
       });
     }
 
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    setTheme(isDark ? "light" : "dark");
   };
 
+  const isDark = resolvedTheme === "dark";
+
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        duration: 0.6,
-        ease: "easeOut",
-      }}
-      className="
-      sticky
-      top-0
-      z-50
-      hidden
-      md:block
-      w-full
-      border-b
-      border-black/[0.06]
-      bg-[#F4F3EF]/70
-      backdrop-blur-2xl
-      backdrop-saturate-150
-      dark:border-white/[0.08]
-      dark:bg-[#0B0D12]/55
-    "
-      aria-label="Section navigation"
-    >
-      <div className="mx-auto flex h-20 max-w-7xl items-center gap-8 px-6 lg:px-10">
-        <div className="flex flex-1 items-center justify-between">
-          {NAV_ITEMS.map((item) => {
-            const isActive = active === item.id;
+    <>
+      <motion.header
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="sticky top-0 z-50 w-full border-b border-text-main/10 bg-second-base/50 backdrop-blur-xl backdrop-saturate-150"
+        style={{
+          WebkitBackdropFilter: "blur(16px) saturate(150%)",
+        }}
+      >
+        <div className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6 lg:px-10">
+          {/* Home: your photo */}
+          <button
+            type="button"
+            onClick={() => scrollTo("home")}
+            aria-label="Back to top"
+            className="shrink-0 overflow-hidden rounded-full ring-1 ring-text-main/15 transition hover:ring-text-main/40"
+          >
+            <Image
+              src={PROFILE_PHOTO}
+              alt="Samson Daba"
+              width={36}
+              height={36}
+              className="h-9 w-9 object-cover object-top"
+            />
+          </button>
 
-            return (
-              <button
-                key={item.name}
-                type="button"
-                onClick={() => scrollToSection(item.id)}
-                aria-label={`Go to ${item.name}`}
-                className="
-                  group
-                  flex
-                  h-12
-                  items-center
-                  justify-center
-                  px-4
-                  outline-none
-                "
-              >
-                {item.id === "home" ? (
+          {/* Desktop links */}
+          <nav
+            aria-label="Section navigation"
+            className="hidden items-center gap-7 md:flex"
+          >
+            {NAV_ITEMS.map((item) => {
+              const isActive = active === item.id;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => scrollTo(item.id)}
+                  className={`group relative py-2 text-[11px] font-medium uppercase tracking-[0.18em] transition-colors duration-300 ${
+                    isActive
+                      ? "text-text-main"
+                      : "text-text-muted hover:text-text-main"
+                  }`}
+                >
+                  {item.name}
                   <span
-                    className="
-                      relative
-                      h-[18px]
-                      w-[18px]
-                      opacity-60
-                      transition
-                      group-hover:opacity-100
-                      group-focus-visible:opacity-100
-                    "
-                  >
-                    <Image
-                      src={item.iconUrl}
-                      alt=""
-                      fill
-                      sizes="18px"
-                      className="object-contain transition dark:invert"
-                    />
-                  </span>
+                    className={`absolute bottom-0 left-0 h-px bg-text-main transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Right side: theme toggle, plus the menu button on mobile */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              disabled={!mounted}
+              aria-label={
+                isDark ? "Switch to light mode" : "Switch to dark mode"
+              }
+              className="flex h-9 w-9 items-center justify-center rounded-full text-text-muted transition hover:text-text-main disabled:opacity-0"
+            >
+              {mounted &&
+                (isDark ? (
+                  <Sun size={16} strokeWidth={1.6} />
                 ) : (
-                  <span
-                    className={`
-                      whitespace-nowrap
-                      text-[11px]
-                      font-medium
-                      uppercase
-                      tracking-[0.16em]
-                      transition
-                      ${
-                        isActive
-                          ? "text-text-main"
-                          : "text-text-muted hover:text-text-main group-focus-visible:text-text-main"
-                      }
-                    `}
-                  >
-                    {item.name}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
+                  <Moon size={16} strokeWidth={1.6} />
+                ))}
+            </button>
 
-        <button
-          type="button"
-          onClick={toggleTheme}
-          disabled={!mounted}
-          aria-label={
-            resolvedTheme === "dark"
-              ? "Switch to light mode"
-              : "Switch to dark mode"
-          }
-          title={
-            resolvedTheme === "dark"
-              ? "Switch to light mode"
-              : "Switch to dark mode"
-          }
-          className="
-            flex
-            shrink-0
-            items-center
-            justify-center
-            text-text-muted
-            transition-all
-            duration-300
-            hover:scale-105
-            hover:text-text-main
-            disabled:opacity-0
-          "
-        >
-          {mounted &&
-            (resolvedTheme === "dark" ? (
-              <Sun size={16} strokeWidth={1.7} />
-            ) : (
-              <Moon size={16} strokeWidth={1.7} />
-            ))}
-        </button>
-      </div>
-    </motion.nav>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((open) => !open)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              className="flex h-9 w-9 items-center justify-center rounded-full text-text-main transition hover:bg-text-main/5 md:hidden"
+            >
+              {menuOpen ? (
+                <X size={20} strokeWidth={1.6} />
+              ) : (
+                <Menu size={20} strokeWidth={1.6} />
+              )}
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Mobile menu: a sibling of the header, so its blur sees the page */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            id="mobile-menu"
+            aria-label="Mobile section navigation"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-x-0 bottom-0 top-24 z-40 overflow-y-auto bg-second-base/60 backdrop-blur-2xl backdrop-saturate-150 md:hidden"
+            style={{
+              WebkitBackdropFilter: "blur(24px) saturate(150%)",
+            }}
+          >
+            <ul className="flex flex-col px-6 pt-2">
+              {NAV_ITEMS.map((item) => {
+                const isActive = active === item.id;
+
+                return (
+                  <li
+                    key={item.id}
+                    className="border-b border-text-main/10 last:border-b-0"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => scrollTo(item.id)}
+                      className={`flex w-full items-center justify-between py-5 text-left text-3xl transition-colors ${
+                        isActive ? "text-text-main" : "text-text-muted"
+                      }`}
+                      style={{
+                        fontFamily:
+                          "var(--font-instrument-serif), Georgia, serif",
+                      }}
+                    >
+                      {item.name}
+                      {isActive && <span className="h-px w-8 bg-text-main" />}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

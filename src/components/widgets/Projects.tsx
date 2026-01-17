@@ -1,276 +1,185 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import ProjectModal from "@/components/ui/ProjectModal";
-import { projects } from "@/lib/projects";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { featuredProjects, type FeaturedProject } from "@/lib/projects";
 
-type Project = (typeof projects)[number];
+const COLUMNS = 3;
+const INITIAL_ROWS = 1;
+const INITIAL_COUNT = COLUMNS * INITIAL_ROWS;
+
+const serif = { fontFamily: "var(--font-serif)" } as const;
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  const cardGap = 16;
-
-  useEffect(() => {
-    const container = carouselRef.current;
-    if (!container) return;
-
-    const observer = new ResizeObserver(([entry]) => {
-      setContainerWidth(entry.contentRect.width);
-    });
-
-    observer.observe(container);
-
-    return () => observer.disconnect();
-  }, []);
-
-  const visibleCount =
-    containerWidth >= 1024 ? 4 : containerWidth >= 768 ? 2 : 1;
-
-  const cardWidth =
-    containerWidth > 0
-      ? (containerWidth - cardGap * (visibleCount - 1)) / visibleCount
-      : 0;
-
-  const maxIndex = Math.max(0, projects.length - visibleCount);
-  const safeIndex = Math.min(currentIndex, maxIndex);
-
-  const goNext = () => {
-    setCurrentIndex((index) => Math.min(index + 1, maxIndex));
-  };
-
-  const goPrevious = () => {
-    setCurrentIndex((index) => Math.max(index - 1, 0));
-  };
-
-  const playClickSound = () => {
-    const context =
-      audioContextRef.current ?? (audioContextRef.current = new AudioContext());
-
-    if (context.state === "suspended") {
-      void context.resume();
-    }
-
-    const duration = 0.025;
-    const buffer = context.createBuffer(
-      1,
-      Math.floor(context.sampleRate * duration),
-      context.sampleRate
-    );
-
-    const data = buffer.getChannelData(0);
-
-    for (let i = 0; i < data.length; i++) {
-      const decay = Math.exp(-i / (context.sampleRate * 0.004));
-      data[i] = (Math.random() * 2 - 1) * decay;
-    }
-
-    const source = context.createBufferSource();
-    const gain = context.createGain();
-
-    source.buffer = buffer;
-    gain.gain.value = 0.16;
-
-    source.connect(gain);
-    gain.connect(context.destination);
-
-    source.start();
-  };
+  const total = featuredProjects.length;
+  const visibleProjects = featuredProjects.slice(0, visibleCount);
+  const remaining = total - visibleCount;
+  const isExpanded = visibleCount > INITIAL_COUNT;
 
   return (
     <section
       id="projects"
-      className="w-full bg-second-base px-6 py-24 text-text-main md:py-32"
+      className="w-full bg-second-base px-6 py-20 text-text-main md:py-24"
     >
-      <div className="mx-auto w-full max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1560px]">
+      <div className="mx-auto w-full max-w-[1600px]">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-14 text-center"
+          className="mb-10 text-center"
         >
-          <span className="text-3xl font-medium uppercase tracking-[0.2em] text-co-rich">
+          <span
+            style={serif}
+            className="text-4xl font-normal tracking-tight text-text-main md:text-5xl"
+          >
             Selected Work
           </span>
-
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-text-muted md:text-base">
-            A selection of applications, products, and systems built across
-            full-stack development, cloud infrastructure, and AI.
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-text-muted">
+            The products I&apos;ve shipped across mobile, AI, and SaaS.
           </p>
         </motion.div>
 
-        {/* Project Carousel */}
-        <div ref={carouselRef} className="overflow-hidden">
-          <motion.div
-            className="flex"
-            style={{ gap: `${cardGap}px` }}
-            animate={{
-              x: -(safeIndex * (cardWidth + cardGap)),
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 30,
-            }}
-          >
-            {projects.map((project, index) => (
+        {/* Cards: 3 per row, grows by one row each time "Show more" is clicked */}
+        <div className="grid gap-6 md:grid-cols-3">
+          {visibleProjects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (index % COLUMNS) * 0.1 }}
+              className="h-full"
+            >
+              <ProjectCard project={project} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Toggle */}
+        {(remaining > 0 || isExpanded) && (
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            {remaining > 0 && (
               <button
-                key={project.title}
-                onClick={() => {
-                  playClickSound();
-                  setSelectedProject(project);
-                }}
-                style={{
-                  width: `${cardWidth}px`,
-                  flex: `0 0 ${cardWidth}px`,
-                }}
-                className="
-                  group relative flex min-h-[420px] flex-col
-                  border-x border-t border-black/[0.12] dark:border-white/[0.12]
-                  rounded-t-2xl
-                  bg-charcoal-base
-                  shadow-[inset_0_8px_16px_-12px_rgba(0,0,0,0.2)]
-                  dark:shadow-[inset_0_8px_16px_-12px_rgba(255,255,255,0.2)]
-                  p-6 text-left outline-none
-                  transition-colors duration-300
-                  hover:bg-black/[0.015] dark:hover:bg-white/[0.025]
-                  md:min-h-[440px] md:p-7
-                  lg:min-h-[460px]
-                "
+                type="button"
+                onClick={() =>
+                  setVisibleCount((count) => Math.min(count + COLUMNS, total))
+                }
+                className="flex items-center gap-2 rounded-full border border-black/15 px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-text-main transition-colors duration-300 hover:bg-black/[0.04] dark:border-white/15 dark:hover:bg-white/[0.06]"
               >
-                {/* Top metadata */}
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[11px] text-text-muted">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-
-                  <ArrowUpRight
-                    size={17}
-                    strokeWidth={1.5}
-                    className="text-text-muted/60 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-co-rich"
-                  />
-                </div>
-
-                {/* Project category */}
-                <div className="mt-10">
-                  <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-co-rich">
-                    Project {String(index + 1).padStart(2, "0")}
-                  </span>
-
-                  <h3 className="mt-4 text-xl font-semibold leading-tight tracking-tight text-text-main transition-colors duration-300 group-hover:text-co-rich md:text-[22px]">
-                    {project.title}
-                  </h3>
-                </div>
-
-                {/* Divider */}
-                <div className="my-7 h-px w-8 bg-black/20 transition-all duration-300 group-hover:w-14 group-hover:bg-co-rich dark:bg-white/20" />
-
-                {/* Description */}
-                <p className="text-sm leading-relaxed text-text-muted">
-                  {project.description}
-                </p>
-
-                {/* Technology stack */}
-                <div className="mt-7 flex flex-wrap gap-x-2.5 gap-y-2">
-                  {project.techStack?.map((tech) => (
-                    <span
-                      key={tech}
-                      className="
-                        border border-black/10 dark:border-white/10
-                        px-2 py-1 text-[10px] font-medium uppercase tracking-[0.08em]
-                        text-text-muted
-                        transition-colors duration-300
-                        group-hover:border-black/20 dark:group-hover:border-white/20
-                      "
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Explore */}
-                <div className="mt-auto pt-10">
-                  <div className="flex items-center justify-between border-t border-black/10 dark:border-white/10 pt-4">
-                    <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-text-muted transition-colors duration-300 group-hover:text-text-main">
-                      Explore project
-                    </span>
-
-                    <ArrowUpRight
-                      size={15}
-                      strokeWidth={1.5}
-                      className="text-text-muted/60 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-co-rich"
-                    />
-                  </div>
-                </div>
+                Show more ({remaining})
+                <ChevronDown size={14} strokeWidth={1.5} />
               </button>
-            ))}
-          </motion.div>
-        </div>
+            )}
 
-        {/* Carousel Navigation */}
-        <div className="mt-5 flex items-center justify-center gap-3">
-          <button
-            onClick={() => {
-              playClickSound();
-              goPrevious();
-            }}
-            disabled={safeIndex === 0}
-            aria-label="Previous project"
-            className="
-              flex h-11 w-11 items-center justify-center
-              rounded-full border border-black/10 dark:border-white/10
-              text-text-main
-              transition-all duration-200
-              hover:bg-black hover:text-white
-              dark:hover:bg-white dark:hover:text-black
-              disabled:cursor-not-allowed disabled:opacity-30
-            "
-          >
-            <ArrowLeft size={17} strokeWidth={1.5} />
-          </button>
-
-          <button
-            onClick={() => {
-              playClickSound();
-              goNext();
-            }}
-            disabled={safeIndex >= maxIndex}
-            aria-label="Next project"
-            className="
-              flex h-11 w-11 items-center justify-center
-              rounded-full border border-black/10 dark:border-white/10
-              text-text-main
-              transition-all duration-200
-              hover:bg-black hover:text-white
-              dark:hover:bg-white dark:hover:text-black
-              disabled:cursor-not-allowed disabled:opacity-30
-            "
-          >
-            <ArrowRight size={17} strokeWidth={1.5} />
-          </button>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-10 flex items-center justify-between border-t border-black/10 dark:border-white/10 pt-7 text-xs uppercase tracking-[0.16em] text-text-muted">
-          <span>Built and Deployed</span>
-          <span>{String(projects.length).padStart(2, "0")} Projects</span>
-        </div>
+            {isExpanded && (
+              <button
+                type="button"
+                onClick={() => setVisibleCount(INITIAL_COUNT)}
+                className="px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-text-muted transition-colors duration-300 hover:text-text-main"
+              >
+                Show less
+              </button>
+            )}
+          </div>
+        )}
       </div>
-
-      {/* Project Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
     </section>
+  );
+}
+
+function ProjectCard({ project }: { project: FeaturedProject }) {
+  return (
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-charcoal-base transition-colors duration-300 dark:border-white/10">
+      {/* Banner (optional) */}
+      {project.image && (
+        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-black/10 bg-black/[0.03] dark:border-white/10 dark:bg-white/[0.03]">
+          <Image
+            src={project.image}
+            alt={`${project.title} screenshot`}
+            fill
+            sizes="(min-width: 768px) 33vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+      )}
+
+      <div className="flex flex-1 flex-col gap-5 p-6">
+        {project.meta && (
+          <p className="font-mono text-[11px] text-text-muted">
+            {project.meta}
+          </p>
+        )}
+
+        {/* Title row: name on the left, live link on the right */}
+        <div className="flex items-center justify-between gap-4">
+          <h3
+            style={{ fontFamily: "var(--font-serif)" }}
+            className="text-3xl leading-none tracking-tight transition-colors duration-300 group-hover:text-co-rich"
+          >
+            {project.title}
+          </h3>
+
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${project.title} live`}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/15 text-text-main transition-all duration-300 hover:bg-black hover:text-white dark:border-white/15 dark:hover:bg-white dark:hover:text-black"
+            >
+              <ArrowUpRight size={18} strokeWidth={1.5} />
+            </a>
+          )}
+        </div>
+
+        {/* Body blocks: only the ones that have content */}
+        <div className="flex flex-col gap-3.5">
+          <Block label="Role" text={project.role} />
+          {project.details?.map((detail) => (
+            <Block
+              key={detail.label}
+              label={detail.label}
+              text={detail.value}
+            />
+          ))}
+          {project.problem && <Block label="Problem" text={project.problem} />}
+          {project.solution && (
+            <Block label="Solution" text={project.solution} />
+          )}
+          {project.result && <Block label="Result" text={project.result} />}
+        </div>
+
+        {/* Tech stack (optional) */}
+        {project.techStack && project.techStack.length > 0 && (
+          <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+            {project.techStack.map((tech) => (
+              <span
+                key={tech}
+                className="border border-black/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.08em] text-text-muted dark:border-white/10"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function Block({ label, text }: { label: string; text: string }) {
+  return (
+    <div>
+      <h4 className="mb-1 text-[10px] font-medium uppercase tracking-[0.16em] text-co-rich">
+        {label}
+      </h4>
+      <p className="text-sm leading-snug text-text-muted">{text}</p>
+    </div>
   );
 }

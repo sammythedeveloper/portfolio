@@ -1,45 +1,7 @@
 export const NAV_ITEMS = [
-  {
-    name: "Home",
-    id: "home",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/2549/2549900.png",
-  },
-  {
-    name: "Stack",
-    id: "stack",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/3573/3573187.png",
-  },
-
-  {
-    name: "Projects",
-    id: "projects",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/18510/18510347.png",
-  },
-
-  {
-    name: "Experience",
-    id: "experience",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/522/522561.png",
-  },
-  {
-    name: "About",
-    id: "about",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/10758/10758751.png",
-  },
-  {
-    name: "Education",
-    id: "education",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/864/864685.png",
-  },
-
-  {
-    name: "Certficates",
-    id: "certificates",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/3172/3172183.png",
-  },
-  {
-    name: "Contact",
-    id: "contact",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/2549/2549872.png",
-  },
+  { name: "Projects", id: "projects" },
+  { name: "Case Studies", id: "case-study" },
+  { name: "Stack", id: "stack" },
+  { name: "Testimonials", id: "testimonials" },
+  { name: "Contact", id: "contact" },
 ];
