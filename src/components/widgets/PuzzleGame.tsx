@@ -68,7 +68,6 @@ export default function PuzzleGame() {
    * This prevents the entire puzzle from becoming
    * stretched or squashed.
    */
-  const imageAspectRatio = 4 / 3;
 
   /*
    * Solved board.
