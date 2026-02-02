@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   RotateCcw,
@@ -45,8 +45,7 @@ const DIFFICULTIES = {
 const PUZZLE_IMAGE = "/puzzel2.jpg";
 
 export default function PuzzleGame() {
-  const [difficulty, setDifficulty] =
-    useState<Difficulty>("easy");
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
 
   const [board, setBoard] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
@@ -56,8 +55,7 @@ export default function PuzzleGame() {
   const [won, setWon] = useState(false);
 
   const [preview, setPreview] = useState(false);
-  const [difficultyOpen, setDifficultyOpen] =
-    useState(false);
+  const [difficultyOpen, setDifficultyOpen] = useState(false);
 
   const current = DIFFICULTIES[difficulty];
 
@@ -73,9 +71,7 @@ export default function PuzzleGame() {
    * Solved board.
    */
   const createSolvedBoard = () => {
-    return [...Array(current.pieces - 1).keys()]
-      .map((i) => i + 1)
-      .concat(0);
+    return [...Array(current.pieces - 1).keys()].map((i) => i + 1).concat(0);
   };
 
   /*
@@ -85,54 +81,30 @@ export default function PuzzleGame() {
     let shuffled = createSolvedBoard();
     let previousEmpty = -1;
 
-    for (
-      let i = 0;
-      i < current.shuffleMoves;
-      i++
-    ) {
+    for (let i = 0; i < current.shuffleMoves; i++) {
       const empty = shuffled.indexOf(0);
 
-      const emptyRow = Math.floor(
-        empty / current.cols
-      );
+      const emptyRow = Math.floor(empty / current.cols);
 
       const emptyCol = empty % current.cols;
 
       const possible: number[] = [];
 
-      for (
-        let index = 0;
-        index < shuffled.length;
-        index++
-      ) {
+      for (let index = 0; index < shuffled.length; index++) {
         if (index === previousEmpty) continue;
 
-        const row = Math.floor(
-          index / current.cols
-        );
+        const row = Math.floor(index / current.cols);
 
         const col = index % current.cols;
 
-        if (
-          Math.abs(row - emptyRow) +
-            Math.abs(col - emptyCol) ===
-          1
-        ) {
+        if (Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1) {
           possible.push(index);
         }
       }
 
-      const random =
-        possible[
-          Math.floor(
-            Math.random() * possible.length
-          )
-        ];
+      const random = possible[Math.floor(Math.random() * possible.length)];
 
-      [shuffled[random], shuffled[empty]] = [
-        shuffled[empty],
-        shuffled[random],
-      ];
+      [shuffled[random], shuffled[empty]] = [shuffled[empty], shuffled[random]];
 
       previousEmpty = empty;
     }
@@ -173,9 +145,7 @@ export default function PuzzleGame() {
 
     const solved = board.every(
       (value, index) =>
-        value === index + 1 ||
-        (index === board.length - 1 &&
-          value === 0)
+        value === index + 1 || (index === board.length - 1 && value === 0)
     );
 
     if (solved) {
@@ -191,23 +161,15 @@ export default function PuzzleGame() {
 
     if (empty === -1) return false;
 
-    const row = Math.floor(
-      index / current.cols
-    );
+    const row = Math.floor(index / current.cols);
 
     const col = index % current.cols;
 
-    const emptyRow = Math.floor(
-      empty / current.cols
-    );
+    const emptyRow = Math.floor(empty / current.cols);
 
     const emptyCol = empty % current.cols;
 
-    return (
-      Math.abs(row - emptyRow) +
-        Math.abs(col - emptyCol) ===
-      1
-    );
+    return Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1;
   };
 
   /*
@@ -235,15 +197,11 @@ export default function PuzzleGame() {
    * Timer formatting.
    */
   const formatTime = (totalSeconds: number) => {
-    const minutes = Math.floor(
-      totalSeconds / 60
-    )
+    const minutes = Math.floor(totalSeconds / 60)
       .toString()
       .padStart(2, "0");
 
-    const seconds = (totalSeconds % 60)
-      .toString()
-      .padStart(2, "0");
+    const seconds = (totalSeconds % 60).toString().padStart(2, "0");
 
     return `${minutes}:${seconds}`;
   };
@@ -251,9 +209,7 @@ export default function PuzzleGame() {
   /*
    * Select difficulty.
    */
-  const selectDifficulty = (
-    value: Difficulty
-  ) => {
+  const selectDifficulty = (value: Difficulty) => {
     setDifficulty(value);
     setDifficultyOpen(false);
   };
@@ -262,10 +218,7 @@ export default function PuzzleGame() {
    * Reward.
    */
   const openReward = () => {
-    window.open(
-      "https://www.youtube.com/watch?v=SRwDRg5MVSo",
-      "_blank"
-    );
+    window.open("https://www.youtube.com/watch?v=SRwDRg5MVSo", "_blank");
   };
 
   /*
@@ -274,8 +227,7 @@ export default function PuzzleGame() {
    * We use a fixed aspect ratio for the board
    * rather than stretching it to arbitrary dimensions.
    */
-  const boardAspectRatio =
-    current.cols / current.rows;
+  const boardAspectRatio = current.cols / current.rows;
 
   return (
     <section
@@ -309,10 +261,7 @@ export default function PuzzleGame() {
           className="text-center"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white bg-white px-4 py-2">
-            <Sparkles
-              size={14}
-              className="text-co-rich"
-            />
+            <Sparkles size={14} className="text-co-rich" />
 
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black">
               Interactive Playground
@@ -320,17 +269,12 @@ export default function PuzzleGame() {
           </div>
 
           <h2 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-            Solve the{" "}
-            <span className="text-co-rich">
-              puzzle.
-            </span>
+            Solve the <span className="text-co-rich">puzzle.</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/80 sm:leading-relaxed">
-            A little interactive challenge for anyone
-            who made it this far. Choose your
-            difficulty and put the image back
-            together.
+            A little interactive challenge for anyone who made it this far.
+            Choose your difficulty and put the image back together.
           </p>
         </motion.div>
 
@@ -390,8 +334,7 @@ export default function PuzzleGame() {
                     width:
                       difficulty === "easy"
                         ? "33%"
-                        : difficulty ===
-                          "medium"
+                        : difficulty === "medium"
                         ? "66%"
                         : "100%",
                   }}
@@ -410,12 +353,7 @@ export default function PuzzleGame() {
               </p>
 
               <button
-                onClick={() =>
-                  setDifficultyOpen(
-                    (previous) =>
-                      !previous
-                  )
-                }
+                onClick={() => setDifficultyOpen((previous) => !previous)}
                 className="flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left transition-all hover:border-white/20 hover:bg-white/[0.06]"
               >
                 <div className="flex items-center gap-3">
@@ -423,8 +361,7 @@ export default function PuzzleGame() {
                     className={`h-2.5 w-2.5 rounded-full ${
                       difficulty === "easy"
                         ? "bg-emerald-400"
-                        : difficulty ===
-                          "medium"
+                        : difficulty === "medium"
                         ? "bg-yellow-400"
                         : "bg-red-400"
                     }`}
@@ -436,9 +373,7 @@ export default function PuzzleGame() {
                     </p>
 
                     <p className="mt-0.5 text-xs text-sub-rich">
-                      {current.rows} ×{" "}
-                      {current.cols} ·{" "}
-                      {current.pieces} pieces
+                      {current.rows} × {current.cols} · {current.pieces} pieces
                     </p>
                   </div>
                 </div>
@@ -446,9 +381,7 @@ export default function PuzzleGame() {
                 <ChevronDown
                   size={16}
                   className={`text-sub-rich transition-transform ${
-                    difficultyOpen
-                      ? "rotate-180"
-                      : ""
+                    difficultyOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
@@ -470,34 +403,22 @@ export default function PuzzleGame() {
                     }}
                     className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-xl border border-white/10 bg-charcoal-base shadow-2xl"
                   >
-                    {(
-                      Object.keys(
-                        DIFFICULTIES
-                      ) as Difficulty[]
-                    ).map((key) => {
-                      const option =
-                        DIFFICULTIES[key];
+                    {(Object.keys(DIFFICULTIES) as Difficulty[]).map((key) => {
+                      const option = DIFFICULTIES[key];
 
                       return (
                         <button
                           key={key}
-                          onClick={() =>
-                            selectDifficulty(
-                              key
-                            )
-                          }
+                          onClick={() => selectDifficulty(key)}
                           className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-white/[0.05] ${
-                            difficulty === key
-                              ? "bg-white/[0.04]"
-                              : ""
+                            difficulty === key ? "bg-white/[0.04]" : ""
                           }`}
                         >
                           <div
                             className={`h-2.5 w-2.5 rounded-full ${
                               key === "easy"
                                 ? "bg-emerald-400"
-                                : key ===
-                                  "medium"
+                                : key === "medium"
                                 ? "bg-yellow-400"
                                 : "bg-red-400"
                             }`}
@@ -505,15 +426,11 @@ export default function PuzzleGame() {
 
                           <div>
                             <p className="text-sm font-semibold text-white">
-                              {
-                                option.label
-                              }
+                              {option.label}
                             </p>
 
                             <p className="text-xs text-sub-rich">
-                              {option.rows} ×{" "}
-                              {option.cols} ·{" "}
-                              {option.pieces}{" "}
+                              {option.rows} × {option.cols} · {option.pieces}{" "}
                               pieces
                             </p>
                           </div>
@@ -529,14 +446,9 @@ export default function PuzzleGame() {
             <div className="mt-5 grid grid-cols-2 gap-3">
               <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
                 <div className="flex items-center gap-2">
-                  <Clock
-                    size={14}
-                    className="text-co-rich"
-                  />
+                  <Clock size={14} className="text-co-rich" />
 
-                  <p className="text-xs text-sub-rich">
-                    Time
-                  </p>
+                  <p className="text-xs text-sub-rich">Time</p>
                 </div>
 
                 <p className="mt-2 text-2xl font-bold tabular-nums text-white">
@@ -546,14 +458,9 @@ export default function PuzzleGame() {
 
               <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
                 <div className="flex items-center gap-2">
-                  <MousePointer2
-                    size={14}
-                    className="text-co-rich"
-                  />
+                  <MousePointer2 size={14} className="text-co-rich" />
 
-                  <p className="text-xs text-sub-rich">
-                    Moves
-                  </p>
+                  <p className="text-xs text-sub-rich">Moves</p>
                 </div>
 
                 <p className="mt-2 text-2xl font-bold tabular-nums text-white">
@@ -565,14 +472,9 @@ export default function PuzzleGame() {
             {/* Pieces */}
             <div className="mt-3 flex items-center justify-between rounded-2xl border border-white/5 bg-white/[0.02] px-4 py-3">
               <div className="flex items-center gap-2">
-                <Puzzle
-                  size={15}
-                  className="text-co-rich"
-                />
+                <Puzzle size={15} className="text-co-rich" />
 
-                <span className="text-sm text-sub-rich">
-                  Pieces
-                </span>
+                <span className="text-sm text-sub-rich">Pieces</span>
               </div>
 
               <span className="text-sm font-semibold text-white">
@@ -583,19 +485,13 @@ export default function PuzzleGame() {
             {/* Desktop instructions */}
             <div className="mt-7 hidden lg:block">
               <div className="flex items-center gap-2 text-white">
-                <MousePointer2
-                  size={16}
-                  className="text-co-rich"
-                />
+                <MousePointer2 size={16} className="text-co-rich" />
 
-                <span className="text-sm font-semibold">
-                  How to play
-                </span>
+                <span className="text-sm font-semibold">How to play</span>
               </div>
 
               <p className="mt-3 text-sm leading-relaxed text-sub-rich">
-                Click a tile next to the empty
-                space to move it. Arrange every
+                Click a tile next to the empty space to move it. Arrange every
                 piece back into the original image.
               </p>
             </div>
@@ -603,9 +499,7 @@ export default function PuzzleGame() {
             {/* Buttons */}
             <div className="mt-5 flex gap-3 lg:mt-auto lg:flex-col">
               <button
-                onClick={() =>
-                  setPreview(true)
-                }
+                onClick={() => setPreview(true)}
                 disabled={won}
                 className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-sub-rich transition-all hover:border-white/20 hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
               >
@@ -677,27 +571,20 @@ export default function PuzzleGame() {
                    */
                   if (piece === 0) {
                     return (
-                      <div
-                        key={`empty-${index}`}
-                        className="bg-black/50"
-                      />
+                      <div key={`empty-${index}`} className="bg-black/50" />
                     );
                   }
 
-                  const movable =
-                    canMove(index) && !won;
+                  const movable = canMove(index) && !won;
 
                   /*
                    * Original location of the piece.
                    */
                   const original = piece - 1;
 
-                  const originalCol =
-                    original % current.cols;
+                  const originalCol = original % current.cols;
 
-                  const originalRow = Math.floor(
-                    original / current.cols
-                  );
+                  const originalRow = Math.floor(original / current.cols);
 
                   /*
                    * Each tile gets an image that is:
@@ -711,16 +598,10 @@ export default function PuzzleGame() {
                    * This keeps the source image intact.
                    */
                   const backgroundPositionX =
-                    current.cols === 1
-                      ? 0
-                      : (originalCol * 100) /
-                        (current.cols - 1);
+                    (originalCol * 100) / (current.cols - 1);
 
                   const backgroundPositionY =
-                    current.rows === 1
-                      ? 0
-                      : (originalRow * 100) /
-                        (current.rows - 1);
+                    (originalRow * 100) / (current.rows - 1);
 
                   return (
                     <motion.button
@@ -745,9 +626,7 @@ export default function PuzzleGame() {
                             }
                           : {}
                       }
-                      onClick={() =>
-                        moveTile(index)
-                      }
+                      onClick={() => moveTile(index)}
                       aria-label={`Puzzle tile ${piece}`}
                       className={`
                         relative min-h-0 min-w-0
@@ -769,10 +648,11 @@ export default function PuzzleGame() {
                         className="absolute inset-0"
                         style={{
                           backgroundImage: `url(${PUZZLE_IMAGE})`,
-                          backgroundSize: `${current.cols * 100}% ${current.rows * 100}%`,
+                          backgroundSize: `${current.cols * 100}% ${
+                            current.rows * 100
+                          }%`,
                           backgroundPosition: `${backgroundPositionX}% ${backgroundPositionY}%`,
-                          backgroundRepeat:
-                            "no-repeat",
+                          backgroundRepeat: "no-repeat",
                         }}
                       />
 
@@ -800,9 +680,7 @@ export default function PuzzleGame() {
                       opacity: 0,
                     }}
                     className="absolute inset-0 z-50 flex items-center justify-center  bg-black/85 p-4 backdrop-blur-md"
-                    onClick={() =>
-                      setPreview(false)
-                    }
+                    onClick={() => setPreview(false)}
                   >
                     <motion.div
                       initial={{
@@ -818,9 +696,7 @@ export default function PuzzleGame() {
                         scale: 0.94,
                       }}
                       className="relative max-h-full max-w-full overflow-hidden rounded-xl border border-white/10 bg-black shadow-4xl"
-                      onClick={(event) =>
-                        event.stopPropagation()
-                      }
+                      onClick={(event) => event.stopPropagation()}
                     >
                       <img
                         src={PUZZLE_IMAGE}
@@ -829,9 +705,7 @@ export default function PuzzleGame() {
                       />
 
                       <button
-                        onClick={() =>
-                          setPreview(false)
-                        }
+                        onClick={() => setPreview(false)}
                         aria-label="Close preview"
                         className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/70 text-white backdrop-blur-md transition-colors hover:bg-co-rich hover:text-black"
                       >
@@ -883,9 +757,7 @@ export default function PuzzleGame() {
                       </h3>
 
                       <p className="mt-2 text-sm text-sub-rich">
-                        {current.label} · {moves}{" "}
-                        moves ·{" "}
-                        {formatTime(seconds)}
+                        {current.label} · {moves} moves · {formatTime(seconds)}
                       </p>
 
                       <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -893,9 +765,7 @@ export default function PuzzleGame() {
                           onClick={shuffle}
                           className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.06] px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10"
                         >
-                          <RotateCcw
-                            size={15}
-                          />
+                          <RotateCcw size={15} />
                           Play Again
                         </button>
 
