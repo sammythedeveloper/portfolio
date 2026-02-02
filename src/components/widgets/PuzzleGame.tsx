@@ -236,7 +236,7 @@ export default function PuzzleGame() {
     >
       {/* Ambient background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/3 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-co-rich blur-[120px]" />
+        <div className="absolute left-1/2 top-1/3 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-co-rich/20 blur-[120px]" />
 
         <div className="absolute bottom-1/4 left-1/4 h-64 w-64 rounded-full bg-co-rich blur-[100px]" />
       </div>
