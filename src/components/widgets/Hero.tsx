@@ -292,7 +292,7 @@ export default function Hero() {
           justify-center
           h-full
           gap-16
-          px-20
+          md:px-20
         "
       >
         <div
