@@ -14,9 +14,20 @@ interface ExperienceItem {
 // 2. Add your career data here
 const experiences: ExperienceItem[] = [
   {
+    role: "Software Developer Intern",
+    company: "InteractMet",
+    location: "Toronto, ON ",
+    period: "Present",
+    description: [
+      "Selected to participate in an industry-sponsored software development capstone project with InteractMet, an AI communication technology company.",
+      "Collaborating with a student development team to analyze requirements and design software solutions for real-world business needs",
+      "Applying software development practices including project planning, version control, documentation, and Agile collaboration."
+    ],
+  },
+  {
     role: "Full-Stack Developer",
-    company: "Self-Directed Product Engineering",
-    location: "Toronto, ON (Remote)",
+    company: "Self-Directed Product development",
+    location: "Toronto, ON )",
     period: "Jan 2026 - Present",
     description: [
       "Built, tested, and deployed multiple full-stack web applications from scratch, handling everything from database design to frontend animations.",
@@ -26,15 +37,16 @@ const experiences: ExperienceItem[] = [
     ],
   },
   {
-    role: "MERN Developer",
-    company: "Fixed-Term Position",
-    location: "Toronto, ON (Remote)",
-    period: " 2025 ",
+    role: "Full Stack Developer",
+    company: "Freelance ",
+    location: "Toronto, ON ",
+    period: " 2025 - 2026",
     description: [
-      "Maintained and scaled the core e-commerce platform, handling everything from tracking down system bottlenecks to rolling out high-priority features.",
-      "Worked closely with cross-functional teams to redesign the checkout flow, directly contributing to a 25% increase in completed orders.",
-      "Collaborated with the backend team to migrate legacy checkout logic into a modern React architecture, significantly improving code maintainability and page performance.",
-      "Optimized the end-to-end user journey by engineering a high-performance, seamless transition from product selection straight through to the payment gateway.",
+      "Worked with small business owners to update, improve, and maintain their websites based on changing business needs.",
+      "Built and modified website features, fixed bugs, and improved existing functionality to create smoother user experiences.",
+      "Helped clients improve their online presence by making websites more responsive, user-friendly, and reliable across devices.",
+      "Managed the full development process, including understanding requirements, making updates, testing changes, and deploying improvements.",
+      "Used modern frontend and backend technologies to customize websites and integrate tools that support business operations.",
     ],
   },
   {
@@ -43,11 +55,11 @@ const experiences: ExperienceItem[] = [
     location: "Remote ,Silverspring, MD",
     period: "2024",
     description: [
-      "Built and maintained a reusable component library to standardize UI elements, improve consistency, and reduce development effort across multiple features.",
-      "Collaborated closely with UI/UX designers to implement pixel-perfect, scalable design tokens.",
+      "Developed and enhanced full-stack web application features using React, Next.js, and Node.js, improving user workflows and application reliability.",
+      "Created reusable React components and optimized frontend architecture to improve maintainability, consistency, and development efficiency.",
       "Implemented RESTful API endpoints and secure form-handling logic to ensure reliable data flow between frontend and backend systems.",
-      "Handling data validation, computing complex processes, and managing user authentication/session security.",
-      "Participated in Agile/Scrum development processes including sprint planning and daily stand-ups, contributing to timely delivery of production features.",
+      "Implemented Cypress end-to-end testing to validate critical user flows, identify issues early, and improve overall application quality.",
+      "Collaborated within an Agile/Scrum development environment through sprint planning, standups, code reviews, and team discussions to deliver features and resolve technical challenges.",
     ],
   },
 ];

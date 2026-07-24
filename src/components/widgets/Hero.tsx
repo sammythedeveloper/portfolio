@@ -61,7 +61,7 @@ type FloatingIcon = {
   delay: number;
 };
 
-// STATIC DATA = NO HYDRATION ISSUE
+// STATIC DATA
 
 const stars: Star[] = Array.from({ length: 120 }, (_, i) => ({
   shapeType: i % 3,
