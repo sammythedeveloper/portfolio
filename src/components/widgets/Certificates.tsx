@@ -16,31 +16,43 @@ const certificates: CertificateItem[] = [
     title: "AWS Certified Cloud Practitioner ",
     issuer: "Amazon Web Services (AWS)",
     date: "2026",
-    verificationUrl: "https://www.credly.com/badges/1f14f2cd-6a22-4cac-9bd4-abc559a82bf3/public_url",
+    verificationUrl:
+      "https://www.credly.com/badges/1f14f2cd-6a22-4cac-9bd4-abc559a82bf3/public_url",
   },
   {
     title: "Supervised Machine Learning",
     issuer: "Coursera",
     date: "2026",
-    verificationUrl: "https://www.coursera.org/account/accomplishments/verify/T8XQVEHQX3X4",
+    verificationUrl:
+      "https://www.coursera.org/account/accomplishments/verify/T8XQVEHQX3X4",
   },
   {
     title: "Full-Stack Developer Certificate",
     issuer: "Evangadi Network",
     date: "2023",
-    verificationUrl: "https://drive.google.com/file/d/13P5Y7XxAr_6GoSsrD5phLhySdhjUiVMK/view?usp=sharing",
+    verificationUrl:
+      "https://drive.google.com/file/d/13P5Y7XxAr_6GoSsrD5phLhySdhjUiVMK/view?usp=sharing",
+  },
+  {
+    title: "AWS Educate Machine Learning Foundations",
+    issuer: "Amazon Web Services (AWS)",
+    date: "2026",
+    verificationUrl:
+      "https://www.credly.com/badges/7aa30285-5c1d-4b9b-a792-31fae83a69e2/public_url",
   },
   {
     title: "Google IT Analyst Certificate",
     issuer: "Coursera",
     date: "2022",
-    verificationUrl: "https://coursera.org/share/f6c8bee864de21f8980cdbbb4fc7d9c7",
+    verificationUrl:
+      "https://coursera.org/share/f6c8bee864de21f8980cdbbb4fc7d9c7",
   },
   {
     title: "Python for Everybody",
     issuer: "University of Michigan",
     date: "2025",
-    verificationUrl: "https://coursera.org/share/d67b8665b73a37cd366bdf5949532d42",
+    verificationUrl:
+      "https://coursera.org/share/d67b8665b73a37cd366bdf5949532d42",
   },
 ];
 
@@ -70,16 +82,15 @@ export default function Certificates() {
 
       {/* Marquee Wrapper Container */}
       <div className="flex relative w-full overflow-hidden">
-        
         {/* Linear Moving Track */}
         <motion.div
           className="flex gap-6 pr-6 min-w-full shrink-0 cursor-pointer"
-          onMouseEnter={() => setIsPaused(true)}  
-          onMouseLeave={() => setIsPaused(false)} 
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
           animate={isPaused ? {} : { x: ["0%", "-50%"] }}
           transition={{
             ease: "linear",
-            duration: 25, 
+            duration: 25,
             repeat: Infinity,
           }}
         >

@@ -27,7 +27,7 @@ const experiences: ExperienceItem[] = [
   {
     role: "Full-Stack Developer",
     company: "Self-Directed Product development",
-    location: "Toronto, ON )",
+    location: "Toronto, ON ",
     period: "Jan 2026 - Present",
     description: [
       "Built, tested, and deployed multiple full-stack web applications from scratch, handling everything from database design to frontend animations.",
