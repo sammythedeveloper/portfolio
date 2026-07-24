@@ -40,7 +40,7 @@ export const projects = [
 
     image: "/projects/book.png",
 
-    techStack: ["React", "Node.js", "Express", "MongoDB", "EJS"],
+    techStack: ["HTML","CSS", "Node.js", "Express", "MongoDB", "EJS"],
 
     features: [
       "User authentication",
