@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+// import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { Github, ArrowUpRight } from "lucide-react";
 
-import me from "../../../public/yes.jpg";
+// import me from "../../../public/yes.jpg";
+import AsciiPortrait from "@/components/ui/AsciiPortrait";
 
 import ReactIcon from "@/components/icons/React.svg";
 import AWSIcon from "@/components/icons/AWS.svg";
@@ -447,7 +448,6 @@ export default function Hero() {
               "
             >
               View Featured Projects
-
               <ArrowUpRight
                 size={15}
                 className="
@@ -510,7 +510,10 @@ export default function Hero() {
                 hover:text-white
               "
             >
-              <FaLinkedin className=" text-white hover:text-blue-400" size={19} />
+              <FaLinkedin
+                className=" text-white hover:text-blue-400"
+                size={19}
+              />
             </a>
 
             <a
@@ -522,7 +525,10 @@ export default function Hero() {
                 hover:text-co-rich
               "
             >
-              <FaEnvelope className="text-white hover:text-co-rich  " size={18} />
+              <FaEnvelope
+                className="text-white hover:text-co-rich  "
+                size={18}
+              />
             </a>
           </div>
         </motion.div>
@@ -530,71 +536,31 @@ export default function Hero() {
         {/* Profile Image                     */}
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
+          initial={{
+            opacity: 0,
+            scale: 0.95,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.15,
+          }}
           className="
-            hidden
-            lg:flex
-            relative
-            w-80
-            h-80
-            xl:w-96
-            xl:h-96
-            items-center
-            justify-center
-          "
+    hidden
+    lg:flex
+    relative
+    w-80
+    h-80
+    xl:w-96
+    xl:h-96
+    items-center
+    justify-center
+  "
         >
-          {/* Outer Glow */}
-
-          <div
-            className="
-              absolute
-              inset-0
-              rounded-full
-              bg-co-rich/[0.06]
-              blur-3xl
-            "
-          />
-
-          {/* Gradient Ring */}
-
-          <div
-            className="
-              absolute
-              inset-0
-              rounded-full
-              p-[1px]
-              bg-gradient-to-br
-              from-co-rich/40
-              via-white/10
-              to-transparent
-            "
-          >
-            <div className="w-full h-full rounded-full bg-navy-base" />
-          </div>
-
-          {/* Image */}
-
-          <div
-            className="
-              relative
-              w-[calc(100%-12px)]
-              h-[calc(100%-12px)]
-              rounded-full
-              overflow-hidden
-              border
-              border-white/10
-            "
-          >
-            <Image
-              src={me}
-              alt="Samson Daba"
-              fill
-              priority
-              className="object-cover object-[center_70%]"
-            />
-          </div>
+          <AsciiPortrait src="/profile.png" size={560} />
         </motion.div>
       </div>
 
