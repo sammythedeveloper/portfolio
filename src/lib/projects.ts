@@ -128,7 +128,7 @@ export const projects = [
     documentation:
       "https://www.notion.so/Stacky-36e8bd3daece80ab90c5d6823b2fa655?source=copy_link",
     live: "https://stackyapp.vercel.app/",
-    repo: "https://github.com/sammythedeveloper/Stacky",
+    repo: "https://stacky-omega.vercel.app/",
   },
 
   {
