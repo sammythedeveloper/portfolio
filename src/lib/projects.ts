@@ -38,7 +38,7 @@ export const projects = [
     purpose:
       "Full-stack luxury accommodations platform built to deliver an elegant, seamless booking experience",
 
-    image: "/projects/book.png",
+    image: "/projects/booker.png",
 
     techStack: ["HTML","CSS", "Node.js", "Express", "MongoDB", "EJS"],
 
@@ -51,7 +51,7 @@ export const projects = [
       "Interactive Leaflet Mapping",
     ],
 
-    documentation: "#",
+    documentation: "https://mixed-gull-24c.notion.site/Booking-System-Engineering-Case-Study-3bc8bd3daece806d9a3bce998cb7027b?source=copy_link",
     live: "https://booking-pcmm.onrender.com/listings",
     repo: "https://github.com/sammythedeveloper/Booking",
   },
@@ -102,7 +102,7 @@ export const projects = [
       " Secure Payments",
     ],
 
-    documentation: "#",
+    documentation: "https://mixed-gull-24c.notion.site/Nova-Shop-3bc8bd3daece80579602fb3f09ab3783?source=copy_link",
     live: "https://sammythedeveloper.github.io/Nova-shop/",
     repo: "https://github.com/sammythedeveloper/Nova-shop",
   },
@@ -150,8 +150,8 @@ export const projects = [
       "Real-time updates and smooth navigation powered by React and Next.js.",
     ],
 
-    documentation: "#",
-    live: "#",
+    documentation: "https://github.com/sammythedeveloper/monifyapp",
+    live: "https://github.com/sammythedeveloper/monifyapp",
     repo: "https://github.com/sammythedeveloper/monifyapp",
   },
 ];
