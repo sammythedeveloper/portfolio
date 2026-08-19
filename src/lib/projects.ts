@@ -40,7 +40,7 @@ export const projects = [
 
     image: "/projects/booker.png",
 
-    techStack: ["HTML","CSS", "Node.js", "Express", "MongoDB", "EJS"],
+    techStack: ["HTML", "CSS", "Node.js", "Express", "MongoDB", "EJS"],
 
     features: [
       "User authentication",
@@ -51,7 +51,8 @@ export const projects = [
       "Interactive Leaflet Mapping",
     ],
 
-    documentation: "https://mixed-gull-24c.notion.site/Booking-System-Engineering-Case-Study-3bc8bd3daece806d9a3bce998cb7027b?source=copy_link",
+    documentation:
+      "https://mixed-gull-24c.notion.site/Booking-System-Engineering-Case-Study-3bc8bd3daece806d9a3bce998cb7027b?source=copy_link",
     live: "https://booking-pcmm.onrender.com/listings",
     repo: "https://github.com/sammythedeveloper/Booking",
   },
@@ -102,7 +103,8 @@ export const projects = [
       " Secure Payments",
     ],
 
-    documentation: "https://mixed-gull-24c.notion.site/Nova-Shop-3bc8bd3daece80579602fb3f09ab3783?source=copy_link",
+    documentation:
+      "https://mixed-gull-24c.notion.site/Nova-Shop-3bc8bd3daece80579602fb3f09ab3783?source=copy_link",
     live: "https://sammythedeveloper.github.io/Nova-shop/",
     repo: "https://github.com/sammythedeveloper/Nova-shop",
   },
@@ -137,21 +139,35 @@ export const projects = [
       "A financial dashboard designed to visualize and manage personal finances.",
 
     purpose:
-      "Finance provides users with insights into spending habits and financial activity.",
+      "FinFlow gives users a centralized view of their finances, allowing them to securely manage transactions and categories while gaining insight into their spending activity.",
 
     image: "/projects/finance.jpg",
 
-    techStack: ["Next.js", "Charts.js", "TypeScript"],
+    techStack: [
+      "Vue.js",
+      "TypeScript",
+      "ASP.NET Core",
+      "Entity Framework Core",
+      "PostgreSQL",
+      "JWT",
+      "Railway",
+      "Vercel",
+    ],
 
     features: [
-      "Add, edit, and delete expenses with category tagging and note attachment.",
-      "Automatic categorization of expenses based on user input",
-      "nteractive data visualization using charts to display spending insights.",
-      "Real-time updates and smooth navigation powered by React and Next.js.",
+      "Secure user registration and authentication with JWT.",
+      "Secure password hashing using ASP.NET Core Identity's PasswordHasher.",
+      "Create, manage, and organize financial transactions.",
+      "Categorize transactions to better understand spending habits.",
+      "PostgreSQL database with Entity Framework Core migrations.",
+      "RESTful API built with ASP.NET Core.",
+      "Responsive financial dashboard with a modern dark-themed interface.",
+      "Production deployment using Railway for the backend and PostgreSQL database.",
+      "Vercel deployment for the Vue.js frontend."
     ],
 
     documentation: "https://github.com/sammythedeveloper/monifyapp",
-    live: "https://github.com/sammythedeveloper/monifyapp",
-    repo: "https://github.com/sammythedeveloper/monifyapp",
+    live: "https://finflow-client-one.vercel.app/login",
+    repo: "https://github.com/sammythedeveloper/finflow_client",
   },
 ];
