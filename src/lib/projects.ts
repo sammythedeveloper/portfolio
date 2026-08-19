@@ -166,7 +166,7 @@ export const projects = [
       "Vercel deployment for the Vue.js frontend."
     ],
 
-    documentation: "https://github.com/sammythedeveloper/monifyapp",
+    documentation: "",
     live: "https://finflow-client-one.vercel.app/login",
     repo: "https://github.com/sammythedeveloper/finflow_client",
   },
