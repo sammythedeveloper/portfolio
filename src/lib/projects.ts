@@ -5,7 +5,7 @@ export const projects = [
       "An AI-powered personalized assistant that uses user input metrics to generate real-time, data-driven recommendations.",
     purpose:
       "The purpose is to leverage AI and user data to provide intelligent, adaptive recommendations that improve user experience and decision-making.",
-    image: "/projects/assistance.jpg",
+    image: "/projects/hassist.jpg",
 
     techStack: [
       "Next.js",
