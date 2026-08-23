@@ -43,8 +43,8 @@ const experiences: ExperienceItem[] = [
     period: " 2025 - 2026",
     description: [
       "Worked with small business owners to update, improve, and maintain their websites based on changing business needs.",
-      "Built and modified website features, fixed bugs, and improved existing functionality to create smoother user experiences.",
-      "Helped clients improve their online presence by making websites more responsive, user-friendly, and reliable across devices.",
+      "Built and modified website features, fixed bugs, and improved 90% of the existing functionality to create smoother user experiences.",
+      "Helped 20+ clients improve their online presence by making websites more responsive, user-friendly, and reliable across devices.",
       "Managed the full development process, including understanding requirements, making updates, testing changes, and deploying improvements.",
       "Used modern frontend and backend technologies to customize websites and integrate tools that support business operations.",
     ],
@@ -56,10 +56,10 @@ const experiences: ExperienceItem[] = [
     period: "2024",
     description: [
       "Developed and enhanced full-stack web application features using React, Next.js, and Node.js, improving user workflows and application reliability.",
-      "Created reusable React components and optimized frontend architecture to improve maintainability, consistency, and development efficiency.",
+      "Created 15+ reusable React components and optimized frontend architecture to improve maintainability, consistency, and development efficiency.",
       "Implemented RESTful API endpoints and secure form-handling logic to ensure reliable data flow between frontend and backend systems.",
-      "Implemented Cypress end-to-end testing to validate critical user flows, identify issues early, and improve overall application quality.",
-      "Collaborated within an Agile/Scrum development environment through sprint planning, standups, code reviews, and team discussions to deliver features and resolve technical challenges.",
+      "Implemented and maintained 25+ Cypress end-to-end testing to validate critical user flows, identify issues early, and improve overall application quality.",
+      "Collaborated within an Agile/Scrum team of 5+ developers through sprint planning, daily standups, code reviews, and technical discussions to deliver features and resolve development challenges.",
     ],
   },
 ];
