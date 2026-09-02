@@ -1,25 +1,60 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --color-charcoal-base: #FFFFFF;
-  --color-second-base: #FFFFFF;
+  --color-charcoal-base: #ffffff;
+  --color-second-base: #ffffff;
   --color-bar-surface: #000000;
 
-  --color-co-rich: #2273F4;
+  --color-co-rich: #2273f4;
   --color-sub-rich: #000000;
   --color-co-dark: #a05a2c;
   --color-co-light: #000000;
   --color-co-simple: #10b981;
 
-  --color-text-main: #f5f5f5;
-  --color-text-muted: #b0b0b0;
+  --color-text-main: #171717;
+  --color-text-muted: #737373;
+  --color-circuit: #808080;
 }
 
+/* Light theme */
+:root {
+  color-scheme: light;
+
+  --color-charcoal-base: #ffffff;
+  --color-second-base: #f4f3ef;
+  --color-bar-surface: #ffffff;
+
+  --color-sub-rich: #171717;
+  --color-co-light: #171717;
+
+  --color-text-main: #171717;
+  --color-text-muted: #737373;
+  --color-circuit: #a6a39b;
+}
+
+/* Dark theme */
+.dark {
+  color-scheme: dark;
+
+  --color-charcoal-base: #0b0d12;
+  --color-second-base: #11151d;
+  --color-bar-surface: #1a202b;
+
+  --color-sub-rich: #e5e7eb;
+  --color-co-light: #f5f5f5;
+
+  --color-text-main: #f5f5f5;
+  --color-text-muted: #a1a1aa;
+  --color-circuit: #454b57;
+}
 
 html,
 body {
-  background-color: var(--color-charcoal-base);
+  background-color: var(--color-second-base);
   color: var(--color-text-main);
   margin: 0;
   padding: 0;
+  transition: background-color 300ms ease, color 300ms ease;
 }

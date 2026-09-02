@@ -8,6 +8,7 @@ import {
   ExternalLink,
   Github,
   X,
+  ChevronRight,
 } from "lucide-react";
 
 interface ProjectModalProps {
@@ -26,10 +27,7 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export default function ProjectModal({
-  project,
-  onClose,
-}: ProjectModalProps) {
+export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -44,7 +42,6 @@ export default function ProjectModal({
     if (!project) return;
 
     const previousOverflow = document.body.style.overflow;
-
     document.body.style.overflow = "hidden";
 
     return () => {
@@ -56,9 +53,7 @@ export default function ProjectModal({
     if (!project) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
+      if (event.key === "Escape") onClose();
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -80,32 +75,18 @@ export default function ProjectModal({
           transition={{ duration: 0.3 }}
           onClick={onClose}
           className="
-            fixed
-            inset-0
-            z-[150]
-            flex
-            items-center
-            justify-center
+            fixed inset-0 z-[150]
+            flex items-center justify-center
             bg-black/75
-            px-4
-            py-6
-            backdrop-blur-xl
+            px-4 py-5
+            backdrop-blur-md
             md:px-8
           "
         >
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 25,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              y: 20,
-            }}
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{
               duration: 0.4,
               ease: [0.22, 1, 0.36, 1],
@@ -113,45 +94,30 @@ export default function ProjectModal({
             onClick={(event) => event.stopPropagation()}
             data-lenis-prevent
             className="
-              relative
-              flex
-              h-full
-              max-h-[90vh]
-              w-full
-              max-w-5xl
-              flex-col
-              overflow-hidden
-              border
-              border-white/[0.08]
-              bg-charcoal-base
-            "
+            relative flex h-full max-h-[90vh]
+            w-full max-w-5xl flex-col
+            overflow-hidden
+            rounded-2xl
+            border border-black/[0.08]
+            bg-charcoal-base
+            dark:border-white/[0.08]
+          "
           >
             {/* TOP BAR */}
 
             <div
               className="
-                flex
-                shrink-0
-                items-center
-                justify-between
-                border-b
-                border-white/[0.08]
-                px-6
-                py-5
-                md:px-10
+                flex shrink-0 items-center justify-between
+                border-b border-black/[0.08]
+                px-5 py-3
+                dark:border-white/[0.08]
+                md:px-8
               "
             >
               <div className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-co-rich" />
+                <span className="h-1.5 w-1.5 rounded-full bg-circuit" />
 
-                <span
-                  className="
-                    text-[10px]
-                    uppercase
-                    tracking-[0.25em]
-                    text-sub-rich/45
-                  "
-                >
+                <span className="text-[10px] uppercase tracking-[0.2em] text-text-muted">
                   Project Details
                 </span>
               </div>
@@ -161,83 +127,42 @@ export default function ProjectModal({
                 onClick={onClose}
                 aria-label="Close project"
                 className="
-                  group
-                  flex
-                  h-9
-                  w-9
-                  items-center
-                  justify-center
-                  text-sub-rich/50
-                  transition-colors
+                  group flex h-9 w-9 items-center justify-center
+                  text-text-muted transition-colors
                   hover:text-co-rich
                 "
               >
                 <X
                   size={18}
-                  className="
-                    transition-transform
-                    duration-300
-                    group-hover:rotate-90
-                  "
+                  className="transition-transform duration-300 group-hover:rotate-90"
                 />
               </button>
             </div>
 
             {/* CONTENT */}
 
-            <div
-              className="
-                flex-1
-                overflow-y-auto
-                custom-scrollbar
-              "
-            >
-              <div
-                className="
-                  px-6
-                  py-12
-                  md:px-10
-                  md:py-16
-                  lg:px-16
-                "
-              >
+            <div className="custom-scrollbar flex-1 overflow-y-auto">
+              <div className="px-5 py-8 md:px-10 md:py-10 lg:px-14">
                 {/* HEADER */}
 
                 <motion.header
-                  initial={{
-                    opacity: 0,
-                    y: 15,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{
-                    delay: 0.05,
-                    duration: 0.45,
-                  }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05, duration: 0.45 }}
                 >
-                  <p
-                    className="
-                      text-xs
-                      uppercase
-                      tracking-[0.2em]
-                      text-sub-rich/40
-                    "
-                  >
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-text-muted">
                     Selected Work
                   </p>
 
                   <h2
                     className="
-                      mt-5
-                      max-w-4xl
-                      text-5xl
-                      font-semibold
-                      leading-[0.95]
-                      tracking-[-0.055em]
-                      text-co-rich
-                      md:text-7xl
+                      mt-3 max-w-3xl
+                      text-3xl font-semibold
+                      leading-tight tracking-[-0.04em]
+                      text-black/55
+                      dark:text-white/55
+                      sm:text-4xl
+                      md:text-5xl
                     "
                   >
                     {project.title}
@@ -245,12 +170,10 @@ export default function ProjectModal({
 
                   <p
                     className="
-                      mt-7
-                      max-w-2xl
-                      text-base
-                      leading-8
-                      text-sub-rich
-                      md:text-lg
+                      mt-4 max-w-2xl
+                      text-sm leading-7
+                      text-text-muted
+                      md:text-base
                     "
                   >
                     {project.description}
@@ -260,15 +183,7 @@ export default function ProjectModal({
                 {/* THE IDEA */}
 
                 <ProjectSection label="The Idea">
-                  <p
-                    className="
-                      max-w-3xl
-                      text-base
-                      leading-8
-                      text-sub-rich
-                      md:text-lg
-                    "
-                  >
+                  <p className="max-w-3xl text-sm leading-7 text-text-muted md:text-base">
                     {project.purpose}
                   </p>
                 </ProjectSection>
@@ -276,61 +191,28 @@ export default function ProjectModal({
                 {/* WHAT I BUILT */}
 
                 <ProjectSection label="What I Built">
-                  <div className="divide-y divide-white/[0.07]">
-                    {project.features.map(
-                      (feature, index) => (
-                        <motion.div
-                          key={feature}
-                          initial={{
-                            opacity: 0,
-                            x: -10,
-                          }}
-                          whileInView={{
-                            opacity: 1,
-                            x: 0,
-                          }}
-                          viewport={{
-                            once: true,
-                          }}
-                          transition={{
-                            duration: 0.35,
-                            delay: index * 0.04,
-                          }}
-                          className="
-                            flex
-                            gap-6
-                            py-5
-                          "
-                        >
-                          <span
-                            className="
-                              shrink-0
-                              pt-1
-                              text-[10px]
-                              tracking-[0.15em]
-                              text-sub-rich/30
-                            "
-                          >
-                            {String(index + 1).padStart(
-                              2,
-                              "0"
-                            )}
-                          </span>
+                  <div className="space-y-4">
+                    {project.features.map((feature, index) => (
+                      <motion.div
+                        key={feature}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 0.35,
+                          delay: index * 0.04,
+                        }}
+                        className="flex items-start gap-3"
+                      >
+                        <span className="mt-1 shrink-0 text-co-rich">
+                          <ChevronRight size={16} strokeWidth={1.8} />
+                        </span>
 
-                          <p
-                            className="
-                              max-w-3xl
-                              text-sm
-                              leading-7
-                              text-sub-rich
-                              md:text-base
-                            "
-                          >
-                            {feature}
-                          </p>
-                        </motion.div>
-                      )
-                    )}
+                        <p className="max-w-3xl text-sm leading-7 text-text-muted md:text-base">
+                          {feature}
+                        </p>
+                      </motion.div>
+                    ))}
                   </div>
                 </ProjectSection>
 
@@ -339,24 +221,19 @@ export default function ProjectModal({
                 <ProjectSection label="Technology">
                   <div
                     className="
-                      grid
-                      max-w-3xl
-                      grid-cols-2
-                      gap-x-8
-                      gap-y-4
+                      grid max-w-3xl
+                      grid-cols-2 gap-x-6 gap-y-3
                       sm:grid-cols-3
                     "
                   >
                     {project.techStack.map((tech) => (
-                      <span
+                      <div
                         key={tech}
-                        className="
-                          text-sm
-                          text-co-rich
-                        "
+                        className="flex items-center gap-2 text-sm text-text-main"
                       >
+                        <span className="h-px w-3 shrink-0 bg-text-muted/50" />
                         {tech}
-                      </span>
+                      </div>
                     ))}
                   </div>
                 </ProjectSection>
@@ -365,30 +242,14 @@ export default function ProjectModal({
 
                 <div
                   className="
-                    mt-20
-                    border-t
-                    border-white/[0.08]
-                    pt-8
+                    mt-12 border-t
+                    border-black/[0.08]
+                    pt-6
+                    dark:border-white/[0.08]
                   "
                 >
-                  <div
-                    className="
-                      flex
-                      flex-wrap
-                      items-center
-                      gap-x-8
-                      gap-y-5
-                    "
-                  >
-                    <span
-                      className="
-                        mr-2
-                        text-[10px]
-                        uppercase
-                        tracking-[0.2em]
-                        text-sub-rich/35
-                      "
-                    >
+                  <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-text-muted">
                       Explore
                     </span>
 
@@ -424,7 +285,6 @@ export default function ProjectModal({
   );
 }
 
-
 /* ================================================================
    SECTION
 ================================================================ */
@@ -439,23 +299,20 @@ function ProjectSection({
   return (
     <section
       className="
-        mt-20
-        grid
-        grid-cols-1
-        gap-8
-        border-t
-        border-white/[0.08]
-        pt-8
-        md:grid-cols-[180px_1fr]
+        mt-12 grid grid-cols-1 gap-4
+        border-t border-black/[0.08]
+        pt-6
+        dark:border-white/[0.08]
+        md:mt-14
+        md:grid-cols-[150px_1fr]
+        md:gap-8
       "
     >
       <span
         className="
-          text-[10px]
-          font-medium
-          uppercase
-          tracking-[0.22em]
-          text-sub-rich/40
+          text-[10px] font-medium
+          uppercase tracking-[0.2em]
+          text-text-muted
         "
       >
         {label}
@@ -465,7 +322,6 @@ function ProjectSection({
     </section>
   );
 }
-
 
 /* ================================================================
    LINK
@@ -486,23 +342,17 @@ function ProjectLink({
       target="_blank"
       rel="noreferrer"
       className="
-        group
-        inline-flex
-        items-center
-        gap-2
-        text-sm
-        text-co-rich
-        transition-colors
-        duration-300
-        hover:text-sub-rich
+        group inline-flex items-center gap-2
+        text-sm text-co-rich
+        transition-colors duration-300
+        hover:text-text-main
       "
     >
       <span>{children}</span>
 
       <span
         className="
-          transition-transform
-          duration-300
+          transition-transform duration-300
           group-hover:-translate-y-0.5
           group-hover:translate-x-0.5
         "

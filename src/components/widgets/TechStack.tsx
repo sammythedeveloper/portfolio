@@ -18,9 +18,8 @@ import MongoDB from "@/components/icons/MongoDB.svg";
 import Docker from "@/components/icons/Docker.svg";
 import PostgresSQL from "@/components/icons/PostgresSQL.svg";
 import MySQL from "@/components/icons/MySQL.svg";
-import Cloudflare from "@/components/icons/Cloudflare.svg";
+import Cloud from "@/components/icons/Cloudflare.svg";
 import Vercel from "@/components/icons/Vercel.svg";
-import ESLint from "@/components/icons/ESLint.svg";
 import Next from "@/components/icons/Next.js.svg";
 
 type Technology = {
@@ -34,7 +33,7 @@ const coreStack: Technology[] = [
   { name: "JavaScript", Icon: JavaScript },
   { name: "Git", Icon: Git },
   { name: "Express", Icon: Express },
-  { name: "Postman", Icon: Postman  },
+  { name: "Postman", Icon: Postman },
   { name: "Docker", Icon: Docker },
   { name: "Node.js", Icon: Node },
   { name: "HTML5", Icon: HTML5 },
@@ -57,7 +56,7 @@ const deployRun: Technology[] = [
   { name: "Docker", Icon: Docker },
   { name: "Github", Icon: Git },
   { name: "Render" },
-  { name: "Cloudflare", Icon: Cloudflare  },
+  { name: "Cloud", Icon: Cloud },
   { name: "Vercel", Icon: Vercel },
 ];
 
@@ -91,15 +90,15 @@ function TechItem({ tech }: { tech: Technology }) {
         group
         flex
         items-center
-        gap-2.5
-        px-3.5
-        py-2.5
-        rounded-xl
-        bg-white/[0.025]
+        gap-2
+        px-2.5
+        py-2
+        rounded-lg
+        bg-black/[0.025] dark:bg-white/[0.025]
         border
-        border-white/[0.07]
+        border-black/[0.07] dark:border-white/[0.07]
         hover:border-co-rich/40
-        hover:bg-white/[0.045]
+        hover:bg-black/[0.045] dark:hover:bg-white/[0.045]
         transition-colors
         duration-300
       "
@@ -110,7 +109,7 @@ function TechItem({ tech }: { tech: Technology }) {
         <span className="w-1.5 h-1.5 rounded-full bg-co-rich/60 shrink-0" />
       )}
 
-      <span className="text-xs font-medium text-sub-rich whitespace-nowrap">
+      <span className="text-xs font-medium text-text-main whitespace-nowrap">
         {tech.name}
       </span>
     </motion.div>
@@ -123,12 +122,14 @@ function TechModule({
   technologies,
   className = "",
   featured = false,
+  technologyLayoutClassName = "",
 }: {
   title: string;
   description: string;
   technologies: Technology[];
   className?: string;
   featured?: boolean;
+  technologyLayoutClassName?: string;
 }) {
   return (
     <motion.div
@@ -139,37 +140,39 @@ function TechModule({
       className={`
         relative
         h-full
-        rounded-3xl
+        w-full
+        rounded-2xl
         border
-        border-white/[0.08]
-        bg-white/[0.02]
+        uppercase
+        border-black/[0.12] dark:border-white/[0.12]
+        bg-white/[0.035] dark:bg-white/[0.035]
         backdrop-blur-sm
+        shadow-[0_8px_18px_rgba(0,0,0,0.08)]
+        dark:shadow-[0_8px_18px_rgba(0,0,0,0.08)]
+        hover:shadow-[0_8px_24px_rgba(0,0,0,0.13)]
+        dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.2)]
+        transition-shadow
+        duration-300
         overflow-hidden
-        ${featured ? "border-co-rich/20 bg-white/[0.035]" : ""}
+        ${featured ? "bg-white/[0.035]" : ""}
         ${className}
       `}
     >
-      {/* Technical corner details */}
-      <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/[0.08] rounded-tl-3xl" />
-      <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-white/[0.08] rounded-tr-3xl" />
-      <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-white/[0.08] rounded-bl-3xl" />
-      <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-white/[0.08] rounded-br-3xl" />
 
-
-      <div className="relative p-6 md:p-7">
+      <div className="relative p-5">
         {/* Label */}
-        <div className="flex items-center gap-3 mb-2">
-          <h3 className="text-lg font-semibold text-co-rich">
+        <div className="flex items-center justify-center text-center mb-2">
+          <h3 className="text-lg font-semibold text-text-main text-center">
             {title}
           </h3>
         </div>
 
-        <p className="text-xs text-sub-rich/70 mb-6 max-w-xs">
+        <p className="text-xs text-text-muted mb-4 text-center mx-auto max-w-xs">
           {description}
         </p>
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-2.5">
+        <div className={`flex flex-wrap gap-2.5 ${technologyLayoutClassName}`}>
           {technologies.map((tech) => (
             <TechItem key={tech.name} tech={tech} />
           ))}
@@ -206,10 +209,7 @@ function CircuitLines() {
         </filter>
       </defs>
 
-      {/* ---------------------------------- */}
-      {/* LEFT → CORE                       */}
-      {/* ---------------------------------- */}
-
+      {/* LEFT → CORE */}
       <path
         d="M 270 185
            L 350 185
@@ -228,7 +228,7 @@ function CircuitLines() {
            L 470 225"
         fill="none"
         stroke="currentColor"
-        className="text-co-rich/40"
+        className="text-circuit/70"
         strokeWidth="1.5"
         strokeDasharray="5 14"
         filter="url(#circuitGlow)"
@@ -248,7 +248,7 @@ function CircuitLines() {
         cy="185"
         r="4"
         fill="currentColor"
-        className="text-co-rich/70"
+        className="text-circuit/70"
       />
 
       {/* CORE connection node */}
@@ -257,13 +257,10 @@ function CircuitLines() {
         cy="225"
         r="4"
         fill="currentColor"
-        className="text-co-rich/70"
+        className="text-circuit/70"
       />
 
-      {/* ---------------------------------- */}
-      {/* CORE → RIGHT                      */}
-      {/* ---------------------------------- */}
-
+      {/* CORE → RIGHT */}
       <path
         d="M 730 225
            L 810 225
@@ -282,7 +279,7 @@ function CircuitLines() {
            L 930 185"
         fill="none"
         stroke="currentColor"
-        className="text-co-rich/40"
+        className="text-circuit/70"
         strokeWidth="1.5"
         strokeDasharray="5 14"
         filter="url(#circuitGlow)"
@@ -302,13 +299,10 @@ function CircuitLines() {
         cy="185"
         r="4"
         fill="currentColor"
-        className="text-co-rich/70"
+        className="text-circuit/70"
       />
 
-      {/* ---------------------------------- */}
-      {/* CORE → BOTTOM LEFT                */}
-      {/* ---------------------------------- */}
-
+      {/* CORE → BOTTOM LEFT */}
       <path
         d="M 520 445
            L 520 500
@@ -316,18 +310,7 @@ function CircuitLines() {
            L 350 560"
         fill="none"
         stroke="currentColor"
-        className="text-white/[0.10]"
-        strokeWidth="1.5"
-      />
-
-      <path
-        d="M 520 445
-           L 520 500
-           L 460 560
-           L 350 560"
-        fill="none"
-        stroke="currentColor"
-        className="text-co-rich/40"
+        className="text-circuit/70"
         strokeWidth="1.5"
         strokeDasharray="5 14"
         filter="url(#circuitGlow)"
@@ -346,13 +329,10 @@ function CircuitLines() {
         cy="560"
         r="4"
         fill="currentColor"
-        className="text-co-rich/70"
+        className="text-circuit/70"
       />
 
-      {/* ---------------------------------- */}
-      {/* CORE → BOTTOM RIGHT               */}
-      {/* ---------------------------------- */}
-
+      {/* CORE → BOTTOM RIGHT */}
       <path
         d="M 680 445
            L 680 500
@@ -360,18 +340,7 @@ function CircuitLines() {
            L 850 560"
         fill="none"
         stroke="currentColor"
-        className="text-white/[0.10]"
-        strokeWidth="1.5"
-      />
-
-      <path
-        d="M 680 445
-           L 680 500
-           L 740 560
-           L 850 560"
-        fill="none"
-        stroke="currentColor"
-        className="text-co-rich/40"
+        className="text-circuit/70"
         strokeWidth="1.5"
         strokeDasharray="5 14"
         filter="url(#circuitGlow)"
@@ -390,13 +359,10 @@ function CircuitLines() {
         cy="560"
         r="4"
         fill="currentColor"
-        className="text-co-rich/70"
+        className="text-circuit/70"
       />
 
-      {/* ---------------------------------- */}
-      {/* Decorative circuit traces         */}
-      {/* ---------------------------------- */}
-
+      {/* Decorative circuit traces */}
       <path
         d="M 70 330 L 130 330 L 160 300"
         fill="none"
@@ -412,22 +378,6 @@ function CircuitLines() {
         className="text-white/[0.05]"
         strokeWidth="1"
       />
-
-      <circle
-        cx="130"
-        cy="330"
-        r="2"
-        fill="currentColor"
-        className="text-white/20"
-      />
-
-      <circle
-        cx="1130"
-        cy="330"
-        r="2"
-        fill="currentColor"
-        className="text-white/20"
-      />
     </svg>
   );
 }
@@ -437,14 +387,14 @@ export default function TechStack() {
     <section
       id="stack"
       className="
-        relative
-        py-28
-        bg-charcoal-base
-        text-sub-rich
-        overflow-hidden
-      "
+    relative
+    py-16 md:py-20
+    bg-second-base
+    text-text-main
+    overflow-hidden
+  "
     >
-      {/* Background technical grid */}
+      {/* Background technical grid — unchanged */}
       <div
         className="
           absolute
@@ -456,7 +406,7 @@ export default function TechStack() {
         "
       />
 
-      {/* Ambient center glow */}
+      {/* Ambient center glow — unchanged */}
       <div
         className="
           absolute
@@ -474,161 +424,132 @@ export default function TechStack() {
       />
 
       {/* Header */}
-      <div className="relative z-10 flex flex-col items-center mb-20 px-6">
-        <p className="text-xs tracking-[0.25em] text-co-rich uppercase mb-4">
+      <div className="relative z-10 flex flex-col items-center mb-12 px-4">
+        <p className="text-sm tracking-[0.25em] text-text-muted uppercase mb-4">
           Tech Stack
         </p>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-co-rich tracking-tight text-center">
-          Tools I Build With
+        <h2 className="text-3xl font-medium uppercase tracking-[0.2em] text-co-rich">
+          Development Toolkit
         </h2>
 
-        <p className="mt-5 text-sub-rich text-center max-w-xl leading-relaxed">
-          The technologies, infrastructure, and engineering practices that
-          shape how I build and ship software.
+        <p className="mt-5 text-text-muted text-center max-w-xl leading-relaxed">
+          The technologies, infrastructure, and engineering practices that shape
+          how I build and ship software.
         </p>
       </div>
 
       {/* System */}
-<div className="relative z-10 max-w-6xl mx-auto px-6">
-  <div className="relative min-h-[1050px]">
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <div className="relative min-h-0 lg:min-h-[740px]">
+          {/* Circuit wiring */}
+          <CircuitLines />
 
-    {/* Circuit wiring */}
-    <CircuitLines />
+          {/* ALSO USE */}
+          <div
+            className="
+              relative
+              mt-8
+              lg:mt-0
+              lg:absolute
+              lg:left-0
+              lg:top-[-20px]
+              w-full
+              lg:w-[360px]
+              lg:min-h-[240px]
+              z-10
+            "
+          >
+            <TechModule
+              title="Utilize"
+              description="Technologies I’m confident shipping with"
+              technologies={alsoUse}
+              technologyLayoutClassName="lg:grid lg:grid-cols-3"
+            />
+          </div>
 
-    {/* ================================ */}
-    {/* ALSO USE                         */}
-    {/* ================================ */}
+          {/* DEPLOY & RUN */}
+          <div
+            className="
+              relative
+              mt-8
+              lg:mt-0
+              lg:absolute
+              lg:right-0
+              lg:top-[-20px]
+              w-full
+              lg:w-[340px]
+              lg:min-h-[240px]
+              z-10
+            "
+          >
+            <TechModule
+              title="Configure and Run"
+              description="The infrastructure behind my projects"
+              technologies={deployRun}
+              technologyLayoutClassName="lg:grid lg:grid-cols-3"
+            />
+          </div>
 
-    <div
-      className="
-        relative
-        lg:absolute
-        lg:left-0
-        lg:top-[-20px]
-        w-full
-        lg:w-[340px]
-        lg:min-h-[240px]
-        z-10
-      "
-    >
-      <TechModule
-        title="Also Use"
-        description="Technologies I’m confident shipping with"
-        technologies={alsoUse}
-      />
-    </div>
+          {/* CORE STACK */}
+          <div
+            className="
+              relative
+              mt-2
+              lg:mt-0
+              lg:absolute
+              lg:left-1/2
+              lg:top-[250px]
+              lg:-translate-x-1/2
+              w-full
+              lg:w-[520px]
+              lg:min-h-[250px]
+              z-10
+            "
+          >
+            <TechModule
+              title="Core Tech Stack"
+              description="My everyday development toolkit"
+              technologies={coreStack}
+              technologyLayoutClassName="lg:grid lg:grid-cols-4"
+              featured
+            />
+          </div>
 
-    {/* ================================ */}
-    {/* DEPLOY & RUN                     */}
-    {/* ================================ */}
-
-    <div
-      className="
-        relative
-        mt-8
-        lg:mt-0
-        lg:absolute
-        lg:right-0
-        lg:top-[-20px]
-        w-full
-        lg:w-[340px]
-        lg:min-h-[240px]
-        z-10
-      "
-    >
-      <TechModule
-        title="Deploy & Run"
-        description="The infrastructure behind my projects"
-        technologies={deployRun}
-      />
-    </div>
-
-    {/* ================================ */}
-    {/* CORE STACK                       */}
-    {/* ================================ */}
-
-    <div
-      className="
-        relative
-        mt-8
-        lg:mt-0
-        lg:absolute
-        lg:left-1/2
-        lg:top-[380px]
-        lg:-translate-x-1/2
-        w-full
-        lg:w-[520px]
-        lg:min-h-[290px]
-        z-20
-      "
-    >
-      <TechModule
-        title="Core Stack"
-        description="My everyday development toolkit"
-        technologies={coreStack}
-        featured
-      />
-
-      {/* Core badge */}
-      <div
-        className="
-          absolute
-          -top-2
-          left-1/2
-          -translate-x-1/2
-          px-3
-          py-1
-          bg-charcoal-base
-          border
-          border-co-rich/20
-          rounded-full
-        "
-      >
-        <span className="text-[8px] tracking-[0.2em] uppercase text-co-rich/70">
-          Core
-        </span>
+          {/* PRACTICES */}
+          <div
+            className="
+              relative
+              mt-8
+              lg:mt-0
+              lg:absolute
+              lg:left-1/2
+              lg:top-[650px]
+              lg:-translate-x-1/2
+              w-full
+              lg:w-[760px]
+              lg:min-h-[180px]
+              z-10
+            "
+          >
+            <TechModule
+              title="Practices"
+              description="Principles that guide how I build"
+              technologies={practices}
+              technologyLayoutClassName="lg:grid lg:grid-cols-3"
+            />
+          </div>
+        </div>
       </div>
-    </div>
-
-    {/* ================================ */}
-    {/* PRACTICES                        */}
-    {/* ================================ */}
-
-    <div
-      className="
-        relative
-        mt-8
-        lg:mt-0
-        lg:absolute
-        lg:left-1/2
-        lg:top-[790px]
-        lg:-translate-x-1/2
-        w-full
-        lg:w-[720px]
-        lg:min-h-[180px]
-        z-10
-      "
-    >
-      <TechModule 
-        title="Practices"
-        description="Principles that guide how I build"
-        technologies={practices}
-      />
-    </div>
-
-  </div>
-</div>
 
       {/* Bottom technical detail */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 mt-10">
-        <div className="flex items-center justify-between text-[9px] font-mono tracking-[0.15em] text-sub-rich/30 uppercase">
-          <span>Learn / Adapt</span>
+      <div className="relative z-10 max-w-6xl mx-auto px-6 m-10">
+        <div className="flex items-center justify-between text-[9px] font-mono tracking-[0.15em] text-text-muted/30 uppercase">
+          <span>Learn / Adapt / Elevate</span>
 
           <div className="hidden md:flex items-center gap-3">
-            <span className="w-12 h-px bg-white/[0.08]" />
-            <span> Elevate </span>
-            <span className="w-12 h-px bg-white/[0.08]" />
+            <span className="w-12 h-px bg-white/[0.08] dark:bg-white/[0.08]" />
+            <span className="w-12 h-px bg-white/[0.08] dark:bg-white/[0.08]" />
           </div>
 
           <span>Build / Ship / Iterate</span>

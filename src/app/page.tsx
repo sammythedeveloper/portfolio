@@ -1,20 +1,19 @@
 // src/app/page.tsx
 import About from "@/components/widgets/About";
 import Hero from "@/components/widgets/Hero";
-import SidebarNav from "@/components/widgets/SidebarNav";
+import Navbar from "@/components/widgets/Navbar";
 import TechStack from "@/components/widgets/TechStack";
 import ParallaxSection from "@/components/ui/ParallaxSection"; // Our new component
 import Projects from "@/components/widgets/Projects";
 import Education from "@/components/widgets/Education";
 import Experience from "@/components/widgets/Experience";
-import Certificates from "@/components/widgets/Certificates";
 import Contact from "@/components/widgets/Contact";
 import Footer from "@/components/widgets/Footer";
 
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen ">
-      <SidebarNav />
+      <Navbar />
       <Hero />
       <ParallaxSection>
         <TechStack />
@@ -30,9 +29,6 @@ export default function Home() {
       </ParallaxSection>
       <ParallaxSection>
         <Education />
-      </ParallaxSection>
-      <ParallaxSection>
-        <Certificates />
       </ParallaxSection>
       <ParallaxSection>
         <Contact />

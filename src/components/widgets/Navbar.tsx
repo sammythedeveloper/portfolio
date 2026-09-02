@@ -1,12 +1,39 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore, useRef } from "react";
 import Image from "next/image";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 import { NAV_ITEMS } from "@/lib/nav-data";
+
+const emptySubscribe = () => () => {};
+
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
 
 export default function SidebarNav() {
   const [active, setActive] = useState<string | null>(null);
+  const { resolvedTheme, setTheme } = useTheme();
+  const mounted = useMounted();
+
+  const switchSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const sound = new Audio("/sound/sound.mp3");
+    sound.preload = "auto";
+    switchSoundRef.current = sound;
+
+    return () => {
+      sound.pause();
+      switchSoundRef.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     const sections = NAV_ITEMS.map((item) =>
@@ -41,6 +68,19 @@ export default function SidebarNav() {
     });
   };
 
+  const toggleTheme = () => {
+    const sound = switchSoundRef.current;
+
+    if (sound) {
+      sound.currentTime = 0;
+      void sound.play().catch((error) => {
+        console.error("Switch sound playback failed:", error);
+      });
+    }
+
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
+
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
@@ -50,22 +90,23 @@ export default function SidebarNav() {
         ease: "easeOut",
       }}
       className="
-        sticky
-        top-0
-        z-50
-        hidden
-        md:block
-        w-full
-        border-b
-        border-black/[0.06]
-        bg-white/[0.72]
-        backdrop-blur-xl
-        backdrop-saturate-150
-      "
+      sticky
+      top-0
+      z-50
+      hidden
+      md:block
+      w-full
+      border-b
+      border-black/[0.06]
+      bg-[#F4F3EF]/70
+      backdrop-blur-2xl
+      backdrop-saturate-150
+      dark:border-white/[0.08]
+      dark:bg-[#0B0D12]/55
+    "
       aria-label="Section navigation"
     >
-      <div className="mx-auto flex h-24 max-w-7xl items-center gap-10 px-6 lg:px-10">
-        {/* Navigation */}
+      <div className="mx-auto flex h-20 max-w-7xl items-center gap-8 px-6 lg:px-10">
         <div className="flex flex-1 items-center justify-between">
           {NAV_ITEMS.map((item) => {
             const isActive = active === item.id;
@@ -103,7 +144,7 @@ export default function SidebarNav() {
                       alt=""
                       fill
                       sizes="18px"
-                      className="object-contain"
+                      className="object-contain transition dark:invert"
                     />
                   </span>
                 ) : (
@@ -117,8 +158,8 @@ export default function SidebarNav() {
                       transition
                       ${
                         isActive
-                          ? "text-black"
-                          : "text-black/50 group-hover:text-black group-focus-visible:text-black"
+                          ? "text-text-main"
+                          : "text-text-muted hover:text-text-main group-focus-visible:text-text-main"
                       }
                     `}
                   >
@@ -130,24 +171,40 @@ export default function SidebarNav() {
           })}
         </div>
 
-        {/* Section index */}
-        <div
+        <button
+          type="button"
+          onClick={toggleTheme}
+          disabled={!mounted}
+          aria-label={
+            resolvedTheme === "dark"
+              ? "Switch to light mode"
+              : "Switch to dark mode"
+          }
+          title={
+            resolvedTheme === "dark"
+              ? "Switch to light mode"
+              : "Switch to dark mode"
+          }
           className="
+            flex
             shrink-0
-            text-[9px]
-            font-mono
-            tracking-[0.2em]
-            text-black/30
+            items-center
+            justify-center
+            text-text-muted
+            transition-all
+            duration-300
+            hover:scale-105
+            hover:text-text-main
+            disabled:opacity-0
           "
         >
-          {String(
-            Math.max(
-              0,
-              NAV_ITEMS.findIndex((item) => item.id === active)
-            ) + 1
-          ).padStart(2, "0")}
-          /{String(NAV_ITEMS.length).padStart(2, "0")}
-        </div>
+          {mounted &&
+            (resolvedTheme === "dark" ? (
+              <Sun size={16} strokeWidth={1.7} />
+            ) : (
+              <Moon size={16} strokeWidth={1.7} />
+            ))}
+        </button>
       </div>
     </motion.nav>
   );

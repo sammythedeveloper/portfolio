@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 interface ExperienceItem {
   role: string;
@@ -68,29 +68,38 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="w-full bg-white px-6 py-24 text-black md:py-32"
+      className="w-full bg-second-base px-6 py-24 text-text-main md:py-32"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1560px]">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-14"
+          className="mb-14 text-center"
         >
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-co-rich ">
+          <span className="text-3xl font-medium uppercase tracking-[0.2em] text-co-rich">
             Experience
           </span>
 
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/50 md:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-text-muted md:text-base">
             Professional, freelance, and hands-on development experience across
             full-stack applications, APIs, databases, and AI integrations.
           </p>
         </motion.div>
 
-        {/* Four Columns */}
-        <div className="grid border-t border-black/10 md:grid-cols-2 lg:grid-cols-4">
+        {/* Experience Cards */}
+        <div
+          className="
+            flex gap-4 overflow-x-auto snap-x snap-mandatory
+            pb-4 px-0
+            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+            md:grid md:grid-cols-2 md:overflow-visible
+            md:px-0 md:pb-0
+            lg:grid-cols-4
+          "
+        >
           {experiences.map((exp, index) => (
             <motion.article
               key={`${exp.company}-${index}`}
@@ -101,59 +110,56 @@ export default function Experience() {
                 duration: 0.45,
                 delay: index * 0.08,
               }}
-              className={`
-                group relative border-b border-black/10 p-6
+              className="
+                group relative flex flex-col flex-shrink-0
+                w-full snap-start
+                border-x border-t border-black/[0.12] dark:border-white/[0.12]
+                rounded-t-2xl
+                bg-charcoal-base
+                shadow-[inset_0_5px_12px_-12px_rgba(0,0,0,0.2)]
+                dark:shadow-[inset_0_5px_12px_-12px_rgba(255,255,255,0.2)]
+                p-6
                 transition-colors duration-300
-                hover:bg-black/[0.025]
+                hover:bg-black/[0.015] dark:hover:bg-white/[0.025]
+                md:w-auto md:min-w-0 md:p-7
                 lg:min-h-[560px]
-                lg:border-b-0
-                lg:border-r
-                lg:p-7
-                ${index === experiences.length - 1 ? "lg:border-r-0" : ""}
-              `}
+              "
             >
               {/* Top metadata */}
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] text-black/40">
+                <span className="font-mono text-[11px] text-text-muted">
                   {exp.period}
                 </span>
-
-                <ArrowUpRight
-                  size={17}
-                  strokeWidth={1.5}
-                  className="text-black/25 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-black"
-                />
               </div>
 
               {/* Location */}
-              <div className="mt-4 flex items-center gap-2 text-xs text-black/40">
+              <div className="mt-4 flex items-center gap-2 text-xs text-text-muted">
                 <MapPin size={13} strokeWidth={1.5} />
                 {exp.location}
               </div>
 
               {/* Role */}
               <div className="mt-10">
-                <h3 className="text-xl font-semibold leading-tight tracking-tight text-black md:text-[22px]">
+                <h3 className="text-xl font-semibold leading-tight tracking-tight text-text-main md:text-[22px]">
                   {exp.role}
                 </h3>
 
-                <span className="mt-2 block text-sm font-medium text-black/45">
+                <span className="mt-2 block text-sm font-medium text-text-muted">
                   {exp.company}
                 </span>
               </div>
 
               {/* Divider */}
-              <div className="my-7 h-px w-8 bg-black/20 transition-all duration-300 group-hover:w-14 group-hover:bg-black" />
+              <div className="my-7 h-px w-8 bg-black/20 transition-all duration-300 group-hover:w-14 group-hover:bg-co-rich dark:bg-white/20" />
 
               {/* Description */}
               <ul className="space-y-4">
                 {exp.description.map((bullet, i) => (
                   <li
                     key={i}
-                    className="flex gap-3 text-sm leading-relaxed text-black/50"
+                    className="flex gap-3 text-sm leading-relaxed text-text-muted"
                   >
-                    <span className="mt-[8px] h-1 w-1 flex-shrink-0 rounded-full bg-black/30" />
-
+                    <span className="mt-[8px] h-1 w-1 flex-shrink-0 rounded-full bg-black/30 dark:bg-white/30" />
                     <span>{bullet}</span>
                   </li>
                 ))}

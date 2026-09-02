@@ -135,29 +135,4 @@ export const projects = [
     live: "https://booking-pcmm.onrender.com/listings",
     repo: "https://github.com/sammythedeveloper/Booking",
   },
-
-  {
-    title: "Ecommerce",
-    description:
-      "A modern ecommerce platform demonstration of shopping experience end-to-end features.",
-
-    purpose:
-      "A full-stack e-commerce demonstration built to showcase the architecture and workflows of a modern online store, including product discovery, authentication, cart management, cloud data persistence, Stripe checkout, and order history.",
-
-    image: "/projects/ecommerce.jpg",
-
-    techStack: ["	React", "FirebaseAuth", "React Router", "Tailwind CSS"],
-
-    features: [
-      "Demonstrates a complete e-commerce workflow from product discovery and cart management to authentication, checkout, and order history.",
-      "Implements shared application state with React Context API, keeping cart and authenticated-user data synchronized across the application.",
-      "Uses Firebase Authentication + Firestore to demonstrate user accounts, product data, and persistent order management in a cloud-backed architecture.",
-      "Integrates Stripe checkout to demonstrate a real payment workflow without building payment processing infrastructure from scratch.",
-    ],
-
-    documentation:
-      "https://mixed-gull-24c.notion.site/Nova-Shop-3bc8bd3daece80579602fb3f09ab3783?source=copy_link",
-    live: "https://sammythedeveloper.github.io/Nova-shop/",
-    repo: "https://github.com/sammythedeveloper/Nova-shop",
-  },
 ];
