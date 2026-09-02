@@ -45,9 +45,9 @@ const coreStack: Technology[] = [
 const alsoUse: Technology[] = [
   { name: "Node", Icon: Node },
   { name: "Express", Icon: Express },
-  { name: "PostgreSQL", Icon: PostgresSQL },
+  { name: "Postgres", Icon: PostgresSQL },
   { name: "MongoDB", Icon: MongoDB },
-  { name: "Typescript", Icon: TypeScript },
+  { name: "Typescr", Icon: TypeScript },
   { name: "React", Icon: ReactJs },
 ];
 
@@ -445,7 +445,7 @@ export default function TechStack() {
           {/* Circuit wiring */}
           <CircuitLines />
 
-          {/* ALSO USE */}
+          {/* Utilize */}
           <div
             className="
               relative
@@ -455,7 +455,7 @@ export default function TechStack() {
               lg:left-0
               lg:top-[-20px]
               w-full
-              lg:w-[360px]
+              lg:w-[370px]
               lg:min-h-[240px]
               z-10
             "
