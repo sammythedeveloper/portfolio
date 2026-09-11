@@ -110,7 +110,7 @@ export const projects = [
     ],
 
     documentation: "",
-    live: "https://finflow-client-one.vercel.app/login",
+    live: "https://finflow-client-one.vercel.app/",
     repo: "https://github.com/sammythedeveloper/finflow_client",
   },
 
