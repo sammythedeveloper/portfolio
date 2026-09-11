@@ -42,7 +42,7 @@ export default function SidebarNav() {
             className="absolute w-10 h-10 rounded-full bg-navy-hover/0 transition-colors duration-300"
             animate={{
               backgroundColor:
-                hovered === item.name ? "#000000" : "transparent",
+                hovered === item.name ? "#404040" : "transparent",
             }}
           />
 

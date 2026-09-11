@@ -48,12 +48,12 @@ const education: EducationItem[] = [
     {
         institution: "Hawassa University",
         degree: "Bachelor of Science",
-        field: "Construction Technology and Management",
+        field: "",
         startDate: "2016",
         endDate: "2020",
         location: "Ethiopia",
         description:
-          "Studied construction technology, project management, and civil engineering principles and completed coursework before relocating to Canada",
+          "Coursework completed in structural design, construction engineering, structural analysis, and engineering materials.",
       },
 
   // Add more education here...
