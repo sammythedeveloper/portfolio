@@ -1,12 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import {
-  Award,
-  Calendar,
-  ExternalLink,
-  ShieldCheck,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 
 interface CertificateItem {
   title: string;
@@ -35,7 +31,8 @@ const certificates: CertificateItem[] = [
   },
   {
     title: "Advanced Digital and Professional Training (ADaPT)",
-    issuer: "Ted Rogers School of Management - Toronto Metropolitan University",
+    issuer:
+      "Ted Rogers School of Management - Toronto Metropolitan University",
     date: "2025",
     type: "Certification",
     verificationUrl:
@@ -68,167 +65,114 @@ const certificates: CertificateItem[] = [
 ];
 
 export default function Certificates() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % certificates.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const activeCertificate = certificates[activeIndex];
+
   return (
-    <section
-      id="certficates"
-      className="w-full py-28 md:py-32 px-6"
-    >
-      <div className="max-w-6xl mx-auto">
+    <section id="certificates" className="w-full py-20 md:py-24 px-6">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <span className="text-sm font-semibold tracking-[0.25em] uppercase text-co-rich">
+          <span className="text-xs font-semibold tracking-[0.25em] uppercase text-co-rich">
             Credentials
           </span>
 
-          <h2 className="mt-4 text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Licenses & Certifications
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white tracking-tight">
+            Certifications & Training
           </h2>
 
-          <p className="mt-4 text-sub-rich max-w-2xl leading-relaxed">
-            Verified credentials and specialized training covering cloud
-            computing, machine learning, software development, and technical
-            foundations.
+          <p className="mt-3 max-w-xl text-sm md:text-base text-sub-rich">
+            Verified certifications and technical training.
           </p>
         </motion.div>
 
-        {/* Certificate Grid */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {certificates.map((cert, index) => (
-            <motion.article
-              key={cert.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.08,
-              }}
-              viewport={{ once: true }}
-              className="group relative"
-            >
-              {/* Glow */}
-              <div
-                className="
-                  absolute
-                  inset-0
-                  rounded-3xl
-                  bg-co-rich/10
-                  opacity-0
-                  blur-2xl
-                  transition-opacity
-                  duration-500
-                  group-hover:opacity-100
-                "
-              />
-
-              {/* Card */}
-              <div
-                className="
-                  relative
-                  h-full
-                  min-h-[300px]
-                  flex
-                  flex-col
-                  rounded-3xl
-                  border
-                  border-white/10
-                  bg-charcoal-base
-                  p-6
-                  transition-all
-                  duration-300
-                  group-hover:-translate-y-1
-                  group-hover:border-co-rich/30
-                "
+        {/* Credential Carousel */}
+        <div
+          className="mt-10"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div className="relative overflow-hidden rounded-xl border border-white/10 bg-charcoal-base">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={activeCertificate.title}
+                initial={{ opacity: 0, x: 35 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -35 }}
+                transition={{
+                  duration: 0.35,
+                  ease: "easeOut",
+                }}
+                className="min-h-[120px] px-5 py-5 md:px-7 md:py-6"
               >
-                {/* Top */}
-                <div className="flex items-start justify-between gap-4">
-                  <div
-                    className="
-                      flex
-                      items-center
-                      justify-center
-                      w-12
-                      h-12
-                      rounded-2xl
-                      bg-white/[0.03]
-                      border
-                      border-white/5
-                      text-co-rich
-                      transition-all
-                      duration-300
-                      group-hover:bg-co-rich
-                      group-hover:text-black
-                    "
-                  >
-                    <Award size={22} />
+                <div className="flex flex-col md:flex-row md:items-center gap-5">
+                  {/* Number */}
+                  <div className="shrink-0">
+                    <span className="font-mono text-xs text-sub-rich">
+                      {String(activeIndex + 1).padStart(2, "0")}
+                    </span>
+
+                    <span className="mx-1 text-sub-rich/30">/</span>
+
+                    <span className="font-mono text-xs text-sub-rich/50">
+                      {String(certificates.length).padStart(2, "0")}
+                    </span>
                   </div>
 
-                  <span
-                    className="
-                      inline-flex
-                      items-center
-                      gap-1.5
-                      rounded-full
-                      border
-                      border-white/10
-                      bg-white/[0.03]
-                      px-3
-                      py-1.5
-                      text-[11px]
-                      font-medium
-                      text-sub-rich
-                    "
-                  >
-                    {cert.type}
-                  </span>
-                </div>
+                  {/* Main content */}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <h3 className="text-lg md:text-xl font-semibold text-white tracking-tight">
+                        {activeCertificate.title}
+                      </h3>
 
-                {/* Content */}
-                <div className="mt-7 flex-1">
-                  <h3
-                    className="
-                      text-xl
-                      font-bold
-                      leading-snug
-                      text-white
-                      tracking-tight
-                      transition-colors
-                      duration-300
-                      group-hover:text-co-rich
-                    "
-                  >
-                    {cert.title}
-                  </h3>
+                      <span className="text-[10px] uppercase tracking-[0.18em] text-co-rich">
+                        {activeCertificate.type}
+                      </span>
+                    </div>
 
-                  <p className="mt-3 text-sm font-medium text-sub-rich">
-                    {cert.issuer}
-                  </p>
-                </div>
+                    <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-sub-rich">
+                      <span>{activeCertificate.issuer}</span>
 
-                {/* Footer */}
-                <div className="mt-8 pt-5 border-t border-white/5 flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-xs text-sub-rich">
-                    <Calendar size={13} />
-                    {cert.date}
+                      <span className="text-white/20">·</span>
+
+                      <span>{activeCertificate.date}</span>
+                    </div>
                   </div>
 
+                  {/* Verify */}
                   <a
-                    href={cert.verificationUrl}
+                    href={activeCertificate.verificationUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
+                      group
+                      shrink-0
                       inline-flex
                       items-center
                       gap-1.5
                       text-sm
-                      font-semibold
+                      font-medium
                       text-sub-rich
-                      hover:text-co-rich
                       transition-colors
+                      hover:text-co-rich
                     "
                   >
                     Verify
@@ -243,17 +187,65 @@ export default function Certificates() {
                     />
                   </a>
                 </div>
+              </motion.div>
+            </AnimatePresence>
 
-                {/* Verified Accent */}
-                <div className="absolute top-6 right-6 pointer-events-none">
-                  <ShieldCheck
-                    size={14}
-                    className="text-co-rich/30"
+            {/* Progress */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5">
+              <motion.div
+                key={`${activeIndex}-${isPaused}`}
+                initial={{ width: "0%" }}
+                animate={{
+                  width: isPaused ? "0%" : "100%",
+                }}
+                transition={{
+                  duration: isPaused ? 0 : 5,
+                  ease: "linear",
+                }}
+                className="h-full bg-co-rich"
+              />
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="mt-4 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {certificates.map((certificate, index) => (
+                <button
+                  key={certificate.title}
+                  type="button"
+                  aria-label={`Show ${certificate.title}`}
+                  onClick={() => setActiveIndex(index)}
+                  className="
+                    group
+                    flex
+                    items-center
+                    justify-center
+                    p-1
+                  "
+                >
+                  <span
+                    className={`
+                      block
+                      h-1
+                      rounded-full
+                      transition-all
+                      duration-300
+                      ${
+                        index === activeIndex
+                          ? "w-8 bg-co-rich"
+                          : "w-3 bg-white/15 group-hover:bg-white/30"
+                      }
+                    `}
                   />
-                </div>
-              </div>
-            </motion.article>
-          ))}
+                </button>
+              ))}
+            </div>
+
+            <span className="text-[11px] text-sub-rich/50">
+              {isPaused ? "Paused" : "Auto rotating"}
+            </span>
+          </div>
         </div>
       </div>
     </section>

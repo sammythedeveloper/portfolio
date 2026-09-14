@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, Send, MapPin, ArrowUpRight } from "lucide-react";
+import { Send, MapPin, ArrowUpRight, Check } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function Contact() {
@@ -11,6 +11,7 @@ export default function Contact() {
     email: "",
     message: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -37,7 +38,11 @@ export default function Contact() {
 
       if (result.success) {
         setSubmitted(true);
-        setFormState({ name: "", email: "", message: "" });
+        setFormState({
+          name: "",
+          email: "",
+          message: "",
+        });
       } else {
         console.error("Form submission failed:", result);
         alert("Something went wrong. Please try again.");
@@ -47,207 +52,343 @@ export default function Contact() {
       alert("Network error. Please check your connection.");
     } finally {
       setIsSubmitting(false);
-      // Clear success message after 4 seconds
-      setTimeout(() => setSubmitted(false), 4000);
+
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 4000);
     }
   };
 
   return (
-    <section id="contact" className="w-full px-6 py-32 bg-transparent">
+    <section id="contact" className="w-full px-6 py-24 md:py-28">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left Column: Context & Info */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-12">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-5xl font-bold text-co-rich tracking-tight">
-                  Let&apos;s Connect
-                </h2>
-                <p className="mt-4 text-sub-rich leading-relaxed">
-                  I&apos;m always open to discussing full-stack opportunities,
-                  project collaborations. Drop me a
-                  line!
-                </p>
-              </motion.div>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <span className="text-xs font-semibold tracking-[0.25em] uppercase text-co-rich">
+            Contact
+          </span>
 
-              {/* Quick Info Badges */}
-              <div className="mt-10 space-y-4">
-                <div className="flex items-center gap-4 text-sub-rich">
-                  <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/5 text-co-rich">
-                    <MapPin size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-sub-rich/50 font-medium">
-                      Location
-                    </p>
-                    <p className="text-sm font-semibold text-white/90">
-                      Toronto, ON (Open to Remote)
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <h2 className="mt-4 text-4xl md:text-5xl font-bold text-white tracking-tight">
+            Let&apos;s talk.
+          </h2>
 
-            {/* Social Connection Directory links */}
-            <div className="pt-6 border-t border-white/5">
-              <p className="text-xs font-mono text-sub-rich/40 uppercase tracking-widest mb-4">
-                Find Me On
-              </p>
-              <div className="flex flex-col gap-2">
-                <a
-                  href="https://github.com/sammythedeveloper"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-between group p-3 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-300"
-                >
-                  <div className="flex items-center gap-3 text-sub-rich group-hover:text-white transition-colors">
-                    <FaGithub className="w-5 h-5" />
-                    <span className="text-sm font-medium">GitHub Profile</span>
-                  </div>
-                  <ArrowUpRight
-                    size={16}
-                    className="text-sub-rich/40 group-hover:text-co-rich group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
-                  />
-                </a>
+          <p className="mt-4 max-w-xl text-sub-rich leading-relaxed">
+          Seeking Backend / Full-Stack opportunities · Toronto, ON · Open to remote, hybrid, or onsite
+          </p>
+        </motion.div>
 
-                <a
-                  href="https://www.linkedin.com/in/samson-daba-29b877231/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-between group p-3 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-300"
-                >
-                  <div className="flex items-center gap-3 text-sub-rich group-hover:text-white transition-colors">
-                    <FaLinkedin className="w-5 h-5" />
-                    <span className="text-sm font-medium">
-                      LinkedIn Network
-                    </span>
-                  </div>
-                  <ArrowUpRight
-                    size={16}
-                    className="text-sub-rich/40 group-hover:text-co-rich group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
-                  />
-                </a>
-              </div>
-            </div>
+        {/* Contact Meta */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
+        >
+          {/* Location */}
+          <div className="flex items-center gap-2 text-sm text-sub-rich">
+            <MapPin size={15} className="text-co-rich" />
+            <span>Toronto, ON</span>
+            <span className="text-white/20">·</span>
+            <span>Open to Remote</span>
           </div>
 
-          {/* Right Column: Dynamic Form Block */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="bg-charcoal-base border border-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden"
+          {/* Social Links */}
+          <div className="flex items-center gap-5">
+            <a
+              href="https://github.com/sammythedeveloper"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                group
+                inline-flex
+                items-center
+                gap-1.5
+                text-sm
+                text-sub-rich
+                transition-colors
+                hover:text-co-rich
+              "
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name Input */}
-                <div className="flex flex-col space-y-2">
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-medium text-sub-rich"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    value={formState.name}
-                    onChange={(e) =>
-                      setFormState({ ...formState, name: e.target.value })
-                    }
-                    placeholder="Name"
-                    className="
-                      w-full bg-white/[0.02] border border-white/10 rounded-2xl px-4 py-3.5 
-                      text-white placeholder-white/20 text-sm outline-none transition-all duration-300
-                      focus:border-co-rich focus:bg-white/[0.04] focus:ring-1 focus:ring-co-rich/20
-                    "
-                  />
-                </div>
+              <FaGithub size={15} />
+              GitHub
+              <ArrowUpRight
+                size={13}
+                className="
+                  transition-transform
+                  duration-200
+                  group-hover:translate-x-0.5
+                  group-hover:-translate-y-0.5
+                "
+              />
+            </a>
 
-                {/* Email Input */}
-                <div className="flex flex-col space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-medium text-sub-rich"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    value={formState.email}
-                    onChange={(e) =>
-                      setFormState({ ...formState, email: e.target.value })
-                    }
-                    placeholder="Email"
-                    className="
-                      w-full bg-white/[0.02] border border-white/10 rounded-2xl px-4 py-3.5 
-                      text-white placeholder-white/20 text-sm outline-none transition-all duration-300
-                      focus:border-co-rich focus:bg-white/[0.04] focus:ring-1 focus:ring-co-rich/20
-                    "
-                  />
-                </div>
-
-                {/* Message Textarea */}
-                <div className="flex flex-col space-y-2">
-                  <label
-                    htmlFor="message"
-                    className="text-sm font-medium text-sub-rich"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={5}
-                    value={formState.message}
-                    onChange={(e) =>
-                      setFormState({ ...formState, message: e.target.value })
-                    }
-                    placeholder="Tell me about your project, team, or ideas..."
-                    className="
-                      w-full bg-white/[0.02] border border-white/10 rounded-2xl px-4 py-3.5 
-                      text-white placeholder-white/20 text-sm outline-none transition-all duration-300 resize-none
-                      focus:border-co-rich focus:bg-white/[0.04] focus:ring-1 focus:ring-co-rich/20
-                    "
-                  />
-                </div>
-
-                {/* Submit Action Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting || submitted}
-                  className="
-                    w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl
-                    bg-white text-black font-semibold text-sm transition-all duration-300
-                    hover:bg-white/90 active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none
-                  "
-                >
-                  {isSubmitting ? (
-                    <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                  ) : submitted ? (
-                    <span className="flex items-center gap-2 text-emerald-600 font-bold">
-                      Message Sent Successfully! <MessageSquare size={16} />
-                    </span>
-                  ) : (
-                    <>
-                      <span>Send Message</span>
-                      <Send size={14} className="mt-0.5" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </motion.div>
+            <a
+              href="https://www.linkedin.com/in/samson-daba-29b877231/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                group
+                inline-flex
+                items-center
+                gap-1.5
+                text-sm
+                text-sub-rich
+                transition-colors
+                hover:text-co-rich
+              "
+            >
+              <FaLinkedin size={15} />
+              LinkedIn
+              <ArrowUpRight
+                size={13}
+                className="
+                  transition-transform
+                  duration-200
+                  group-hover:translate-x-0.5
+                  group-hover:-translate-y-0.5
+                "
+              />
+            </a>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Divider */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          viewport={{ once: true }}
+          className="mt-10 h-px bg-white/10 origin-left"
+        />
+
+        {/* Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mt-10"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Name */}
+            <div className="group">
+              <label
+                htmlFor="name"
+                className="
+                  block
+                  mb-2
+                  text-xs
+                  font-medium
+                  uppercase
+                  tracking-[0.15em]
+                  text-sub-rich/60
+                "
+              >
+                Name
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                required
+                value={formState.name}
+                onChange={(e) =>
+                  setFormState({
+                    ...formState,
+                    name: e.target.value,
+                  })
+                }
+                placeholder="Your name"
+                className="
+                  w-full
+                  bg-transparent
+                  border-0
+                  border-b
+                  border-white/10
+                  px-0
+                  py-3
+                  text-white
+                  placeholder-white/20
+                  text-sm
+                  outline-none
+                  transition-colors
+                  duration-300
+                  focus:border-co-rich
+                "
+              />
+            </div>
+
+            {/* Email */}
+            <div className="group">
+              <label
+                htmlFor="email"
+                className="
+                  block
+                  mb-2
+                  text-xs
+                  font-medium
+                  uppercase
+                  tracking-[0.15em]
+                  text-sub-rich/60
+                "
+              >
+                Email
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                required
+                value={formState.email}
+                onChange={(e) =>
+                  setFormState({
+                    ...formState,
+                    email: e.target.value,
+                  })
+                }
+                placeholder="you@example.com"
+                className="
+                  w-full
+                  bg-transparent
+                  border-0
+                  border-b
+                  border-white/10
+                  px-0
+                  py-3
+                  text-white
+                  placeholder-white/20
+                  text-sm
+                  outline-none
+                  transition-colors
+                  duration-300
+                  focus:border-co-rich
+                "
+              />
+            </div>
+          </div>
+
+          {/* Message */}
+          <div className="mt-8">
+            <label
+              htmlFor="message"
+              className="
+                block
+                mb-2
+                text-xs
+                font-medium
+                uppercase
+                tracking-[0.15em]
+                text-sub-rich/60
+              "
+            >
+              Message
+            </label>
+
+            <textarea
+              id="message"
+              required
+              rows={4}
+              value={formState.message}
+              onChange={(e) =>
+                setFormState({
+                  ...formState,
+                  message: e.target.value,
+                })
+              }
+              placeholder="Tell me about the opportunity, project, or idea..."
+              className="
+                w-full
+                bg-transparent
+                border-0
+                border-b
+                border-white/10
+                px-0
+                py-3
+                text-white
+                placeholder-white/20
+                text-sm
+                outline-none
+                resize-none
+                transition-colors
+                duration-300
+                focus:border-co-rich
+              "
+            />
+          </div>
+
+          {/* Bottom Action */}
+          <div className="mt-8 flex items-center justify-between">
+            <p className="hidden sm:block text-xs text-sub-rich/40">
+              I&apos;ll get back to you as soon as I can.
+            </p>
+
+            <button
+              type="submit"
+              disabled={isSubmitting || submitted}
+              className="
+                group
+                ml-auto
+                inline-flex
+                items-center
+                gap-2
+                text-sm
+                font-semibold
+                text-white
+                transition-colors
+                duration-300
+                hover:text-co-rich
+                disabled:opacity-50
+                disabled:pointer-events-none
+              "
+            >
+              {isSubmitting ? (
+                <>
+                  <span>Sending...</span>
+
+                  <div
+                    className="
+                      h-4
+                      w-4
+                      rounded-full
+                      border-2
+                      border-white/20
+                      border-t-co-rich
+                      animate-spin
+                    "
+                  />
+                </>
+              ) : submitted ? (
+                <>
+                  <span className="text-co-rich">Message sent</span>
+                  <Check size={15} className="text-co-rich" />
+                </>
+              ) : (
+                <>
+                  <span>Send message</span>
+
+                  <Send
+                    size={14}
+                    className="
+                      transition-transform
+                      duration-200
+                      group-hover:translate-x-1
+                    "
+                  />
+                </>
+              )}
+            </button>
+          </div>
+        </motion.form>
+
+        {/* Bottom Rule */}
+        <div className="mt-16 h-px bg-white/5" />
       </div>
     </section>
   );

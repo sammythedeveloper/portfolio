@@ -367,13 +367,13 @@ export default function Hero() {
 
           <h1
             className="
-              text-5xl
-              sm:text-6xl
-              lg:text-7xl
-              font-bold
-              tracking-tight
+              text-3xl
+              sm:text-4xl
+              lg:text-5xl
+              tracking
               leading-[0.95]
               text-co-rich
+               uppercase
             "
           >
             Full-Stack
@@ -393,9 +393,8 @@ export default function Hero() {
               text-sub-rich
             "
           >
-            I build production-ready web applications, reliable APIs, and
-            data-driven systems — turning ideas into scalable, maintainable
-            software.
+            I build reliable APIs, production web applications, and data-driven
+            systems.
           </p>
 
           {/* Tech Stack */}

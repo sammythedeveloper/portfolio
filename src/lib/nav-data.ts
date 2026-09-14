@@ -5,11 +5,6 @@ export const NAV_ITEMS = [
     iconUrl: "https://cdn-icons-png.flaticon.com/128/2549/2549900.png",
   },
   {
-    name: "About",
-    id: "about",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/10758/10758751.png",
-  },
-  {
     name: "Stack",
     id: "stack",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/3573/3573187.png",
@@ -31,6 +26,11 @@ export const NAV_ITEMS = [
     name: "Experience",
     id: "experience",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/522/522561.png",
+  },
+  {
+    name: "About",
+    id: "about",
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/10758/10758751.png",
   },
 
   {

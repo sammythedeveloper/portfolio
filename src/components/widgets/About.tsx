@@ -17,7 +17,7 @@ const focusAreas = [
   {
     title: "Production engineering",
     description:
-      "Authentication, error handling, testing, Docker, AWS, and CI/CD workflows.",
+      "Authentication, error handling, testing, Containerizing, CI/CD workflows and Deploying.",
   },
   {
     title: "AI integration",
@@ -125,41 +125,6 @@ export default function About() {
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
-        </motion.div>
-
-                {/* Proof / Links */}
-                <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-12"
-        >
-          <h3 className="text-sm font-medium text-co-rich">
-            Proof / Links
-          </h3>
-
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  link.href.startsWith("http")
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                className="group inline-flex items-center gap-1.5 text-sm text-sub-rich transition-colors hover:text-co-rich"
-              >
-                {link.label}
-                <ArrowUpRight
-                  size={14}
-                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </a>
             ))}
           </div>
         </motion.div>

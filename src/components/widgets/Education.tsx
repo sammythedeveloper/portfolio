@@ -1,206 +1,162 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Calendar, GraduationCap, MapPin } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 interface EducationItem {
   institution: string;
-  degree: string;
+  credential: string;
   field: string;
-  startDate: string;
-  endDate: string;
+  period: string;
   location: string;
-  description?: string;
+  description: string;
+  subjects: string[];
 }
 
 const education: EducationItem[] = [
   {
-    institution: "Humber Polytechic College",
-    degree: "",
+    institution: "Humber Polytechnic",
+    credential: "Software Development",
     field: "Enterprise Backend Software Development",
-    startDate: "",
-    endDate: "2026",
-    location: "Toronto, Canada",
+    period: "2026",
+    location: "Toronto, ON",
     description:
-      "Studing advanced backend development, microservices architecture, and enterprise software solutions.",
+      "Advanced coursework focused on backend development, databases, APIs, cloud-native development, and enterprise software.",
+    subjects: ["C# / .NET", "SQL", "APIs", "Cloud", "Backend"],
   },
-
   {
-    institution: "Evangadi Academy Coding Bootcamp",
-    degree: "",
-    field: "Full Stack Web Development",
-    startDate: "2023",
-    endDate: "2024",
-    location: "Remote, USA",
+    institution: "Hawassa University",
+    credential: "University Coursework",
+    field: "BSc in Construction Technology & Management",
+    period: "2016 — 2020",
+    location: "Ethiopia",
     description:
-      "Studied programming fundamentals, web development, databases, and software engineering.",
-    },
-    {
-        institution: "NPower Canada",
-        degree: "",
-        field: "IT Analyst Program",
-        startDate: "2022",
-        endDate: "2022",
-        location: "Toronto, Canada",
-        description:
-          "Studied IT fundamentals, networking, and troubleshooting in a professional environment.",
-    },
-    {
-        institution: "Hawassa University",
-        degree: "Bachelor of Science",
-        field: "",
-        startDate: "2016",
-        endDate: "2020",
-        location: "Ethiopia",
-        description:
-          "Coursework completed in structural design, construction engineering, structural analysis, and engineering materials.",
-      },
-
-  // Add more education here...
+      "coursework completed across engineering, architectural design , construction management, structural analysis, and technical design.",
+    subjects: [
+      "Engineering",
+    ],
+  },
 ];
 
 export default function Education() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % education.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const item = education[activeIndex];
+
   return (
-    <section id="education" className="w-full py-32">
-      <div className="max-w-5xl mx-auto px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-5xl font-bold text-co-rich tracking-tight">
-            Education
-          </h2>
+    <section
+      id="education"
+      className="relative w-full overflow-hidden bg-second-base px-6 py-20 md:py-24"
+    >
+      <div className="mx-auto max-w-5xl">
+        {/* Header */}
+        <div className="flex items-end justify-between border-b border-white/10 pb-6">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-co-rich">
+              Education
+            </span>
+          </div>
 
-          <p className="mt-4 text-2xl text-sub-rich max-w-xl">
-            My academic journey that have shaped my skills and knowledge in the field of technology.
-          </p>
-        </motion.div>
+          <span className="hidden font-mono text-xs text-sub-rich sm:block">
+            {String(activeIndex + 1).padStart(2, "0")} /{" "}
+            {String(education.length).padStart(2, "0")}
+          </span>
+        </div>
 
-        {/* Education Grid */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {education.map((item, index) => (
-            <motion.article
-              key={`${item.institution}-${item.degree}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+        {/* Education Display */}
+        <div className="relative min-h-[330px] py-12 md:min-h-[300px] md:py-14">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{
                 duration: 0.5,
-                delay: index * 0.08,
+                ease: "easeInOut",
               }}
-              viewport={{ once: true }}
-              className="group relative"
+              className="grid gap-8 md:grid-cols-[180px_1fr]"
             >
-              {/* Hover Glow */}
-              <div
-                className="
-                  absolute inset-0
-                  rounded-3xl
-                  bg-co-rich/10
-                  opacity-0
-                  blur-2xl
-                  group-hover:opacity-100
-                  transition-opacity duration-500
-                "
-              />
+              {/* Index / Date */}
+              <div>
+                <span className="font-mono text-5xl font-light text-white/10 md:text-6xl">
+                  {String(activeIndex + 1).padStart(2, "0")}
+                </span>
 
-              {/* Card */}
-              <div
-                className="
-                  relative
-                  h-full
-                  rounded-3xl
-                  border border-white/10
-                  bg-charcoal-base
-                  p-7
-                  transition-all duration-300
-                  group-hover:-translate-y-1
-                  group-hover:border-co-rich/30
-                "
-              >
-                {/* Top Row */}
-                <div className="flex items-start justify-between gap-6">
-                  {/* Icon */}
-                  <div
-                    className="
-                      shrink-0
-                      p-3
-                      rounded-2xl
-                      bg-white/[0.03]
-                      border border-white/5
-                      text-co-rich
-                      transition-all duration-300
-                      group-hover:bg-co-rich
-                      group-hover:text-black
-                    "
-                  >
-                    <GraduationCap size={24} />
-                  </div>
-
-                  {/* Dates */}
-                  <div className="flex items-center gap-1.5 text-xs text-sub-rich whitespace-nowrap">
-                    <Calendar size={13} />
-                    <span>
-                      {item.startDate} — {item.endDate}
-                    </span>
-                  </div>
+                <div className="mt-5 font-mono text-xs text-sub-rich">
+                  {item.period}
                 </div>
 
-                {/* Main Content */}
-                <div className="mt-7">
-                  <h3
-                    className="
-                      text-xl
-                      font-bold
-                      text-white
-                      tracking-tight
-                      group-hover:text-co-rich
-                      transition-colors duration-300
-                    "
-                  >
-                    {item.degree}
-                  </h3>
-
-                  <p className="mt-1 text-base font-medium text-sub-rich">
-                    {item.field}
-                  </p>
-
-                  <p className="mt-4 text-sm font-semibold text-white/80">
-                    {item.institution}
-                  </p>
-
-                  {/* Location */}
-                  <div className="mt-2 flex items-center gap-1.5 text-sm text-sub-rich">
-                    <MapPin size={14} />
-                    <span>{item.location}</span>
-                  </div>
-
-                  {/* Description */}
-                  {item.description && (
-                    <p className="mt-5 text-sm leading-relaxed text-sub-rich">
-                      {item.description}
-                    </p>
-                  )}
+                <div className="mt-2 text-sm text-sub-rich">
+                  {item.location}
                 </div>
-
-                {/* Bottom Accent */}
-                <div
-                  className="
-                    absolute
-                    bottom-0
-                    left-7
-                    right-7
-                    h-px
-                    bg-co-rich/0
-                    group-hover:bg-co-rich/40
-                    transition-colors duration-300
-                  "
-                />
               </div>
-            </motion.article>
+
+              {/* Content */}
+              <div>
+                <p className="text-sm font-medium text-co-rich">
+                  {item.credential}
+                </p>
+
+                <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+                  {item.institution}
+                </h3>
+
+                <p className="mt-2 text-lg text-sub-rich">
+                  {item.field}
+                </p>
+
+                <p className="mt-6 max-w-2xl text-sm leading-relaxed text-sub-rich md:text-base">
+                  {item.description}
+                </p>
+
+                {/* Subjects */}
+                <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2">
+                  {item.subjects.map((subject) => (
+                    <span
+                      key={subject}
+                      className="font-mono text-[11px] uppercase tracking-wide text-sub-rich/70"
+                    >
+                      {subject}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Progress */}
+        <div className="flex items-center gap-1">
+          {education.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveIndex(index)}
+              aria-label={`Show education ${index + 1}`}
+              className="group h-6 w-12"
+            >
+              <span
+                className={`block h-px w-full transition-all duration-500 ${
+                  activeIndex === index
+                    ? "bg-co-rich"
+                    : "bg-white/15 group-hover:bg-white/40"
+                }`}
+              />
+            </button>
           ))}
+
+          <span className="ml-3 text-xs text-sub-rich">
+            Auto-rotates
+          </span>
         </div>
       </div>
     </section>
