@@ -1,101 +1,167 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
-const qualities = [
-  "Full-Stack Engineering",
-  "Problem Solving",
-  "Continuous Learning",
+const focusAreas = [
+  {
+    title: "Full-stack SWE",
+    description:
+      "React, TypeScript, C#/.NET, Node.js, and REST APIs across frontend and backend systems.",
+  },
+  {
+    title: "Backend & data",
+    description:
+      "API development, SQL, PostgreSQL, database design, schema migrations, and data-driven applications.",
+  },
+  {
+    title: "Production engineering",
+    description:
+      "Authentication, error handling, testing, Docker, AWS, and CI/CD workflows.",
+  },
+  {
+    title: "AI integration",
+    description:
+      "LLM APIs, multimodal processing, and AI-powered features integrated into real applications.",
+  },
+  {
+    title: "Hands-on development",
+    description:
+      "Built and shipped full-stack applications through independent projects and collaborative engineering work.",
+  },
+];
+
+const practices = [
+  "Clean APIs and typed contracts.",
+  "Schema migrations over manual database changes.",
+  "Testing and validation where they provide real value.",
+  "Dockerized environments and repeatable deployments.",
+  "Clear separation between frontend, backend, data, and infrastructure.",
+];
+
+const links = [
+  { label: "Résumé", href: "/resume" },
+  { label: "GitHub", href: "https://github.com/yourusername" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/yourusername" },
 ];
 
 export default function About() {
   return (
     <section
       id="about"
-      className="relative w-full overflow-hidden bg-second-base px-6 py-28 md:py-36"
+      className="relative w-full overflow-hidden bg-second-base px-6 py-24 md:py-32"
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Label */}
+      <div className="mx-auto max-w-5xl">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
         >
-          <span className="text-sm font-semibold tracking-[0.25em] uppercase text-co-rich">
-            About Me
+          <span className="text-xs font-medium uppercase tracking-[0.2em] text-co-rich">
+            About
           </span>
-        </motion.div>
 
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="mt-5 max-w-4xl text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight text-white">
-            Full-Stack Engineer building{" "}
-            <span className="text-co-rich">software that matters.</span>
-          </h2>
-        </motion.div>
-
-        {/* Main Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mt-12 max-w-4xl"
-        >
-          <p className="text-lg md:text-xl leading-relaxed text-sub-rich">
-            I&apos;m a Full-Stack Web Developer with 3 years of hands-on
-            experience building modern web applications, automation tools, and
-            end-to-end systems.
-          </p>
-
-          <p className="mt-6 text-lg md:text-xl leading-relaxed text-sub-rich">
-            I enjoy taking ownership of the entire development process — from
-            understanding a problem and designing the architecture to building,
-            testing, and deploying the final product.
-          </p>
-
-          <p className="mt-6 text-lg md:text-xl leading-relaxed text-sub-rich">
-            My experience spans professional development, freelance work,
-            collaborative engineering teams, and self-directed product
-            development. I&apos;m particularly interested in building reliable
-            systems, exploring AI-driven development, and continuously
-            improving how software gets built and shipped.
+          <p className="mt-5 max-w-2xl text-xl leading-relaxed text-sub-rich md:text-2xl">
+            Evidence over hype—what I build and how I approach software.
           </p>
         </motion.div>
 
-        {/* Qualities */}
+        {/* Focus */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-12 flex flex-wrap gap-3"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-12 border-t border-white/10"
         >
-          {qualities.map((quality) => (
-            <span
-              key={quality}
-              className="
-                rounded-full
-                border border-white/10
-                bg-white/[0.03]
-                px-5 py-2.5
-                text-sm
-                font-medium
-                text-sub-rich
-                transition-all duration-300
-                hover:border-co-rich/30
-                hover:text-co-rich
-              "
+          {focusAreas.map((item, index) => (
+            <div
+              key={item.title}
+              className="grid gap-2 border-b border-white/10 py-6 md:grid-cols-[220px_1fr] md:gap-10"
             >
-              {quality}
-            </span>
+              <div className="font-medium text-co-rich">
+                {item.title}
+              </div>
+
+              <div className="max-w-3xl leading-relaxed text-sub-rich">
+                {item.description}
+              </div>
+            </div>
           ))}
+        </motion.div>
+        {/* How I Work */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mt-20"
+        >
+          <div className="border-b border-white/10 pb-5">
+            <h3 className="text-sm font-medium text-co-rich">
+              How I Work
+            </h3>
+
+            <p className="mt-2 text-sm text-sub-rich">
+              Practical engineering over unnecessary complexity.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2">
+            {practices.map((practice, index) => (
+              <div
+                key={practice}
+                className="border-b border-white/10 py-5 md:pr-10"
+              >
+                <div className="flex gap-4">
+                  <span className="font-mono text-xs text-co-rich/60">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <span className="text-sm leading-relaxed text-sub-rich">
+                    {practice}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+                {/* Proof / Links */}
+                <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12"
+        >
+          <h3 className="text-sm font-medium text-co-rich">
+            Proof / Links
+          </h3>
+
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  link.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
+                className="group inline-flex items-center gap-1.5 text-sm text-sub-rich transition-colors hover:text-co-rich"
+              >
+                {link.label}
+                <ArrowUpRight
+                  size={14}
+                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

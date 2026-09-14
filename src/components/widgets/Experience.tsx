@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, MapPin } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 
 interface ExperienceItem {
   role: string;
@@ -11,185 +11,137 @@ interface ExperienceItem {
   description: string[];
 }
 
-// 2. Add your career data here
 const experiences: ExperienceItem[] = [
   {
     role: "Software Developer Intern",
     company: "InteractMet",
-    location: "Toronto, ON ",
+    location: "Toronto, ON",
     period: "Present",
     description: [
-      "Selected to participate in an industry-sponsored software development capstone project with InteractMet, an AI communication technology company.",
-      "Collaborating with a student development team to analyze requirements and design software solutions for real-world business needs",
-      "Applying software development practices including project planning, version control, documentation, and Agile collaboration."
+      "Developing software for an industry-sponsored project focused on AI-powered communication analysis.",
+      "Building backend APIs with C#/.NET and frontend functionality with React and TypeScript.",
+      "Working with multimodal data and AI services to support video, audio, and language analysis workflows.",
+      "Collaborating in a development team using Git, Agile practices, documentation, and code reviews.",
     ],
   },
   {
     role: "Full-Stack Developer",
-    company: "Self-Directed Product development",
-    location: "Toronto, ON ",
-    period: "Jan 2026 - Present",
+    company: "Self-Directed Product Development",
+    location: "Toronto, ON",
+    period: "Jan 2026 — Present",
     description: [
-      "Built, tested, and deployed multiple full-stack web applications from scratch, handling everything from database design to frontend animations.",
-      "Used AI pairing tools to speed up my development loop, allowing me to build features, refactor code, and prototype ideas at the pace of a multi-person team.",
-      "Focused heavily on performance across my projects, optimizing databases and backend queries to significantly cut down API response times.",
-      "Gained deep experience integrating AI models like the Gemini API for smart automation features, while setting up clean CI/CD pipelines to automate my deployment workflows.",
+      "Built and deployed full-stack applications covering frontend interfaces, backend APIs, databases, authentication, and deployment.",
+      "Designed application architecture, database schemas, API integrations, and reusable frontend components.",
+      "Integrated Gemini and other AI services to build AI-powered application features and automation workflows.",
+      "Set up Docker-based development environments and CI/CD workflows for repeatable deployments.",
     ],
   },
   {
-    role: "Full Stack Developer",
-    company: "Freelance ",
-    location: "Toronto, ON ",
-    period: " 2025 - 2026",
+    role: "Full-Stack Developer",
+    company: "Freelance",
+    location: "Toronto, ON",
+    period: "2025 — 2026",
     description: [
-      "Worked with small business owners to update, improve, and maintain their websites based on changing business needs.",
-      "Built and modified website features, fixed bugs, and improved 90% of the existing functionality to create smoother user experiences.",
-      "Helped 20+ clients improve their online presence by making websites more responsive, user-friendly, and reliable across devices.",
-      "Managed the full development process, including understanding requirements, making updates, testing changes, and deploying improvements.",
-      "Used modern frontend and backend technologies to customize websites and integrate tools that support business operations.",
+      "Built, maintained, and improved websites for small-business clients based on changing requirements.",
+      "Developed responsive frontend features, fixed application issues, and improved usability across devices.",
+      "Worked directly with clients to understand requirements, implement changes, test functionality, and deploy updates.",
+      "Integrated third-party tools and services to support client websites and business workflows.",
     ],
   },
   {
-    role: "Junior Full Stack Developer",
+    role: "Junior Full-Stack Developer",
     company: "Evangadi Network",
-    location: "Remote ,Silverspring, MD",
+    location: "Remote",
     period: "2024",
     description: [
-      "Developed and enhanced full-stack web application features using React, Next.js, and Node.js, improving user workflows and application reliability.",
-      "Created 15+ reusable React components and optimized frontend architecture to improve maintainability, consistency, and development efficiency.",
-      "Implemented RESTful API endpoints and secure form-handling logic to ensure reliable data flow between frontend and backend systems.",
-      "Implemented and maintained 25+ Cypress end-to-end testing to validate critical user flows, identify issues early, and improve overall application quality.",
-      "Collaborated within an Agile/Scrum team of 5+ developers through sprint planning, daily standups, code reviews, and technical discussions to deliver features and resolve development challenges.",
+      "Developed full-stack features using React, Next.js, and Node.js within an Agile development team.",
+      "Created reusable React components and contributed to frontend architecture and maintainability.",
+      "Built REST API endpoints and form-handling functionality for reliable frontend-backend data flow.",
+      "Created and maintained Cypress end-to-end tests covering critical application workflows.",
+      "Collaborated with a team of developers through sprint planning, standups, code reviews, and technical discussions.",
     ],
   },
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="w-full px-6 py-32">
-      <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
+    <section
+      id="experience"
+      className="w-full bg-charcoal-base px-6 py-24 md:py-32"
+    >
+      <div className="mx-auto max-w-5xl">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-20 text-left"
+          transition={{ duration: 0.5 }}
+          className="mb-14"
         >
-          <h2 className="text-5xl font-bold text-co-rich tracking-tight">
-            Work Experience
+          <span className="text-xs font-medium uppercase tracking-[0.2em] text-co-rich">
+            Experience
+          </span>
+
+          <h2 className="mt-5 text-3xl font-semibold tracking-tight text-co-rich md:text-4xl">
+            Where I’ve built and shipped software.
           </h2>
-          <p className="mt-4 text-sub-rich max-w-xl">
-            A history of positions where I’ve built robust applications, led
-            frontend modules, and integrated next-gen tools.
+
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sub-rich md:text-base">
+            Professional, freelance, and hands-on development experience across
+            full-stack applications, APIs, databases, and AI integrations.
           </p>
         </motion.div>
 
-        {/* Timeline Layout */}
-        <div className="relative border-l border-white/10 ml-4 md:ml-6 space-y-12">
+        {/* Experience List */}
+        <div className="border-t border-white/10">
           {experiences.map((exp, index) => (
-            <motion.div
+            <motion.article
               key={`${exp.company}-${index}`}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative pl-8 md:pl-10 group"
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              className="group border-b border-white/10 py-10 md:py-12"
             >
-              {/* Timeline Node Point Indicator */}
-              <div
-                className="
-                absolute 
-                -left-[9px] 
-                top-1.5 
-                w-4 
-                h-4 
-                rounded-full 
-                bg-charcoal-base 
-                border-2 
-                border-white/20 
-                group-hover:border-co-rich 
-                group-hover:bg-co-rich
-                transition-all 
-                duration-300
-                z-10
-              "
-              />
-
-              {/* Main Card */}
-              <div
-                className="
-                w-full 
-                bg-charcoal-base 
-                border 
-                border-white/10 
-                rounded-3xl 
-                p-6 
-                md:p-8 
-                hover:border-white/20
-                transition-all 
-                duration-300
-                relative
-                overflow-hidden
-              "
-              >
-                {/* Subtle Left Border Glow Accent on Card Hover */}
-                <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-co-rich opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Metadata row */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-co-rich tracking-tight group-hover:text-white transition-colors">
-                      {exp.role}
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-3 text-sm text-sub-rich mt-1 font-medium">
-                      <span className="text-white/80">{exp.company}</span>
-                      <span className="text-white/20">•</span>
-                      <span className="flex items-center gap-1">
-                        <MapPin size={14} />
-                        {exp.location}
-                      </span>
-                    </div>
+              <div className="grid gap-6 md:grid-cols-[220px_1fr] md:gap-12">
+                {/* Left metadata */}
+                <div>
+                  <div className="font-mono text-xs text-sub-rich">
+                    {exp.period}
                   </div>
 
-                  {/* Period badge */}
-                  <span
-                    className="
-                    self-start 
-                    md:self-center 
-                    flex 
-                    items-center 
-                    gap-2 
-                    px-4 
-                    py-1.5 
-                    rounded-full 
-                    bg-white/5 
-                    border 
-                    border-white/10 
-                    text-xs 
-                    md:text-sm 
-                    text-sub-rich 
-                    font-medium
-                  "
-                  >
-                    <Calendar size={14} />
-                    {exp.period}
-                  </span>
+                  <div className="mt-3 flex items-center gap-2 text-sm text-sub-rich">
+                    <MapPin size={14} />
+                    {exp.location}
+                  </div>
                 </div>
 
-                {/* Bullets List */}
-                <ul className="mt-6 space-y-3 text-sub-rich leading-relaxed text-sm md:text-base">
-                  {exp.description.map((bullet, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="text-co-rich mt-1.5 flex-shrink-0 text-xs">
-                        •
-                      </span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Main content */}
+                <div>
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-xl font-semibold tracking-tight text-co-rich transition-colors group-hover:text-white md:text-2xl">
+                      {exp.role}
+                    </h3>
+
+                    <span className="text-sm font-medium text-sub-rich">
+                      {exp.company}
+                    </span>
+                  </div>
+
+                  <ul className="mt-6 space-y-3">
+                    {exp.description.map((bullet, i) => (
+                      <li
+                        key={i}
+                        className="flex gap-3 text-sm leading-relaxed text-sub-rich md:text-base"
+                      >
+                        <span className="mt-[9px] h-1 w-1 flex-shrink-0 rounded-full bg-co-rich" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

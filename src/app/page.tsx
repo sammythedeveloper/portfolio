@@ -20,10 +20,6 @@ export default function Home() {
       <Hero />
 
       <ParallaxSection>
-        <About />
-      </ParallaxSection>
-
-      <ParallaxSection>
         <TechStack />
       </ParallaxSection>
 
@@ -32,13 +28,17 @@ export default function Home() {
       </ParallaxSection>
 
       <ParallaxSection>
+        <Experience/>
+      </ParallaxSection>
+
+      <ParallaxSection>
         <Education/>
       </ParallaxSection>
       
       <ParallaxSection>
-        <Experience/>
+        <About />
       </ParallaxSection>
-
+      
       <ParallaxSection>
         <Certificates/>
       </ParallaxSection>
