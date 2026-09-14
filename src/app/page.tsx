@@ -42,11 +42,6 @@ export default function Home() {
       <ParallaxSection>
         <Certificates/>
       </ParallaxSection>
-
-      <ParallaxSection>
-        <PuzzleGame/>
-      </ParallaxSection>
-
       <ParallaxSection>
         <Contact/>
       </ParallaxSection>

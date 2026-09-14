@@ -437,8 +437,8 @@ export default function Hero() {
                 bg-white
                 px-6
                 py-3
-                text-sm
-                font-semibold
+                text-xs 
+                uppercase
                 text-black
                 transition-all
                 hover:bg-co-rich
@@ -468,8 +468,8 @@ export default function Hero() {
                 bg-white/[0.02]
                 px-6
                 py-3
-                text-sm
-                font-semibold
+                text-xs 
+                uppercase
                 text-sub-rich
                 transition-all
                 hover:border-white/20
