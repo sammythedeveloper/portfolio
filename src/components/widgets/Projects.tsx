@@ -203,14 +203,14 @@ function GearProject({
             {project.description}
           </p>
 
-          {project.technologies?.length > 0 && (
+          {project.techStack?.length > 0 && (
             <div
               className={`
-                mt-3.5 flex flex-wrap gap-x-2.5 gap-y-1
-                ${side === "left" ? "justify-start" : "justify-end"}
-              `}
+      mt-3.5 flex flex-wrap gap-x-2.5 gap-y-1
+      ${side === "left" ? "justify-start" : "justify-end"}
+    `}
             >
-              {project.technologies.slice(0, 4).map((tech) => (
+              {project.techStack.slice(0, 4).map((tech) => (
                 <span
                   key={tech}
                   className="text-[10px] uppercase tracking-[0.12em] text-sub-rich/45"
