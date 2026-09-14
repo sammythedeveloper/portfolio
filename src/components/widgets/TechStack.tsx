@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import ReactJs from "@/components/icons/React.svg";
 import AWS from "@/components/icons/AWS.svg";
 import Git from "@/components/icons/GitHub.svg";
-import Tailwind from "@/components/icons/Tailwind-CSS.svg";
+import Postman from "@/components/icons/Postman.svg";
 import CSharp from "@/components/icons/CSharp.svg";
 import CSS3 from "@/components/icons/CSS3.svg";
 import Express from "@/components/icons/Express.svg";
@@ -33,8 +33,8 @@ const coreStack: Technology[] = [
   { name: "TypeScript", Icon: TypeScript },
   { name: "JavaScript", Icon: JavaScript },
   { name: "Git", Icon: Git },
-  { name: "PostgresSQL ", Icon: PostgresSQL  },
   { name: "Express", Icon: Express },
+  { name: "Postman", Icon: Postman  },
   { name: "Docker", Icon: Docker },
   { name: "Node.js", Icon: Node },
   { name: "HTML5", Icon: HTML5 },
@@ -62,13 +62,15 @@ const deployRun: Technology[] = [
 ];
 
 const practices: Technology[] = [
-  { name: "REST APIs" },
-  { name: "Testing" },
-  { name: "TDD" },
-  { name: "OOP" },
+  { name: "Clean Architecture" },
+  { name: "API Design" },
+  { name: "Debugging & Error Handling" },
+  { name: "Database Design" },
+  { name: "Schema Migrations" },
+  { name: "Authentication & Authorization" },
+  { name: "Testing / TDD" },
   { name: "CI/CD" },
-  { name: "Debugging" },
-  { name: "Agile / Scrum" },
+  { name: "Observability" },
 ];
 
 function TechItem({ tech }: { tech: Technology }) {

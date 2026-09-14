@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, ExternalLink } from "lucide-react";
-import { Github} from "lucide-react";
+import {
+  ArrowUpRight,
+  ExternalLink,
+  Github,
+  X,
+} from "lucide-react";
 
 interface ProjectModalProps {
   project: {
@@ -18,16 +22,51 @@ interface ProjectModalProps {
     live: string;
     repo: string;
   } | null;
+
   onClose: () => void;
 }
 
-export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+export default function ProjectModal({
+  project,
+  onClose,
+}: ProjectModalProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    return () => setMounted(false);
+
+    return () => {
+      setMounted(false);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!project) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [project]);
+
+  useEffect(() => {
+    if (!project) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [project, onClose]);
 
   if (!mounted) return null;
 
@@ -38,131 +77,438 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
           onClick={onClose}
           className="
             fixed
             inset-0
-            z-[150]                
-            bg-charcoal-base/60
-            backdrop-blur-md
-            p-4
-            md:p-8
+            z-[150]
             flex
+            items-center
             justify-center
-            items-center            
+            bg-black/75
+            px-4
+            py-6
+            backdrop-blur-xl
+            md:px-8
           "
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.3 }}
-            onClick={(e) => e.stopPropagation()}
+            initial={{
+              opacity: 0,
+              y: 25,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              y: 20,
+            }}
+            transition={{
+              duration: 0.4,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            onClick={(event) => event.stopPropagation()}
             data-lenis-prevent
             className="
               relative
-              w-full
-              max-w-4xl
-              bg-charcoal-base
-              border
-              border-white/10
-              rounded-3xl
-              p-6
-              md:p-8
               flex
+              h-full
+              max-h-[90vh]
+              w-full
+              max-w-5xl
               flex-col
-              h-auto
-              max-h-[85vh]           
-              overflow-hidden         
+              overflow-hidden
+              border
+              border-white/[0.08]
+              bg-charcoal-base
             "
           >
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 transition z-20 bg-charcoal-base/80 backdrop-blur-sm"
+            {/* TOP BAR */}
+
+            <div
+              className="
+                flex
+                shrink-0
+                items-center
+                justify-between
+                border-b
+                border-white/[0.08]
+                px-6
+                py-5
+                md:px-10
+              "
             >
-              <X className="hover:text-co-rich" size={22} />
-            </button>
-            
-            {/* Scrollable Content Wrapper */}
-            <div className="flex-1 overflow-y-auto pr-12 space-y-6 custom-scrollbar">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-co-rich pr-8">
-                  {project.title}
-                </h2>
-                <p className="mt-3 text-sub-rich leading-relaxed">
-                  {project.purpose}
-                </p>
+              <div className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-co-rich" />
+
+                <span
+                  className="
+                    text-[10px]
+                    uppercase
+                    tracking-[0.25em]
+                    text-sub-rich/45
+                  "
+                >
+                  Project Details
+                </span>
               </div>
 
-              <div className="relative h-[220px] sm:h-[320px] w-full rounded-2xl overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close project"
+                className="
+                  group
+                  flex
+                  h-9
+                  w-9
+                  items-center
+                  justify-center
+                  text-sub-rich/50
+                  transition-colors
+                  hover:text-co-rich
+                "
+              >
+                <X
+                  size={18}
+                  className="
+                    transition-transform
+                    duration-300
+                    group-hover:rotate-90
+                  "
                 />
-              </div>
-
-              <section>
-                <h3 className="text-xl font-semibold text-co-rich">
-                  Tech Stack
-                </h3>
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-4 py-1.5 rounded-full bg-sub-rich text-black text-xs md:text-sm font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-semibold text-co-rich">Details</h3>
-                <ul className="mt-3 space-y-2 text-sub-rich text-sm md:text-base">
-                  {project.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
-                      <span className="text-co-rich">•</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
+              </button>
             </div>
 
-            {/* Sticky Action Footer (Never gets clipped or cut off!) */}
-            <div className="flex flex-wrap gap-4 pt-4 mt-4 border-t border-white/5 bg-charcoal-base z-10">
-              <a
-                href={project.documentation}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-sub-rich text-black font-semibold text-sm hover:bg-co-rich hover:text-black transition"
+            {/* CONTENT */}
+
+            <div
+              className="
+                flex-1
+                overflow-y-auto
+                custom-scrollbar
+              "
+            >
+              <div
+                className="
+                  px-6
+                  py-12
+                  md:px-10
+                  md:py-16
+                  lg:px-16
+                "
               >
-                Documentation <ExternalLink size={14} />
-              </a>
-              <a
-                href={project.repo}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium  hover:bg-co-rich hover:text-black transition"
-              >
-                GitHub <Github className="text-white" size={14} />
-              </a>
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium  hover:bg-co-rich hover:text-black transition"
-              >
-                Live
-              </a>
+                {/* HEADER */}
+
+                <motion.header
+                  initial={{
+                    opacity: 0,
+                    y: 15,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    delay: 0.05,
+                    duration: 0.45,
+                  }}
+                >
+                  <p
+                    className="
+                      text-xs
+                      uppercase
+                      tracking-[0.2em]
+                      text-sub-rich/40
+                    "
+                  >
+                    Selected Work
+                  </p>
+
+                  <h2
+                    className="
+                      mt-5
+                      max-w-4xl
+                      text-5xl
+                      font-semibold
+                      leading-[0.95]
+                      tracking-[-0.055em]
+                      text-co-rich
+                      md:text-7xl
+                    "
+                  >
+                    {project.title}
+                  </h2>
+
+                  <p
+                    className="
+                      mt-7
+                      max-w-2xl
+                      text-base
+                      leading-8
+                      text-sub-rich
+                      md:text-lg
+                    "
+                  >
+                    {project.description}
+                  </p>
+                </motion.header>
+
+                {/* THE IDEA */}
+
+                <ProjectSection label="The Idea">
+                  <p
+                    className="
+                      max-w-3xl
+                      text-base
+                      leading-8
+                      text-sub-rich
+                      md:text-lg
+                    "
+                  >
+                    {project.purpose}
+                  </p>
+                </ProjectSection>
+
+                {/* WHAT I BUILT */}
+
+                <ProjectSection label="What I Built">
+                  <div className="divide-y divide-white/[0.07]">
+                    {project.features.map(
+                      (feature, index) => (
+                        <motion.div
+                          key={feature}
+                          initial={{
+                            opacity: 0,
+                            x: -10,
+                          }}
+                          whileInView={{
+                            opacity: 1,
+                            x: 0,
+                          }}
+                          viewport={{
+                            once: true,
+                          }}
+                          transition={{
+                            duration: 0.35,
+                            delay: index * 0.04,
+                          }}
+                          className="
+                            flex
+                            gap-6
+                            py-5
+                          "
+                        >
+                          <span
+                            className="
+                              shrink-0
+                              pt-1
+                              text-[10px]
+                              tracking-[0.15em]
+                              text-sub-rich/30
+                            "
+                          >
+                            {String(index + 1).padStart(
+                              2,
+                              "0"
+                            )}
+                          </span>
+
+                          <p
+                            className="
+                              max-w-3xl
+                              text-sm
+                              leading-7
+                              text-sub-rich
+                              md:text-base
+                            "
+                          >
+                            {feature}
+                          </p>
+                        </motion.div>
+                      )
+                    )}
+                  </div>
+                </ProjectSection>
+
+                {/* TECHNOLOGY */}
+
+                <ProjectSection label="Technology">
+                  <div
+                    className="
+                      grid
+                      max-w-3xl
+                      grid-cols-2
+                      gap-x-8
+                      gap-y-4
+                      sm:grid-cols-3
+                    "
+                  >
+                    {project.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="
+                          text-sm
+                          text-co-rich
+                        "
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </ProjectSection>
+
+                {/* LINKS */}
+
+                <div
+                  className="
+                    mt-20
+                    border-t
+                    border-white/[0.08]
+                    pt-8
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      flex-wrap
+                      items-center
+                      gap-x-8
+                      gap-y-5
+                    "
+                  >
+                    <span
+                      className="
+                        mr-2
+                        text-[10px]
+                        uppercase
+                        tracking-[0.2em]
+                        text-sub-rich/35
+                      "
+                    >
+                      Explore
+                    </span>
+
+                    <ProjectLink
+                      href={project.live}
+                      icon={<ArrowUpRight size={14} />}
+                    >
+                      Live Project
+                    </ProjectLink>
+
+                    <ProjectLink
+                      href={project.repo}
+                      icon={<Github size={14} />}
+                    >
+                      GitHub
+                    </ProjectLink>
+
+                    <ProjectLink
+                      href={project.documentation}
+                      icon={<ExternalLink size={14} />}
+                    >
+                      Documentation
+                    </ProjectLink>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>,
     document.body
+  );
+}
+
+
+/* ================================================================
+   SECTION
+================================================================ */
+
+function ProjectSection({
+  label,
+  children,
+}: {
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <section
+      className="
+        mt-20
+        grid
+        grid-cols-1
+        gap-8
+        border-t
+        border-white/[0.08]
+        pt-8
+        md:grid-cols-[180px_1fr]
+      "
+    >
+      <span
+        className="
+          text-[10px]
+          font-medium
+          uppercase
+          tracking-[0.22em]
+          text-sub-rich/40
+        "
+      >
+        {label}
+      </span>
+
+      <div>{children}</div>
+    </section>
+  );
+}
+
+
+/* ================================================================
+   LINK
+================================================================ */
+
+function ProjectLink({
+  href,
+  children,
+  icon,
+}: {
+  href: string;
+  children: ReactNode;
+  icon: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="
+        group
+        inline-flex
+        items-center
+        gap-2
+        text-sm
+        text-co-rich
+        transition-colors
+        duration-300
+        hover:text-sub-rich
+      "
+    >
+      <span>{children}</span>
+
+      <span
+        className="
+          transition-transform
+          duration-300
+          group-hover:-translate-y-0.5
+          group-hover:translate-x-0.5
+        "
+      >
+        {icon}
+      </span>
+    </a>
   );
 }
