@@ -81,7 +81,7 @@ export default function Experience() {
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-co-rich">
             Experience
           </span>
-          
+
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sub-rich md:text-base">
             Professional, freelance, and hands-on development experience across
             full-stack applications, APIs, databases, and AI integrations.

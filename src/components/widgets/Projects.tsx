@@ -34,9 +34,9 @@ export default function Projects() {
             </span>
           </div>
 
-          <h2 className="mt-5 max-w-3xl text-[clamp(2.8rem,6vw,4.8rem)] font-semibold leading-[0.95] tracking-[-0.05em]">
-            Built to move.
-          </h2>
+          <h5 className="mt-5 max-w-3xl text-[clamp(2.8rem,6vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.05em]">
+            My builds.
+          </h5>
 
           <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-sub-rich md:text-base">
             A collection of applications, systems, and experiments built across

@@ -17,12 +17,6 @@ export const NAV_ITEMS = [
   },
 
   {
-    name: "Education",
-    id: "education",
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/864/864685.png",
-  },
-
-  {
     name: "Experience",
     id: "experience",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/522/522561.png",
@@ -32,10 +26,15 @@ export const NAV_ITEMS = [
     id: "about",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/10758/10758751.png",
   },
+  {
+    name: "Education",
+    id: "education",
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/864/864685.png",
+  },
 
   {
     name: "Certficates",
-    id: "certficates",
+    id: "certificates",
     iconUrl: "https://cdn-icons-png.flaticon.com/128/3172/3172183.png",
   },
   {

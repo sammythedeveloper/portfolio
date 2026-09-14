@@ -9,7 +9,6 @@ import Education from "@/components/widgets/Education";
 import Experience from "@/components/widgets/Experience";
 import Certificates from "@/components/widgets/Certificates";
 import Contact from "@/components/widgets/Contact";
-import PuzzleGame from "@/components/widgets/PuzzleGame";
 import Footer from "@/components/widgets/Footer";
 
 export default function Home() {
