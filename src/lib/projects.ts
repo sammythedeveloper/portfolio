@@ -28,7 +28,91 @@ export const projects = [
     live: "https://main.d32a0gc1jhgn6.amplifyapp.com/",
     repo: "https://github.com/sammythedeveloper/hassistance",
   },
+  {
+    title: "Slate",
+    description:
+      "Saas style infrastructure intelligence platform designed to bridge the gap between complex backend services and actionable user analytics",
 
+    purpose:
+      "Slate is a production-grade SaaS infrastructure intelligence platform that connects subscriber management, service monitoring, billing, and administrative oversight through a unified control plane",
+
+    image: "/projects/slate.png",
+
+    techStack: ["Next.js", "TypeScript", "Express.js", "Node.js", "PostgreSQL"],
+
+    features: [
+      "Provides two dedicated dashboards: a user dashboard for monitoring service instances and subscriptions, and an admin control plane for platform-wide user, financial, and operational management.",
+      "Implements role-based access control (RBAC) to separate standard subscriber access from elevated administrative capabilities and protected infrastructure operations",
+      "Uses a signature-verified Stripe webhook architecture to securely synchronize billing events with platform state while reducing race conditions and preventing unverified financial updates",
+      "Admin Control Plane",
+      "Built with React, Tailwind, shadcn/ui, Node.js, Express, and PostgreSQL to deliver a data-heavy SaaS interface with persistent relational state and real-time operational visibility.",
+    ],
+
+    documentation:
+      "https://www.notion.so/Slate-39a8bd3daece80b78818ce543a883d8c?source=copy_link",
+    live: "https://slate-fawn-one.vercel.app/",
+    repo: "https://github.com/sammythedeveloper/Slate_backend/tree/main/membership-server",
+  },
+
+  {
+    title: "Finance Accounting Dashboard",
+    description:
+      "A financial dashboard designed to visualize and manage personal finances.",
+
+    purpose:
+      "A full-stack personal finance management application built with Vue.js and ASP.NET Core, designed to demonstrate secure authentication, transaction management, spending categorization, relational data persistence, and a production-style cloud deployment workflow.",
+
+    image: "/projects/finance.jpg",
+
+    techStack: [
+      "Vue.js",
+      "TypeScript",
+      "ASP.NET Core",
+      "Entity Framework Core",
+      "PostgreSQL",
+      "JWT",
+      "Railway",
+      "Vercel",
+    ],
+
+    features: [
+      "Implements secure JWT-based authentication with ASP.NET Core Identity's PasswordHasher for protected user accounts and password storage.",
+      "Provides a complete financial transaction workflow, allowing users to create, manage, and categorize transactions to organize and analyze spending activity.",
+      "Uses PostgreSQL with Entity Framework Core migrations for structured relational data management and repeatable database schema changes.",
+      "Built a RESTful ASP.NET Core API that separates business logic and data access from the Vue.js frontend, creating a clean client-server architecture.",
+      "RESTful API built with ASP.NET Core.",
+      "Deployed across Railway and Vercel, with the ASP.NET Core backend and PostgreSQL database hosted on Railway and the responsive Vue.js financial dashboard deployed on Vercel.",
+    ],
+
+    documentation: "",
+    live: "https://finflow-client-one.vercel.app/",
+    repo: "https://github.com/sammythedeveloper/finflow_client",
+  },
+
+  {
+    title: "Stacky",
+    description:
+      "Utilizes modern frameworks for both frontend reactivity and backend robustness",
+
+    purpose:
+      "A full-stack community platform built to demonstrate a production-style client-server architecture, combining React, Node.js, Express, MySQL, JWT authentication, and cloud deployment across Vercel, Railway, and Aiven.",
+
+    image: "/projects/redddit.png",
+
+    techStack: ["React", "MySQL", "Tailwind CSS", "Framer liberaries"],
+
+    features: [
+      "Implements a full-stack community application architecture with React and Tailwind CSS on the frontend and a RESTful Node.js + Express backend.",
+      "Uses JWT authentication and password hashing to demonstrate secure user registration, login, session authorization, and protected API resources.",
+      "Connects to a cloud-hosted MySQL database on Aiven using SSL-secured connections and mysql2 promise-based connection pooling",
+      "Demonstrates a clean client-server separation with environment-based configuration, authentication middleware, relational data management, and responsive UI architecture.",
+    ],
+
+    documentation:
+      "https://www.notion.so/Stacky-36e8bd3daece80ab90c5d6823b2fa655?source=copy_link",
+    live: "https://stacky-omega.vercel.app/",
+    repo: "https://github.com/sammythedeveloper/Stacky",
+  },
   {
     title: "Booking",
     description:
@@ -55,66 +139,6 @@ export const projects = [
   },
 
   {
-    title: "Slate",
-    description:
-      "Saas style infrastructure intelligence platform designed to bridge the gap between complex backend services and actionable user analytics",
-
-    purpose:
-      "Slate is a production-grade SaaS infrastructure intelligence platform that connects subscriber management, service monitoring, billing, and administrative oversight through a unified control plane",
-
-    image: "/projects/slate.png",
-
-    techStack: ["Next.js", "TypeScript", "Express.js", "Node.js", "PostgreSQL"],
-
-    features: [
-      "Provides two dedicated dashboards: a user dashboard for monitoring service instances and subscriptions, and an admin control plane for platform-wide user, financial, and operational management.",
-      "Implements role-based access control (RBAC) to separate standard subscriber access from elevated administrative capabilities and protected infrastructure operations",
-      "Uses a signature-verified Stripe webhook architecture to securely synchronize billing events with platform state while reducing race conditions and preventing unverified financial updates",
-      "Admin Control Plane",
-      "Built with React, Tailwind, shadcn/ui, Node.js, Express, and PostgreSQL to deliver a data-heavy SaaS interface with persistent relational state and real-time operational visibility.",
-    ],
-
-    documentation:
-      "https://www.notion.so/Slate-39a8bd3daece80b78818ce543a883d8c?source=copy_link",
-    live: "https://slate-fawn-one.vercel.app/",
-    repo: "https://github.com/sammythedeveloper/Slate_backend/tree/main/membership-server",
-  },
-  {
-    title: "Finance",
-    description:
-      "A financial dashboard designed to visualize and manage personal finances.",
-
-    purpose:
-      "A full-stack personal finance management application built with Vue.js and ASP.NET Core, designed to demonstrate secure authentication, transaction management, spending categorization, relational data persistence, and a production-style cloud deployment workflow.",
-
-    image: "/projects/finance.jpg",
-
-    techStack: [
-      "Vue.js",
-      "TypeScript",
-      "ASP.NET Core",
-      "Entity Framework Core",
-      "PostgreSQL",
-      "JWT",
-      "Railway",
-      "Vercel",
-    ],
-
-    features: [
-      "Implements secure JWT-based authentication with ASP.NET Core Identity's PasswordHasher for protected user accounts and password storage.",
-      "Provides a complete financial transaction workflow, allowing users to create, manage, and categorize transactions to organize and analyze spending activity.",
-      "Uses PostgreSQL with Entity Framework Core migrations for structured relational data management and repeatable database schema changes.",
-      "Built a RESTful ASP.NET Core API that separates business logic and data access from the Vue.js frontend, creating a clean client-server architecture.",
-      "RESTful API built with ASP.NET Core.",
-      "Deployed across Railway and Vercel, with the ASP.NET Core backend and PostgreSQL database hosted on Railway and the responsive Vue.js financial dashboard deployed on Vercel."
-    ],
-
-    documentation: "",
-    live: "https://finflow-client-one.vercel.app/",
-    repo: "https://github.com/sammythedeveloper/finflow_client",
-  },
-
-  {
     title: "Ecommerce",
     description:
       "A modern ecommerce platform demonstration of shopping experience end-to-end features.",
@@ -138,30 +162,4 @@ export const projects = [
     live: "https://sammythedeveloper.github.io/Nova-shop/",
     repo: "https://github.com/sammythedeveloper/Nova-shop",
   },
-
-  {
-    title: "Stacky",
-    description:
-      "Utilizes modern frameworks for both frontend reactivity and backend robustness",
-
-    purpose: "A full-stack community platform built to demonstrate a production-style client-server architecture, combining React, Node.js, Express, MySQL, JWT authentication, and cloud deployment across Vercel, Railway, and Aiven.",
-
-    image: "/projects/redddit.png",
-
-    techStack: ["React", "MySQL", "Tailwind CSS", "Framer liberaries"],
-
-    features: [
-      "Implements a full-stack community application architecture with React and Tailwind CSS on the frontend and a RESTful Node.js + Express backend.",
-      "Uses JWT authentication and password hashing to demonstrate secure user registration, login, session authorization, and protected API resources.",
-      "Connects to a cloud-hosted MySQL database on Aiven using SSL-secured connections and mysql2 promise-based connection pooling",
-      "Demonstrates a clean client-server separation with environment-based configuration, authentication middleware, relational data management, and responsive UI architecture.",
-    ],
-
-    documentation:
-      "https://www.notion.so/Stacky-36e8bd3daece80ab90c5d6823b2fa655?source=copy_link",
-    live: "https://stacky-omega.vercel.app/",
-    repo: "https://github.com/sammythedeveloper/Stacky",
-  },
-
- 
 ];
