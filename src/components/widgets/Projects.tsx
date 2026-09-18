@@ -18,7 +18,7 @@ export default function Projects() {
       id="projects"
       className="relative w-full overflow-hidden bg-charcoal-base text-co-rich"
     >
-      <div className="mx-auto max-w-[1400px] px-6 py-28 md:px-12 lg:px-20 lg:py-36">
+      <div className="mx-auto max-w-[1400px] px-5 py-28 md:px-12 lg:px-20 lg:py-36">
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -46,10 +46,10 @@ export default function Projects() {
 
         {/* GEAR SYSTEM */}
         <div className="relative mx-auto max-w-[1050px]">
-          {/* CENTRAL AXIS */}
+          {/* CENTRAL AXIS - desktop only */}
           <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/[0.09] to-transparent md:block" />
 
-          <div className="relative space-y-14 md:space-y-20">
+          <div className="relative space-y-12 md:space-y-20">
             {projects.map((project, index) => {
               const size = gearSizes[index % gearSizes.length];
               const side = index % 2 === 0 ? "left" : "right";
@@ -114,6 +114,9 @@ function GearProject({
 }) {
   const rotationDirection = index % 2 === 0 ? 1 : -1;
 
+  // Much smaller gears on mobile so the two-column layout still fits
+  const mobileSize = Math.round(size * 0.42); // ~100-100px range
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -121,7 +124,8 @@ function GearProject({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: index * 0.05 }}
       className={`
-        relative flex min-h-[260px] items-center
+        relative flex min-h-[160px] items-center
+        md:min-h-[260px]
         ${side === "left" ? "justify-start" : "justify-end"}
       `}
       style={{
@@ -129,7 +133,7 @@ function GearProject({
         transition: "opacity 0.4s ease",
       }}
     >
-      {/* Connection line to axis */}
+      {/* Connection line to axis - desktop only */}
       <div
         className={`
           absolute top-1/2 hidden h-px w-[18%] bg-white/[0.07] md:block
@@ -142,78 +146,117 @@ function GearProject({
         onMouseLeave={onLeave}
         onClick={onOpen}
         className={`
-          group relative flex items-center gap-7 outline-none
+          group relative flex items-center gap-3 outline-none
+          md:gap-7
           ${side === "left" ? "flex-row" : "flex-row-reverse"}
         `}
       >
         {/* GEAR */}
-        <div
-          className="relative shrink-0"
-          style={{ width: size, height: size }}
-        >
-          <motion.div
-            animate={{
-              rotate: hovered
-                ? rotationDirection * 720
-                : rotationDirection * 360,
-            }}
-            transition={{
-              duration: hovered ? 6 : 28,
-              ease: "linear",
-              repeat: Infinity,
-            }}
-            className="h-full w-full"
+        <div className="relative shrink-0">
+          {/* Mobile gear */}
+          <div
+            className="md:hidden"
+            style={{ width: mobileSize, height: mobileSize }}
           >
-            <GearSVG active={hovered} />
-          </motion.div>
-
-          {/* Center number */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span
-              className={`
-                text-[11px] font-medium tracking-[0.18em] transition-colors duration-300
-                ${hovered ? "text-co-rich" : "text-sub-rich/50"}
-              `}
+            <motion.div
+              animate={{
+                rotate: hovered
+                  ? rotationDirection * 720
+                  : rotationDirection * 360,
+              }}
+              transition={{
+                duration: hovered ? 6 : 28,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+              className="h-full w-full text-white"
             >
-              {String(index + 1).padStart(2, "0")}
-            </span>
+              <GearSVG active={hovered} mobile />
+            </motion.div>
+
+            {/* Center number */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span
+                className={`
+                  text-[9px] font-medium tracking-[0.18em] transition-colors duration-300
+                  ${hovered ? "text-white" : "text-white/55"}
+                `}
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
+          {/* Desktop gear */}
+          <div
+            className="relative hidden md:block"
+            style={{ width: size, height: size }}
+          >
+            <motion.div
+              animate={{
+                rotate: hovered
+                  ? rotationDirection * 720
+                  : rotationDirection * 360,
+              }}
+              transition={{
+                duration: hovered ? 6 : 28,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+              className="h-full w-full"
+            >
+              <GearSVG active={hovered} />
+            </motion.div>
+
+            {/* Center number */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span
+                className={`
+                  text-[11px] font-medium tracking-[0.18em] transition-colors duration-300
+                  ${hovered ? "text-co-rich" : "text-sub-rich/50"}
+                `}
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
           </div>
         </div>
 
         {/* INFO */}
         <motion.div
           animate={{
-            x: hovered ? (side === "left" ? 10 : -10) : 0,
+            x: hovered ? (side === "left" ? 8 : -8) : 0,
           }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className={`
-            w-[210px] md:w-[250px]
+            w-[140px] sm:w-[160px] md:w-[250px]
             ${side === "left" ? "text-left" : "text-right"}
           `}
         >
-          <div className="mb-1.5 text-[10px] uppercase tracking-[0.2em] text-sub-rich/45">
+          <div className="mb-1 text-[9px] uppercase tracking-[0.2em] text-sub-rich/45 md:mb-1.5 md:text-[10px]">
             Project {String(index + 1).padStart(2, "0")}
           </div>
 
-          <h3 className="text-xl font-semibold tracking-[-0.035em] text-co-rich md:text-2xl">
+          <h3 className="text-[15px] font-semibold leading-tight tracking-[-0.035em] text-co-rich sm:text-base md:text-2xl">
             {project.title}
           </h3>
 
-          <p className="mt-2.5 text-[13.5px] leading-relaxed text-sub-rich">
+          <p className="mt-1.5 text-[12px] leading-relaxed text-sub-rich md:mt-2.5 md:text-[13.5px]">
             {project.description}
           </p>
 
           {project.techStack?.length > 0 && (
             <div
               className={`
-      mt-3.5 flex flex-wrap gap-x-2.5 gap-y-1
-      ${side === "left" ? "justify-start" : "justify-end"}
-    `}
+                mt-2.5 flex flex-wrap gap-x-2 gap-y-1
+                md:mt-3.5 md:gap-x-2.5
+                ${side === "left" ? "justify-start" : "justify-end"}
+              `}
             >
-              {project.techStack.slice(0, 4).map((tech) => (
+              {project.techStack.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
-                  className="text-[10px] uppercase tracking-[0.12em] text-sub-rich/45"
+                  className="text-[9px] uppercase tracking-[0.12em] text-sub-rich/45 md:text-[10px]"
                 >
                   {tech}
                 </span>
@@ -223,8 +266,9 @@ function GearProject({
 
           <div
             className={`
-              mt-4 text-[11px] font-medium uppercase tracking-[0.15em]
+              mt-3 text-[10px] font-medium uppercase tracking-[0.15em]
               transition-all duration-300
+              md:mt-4 md:text-[11px]
               ${hovered ? "text-co-rich" : "text-co-rich/40"}
             `}
           >
@@ -237,10 +281,10 @@ function GearProject({
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   GEAR SVG (cleaner + stronger presence)
+   GEAR SVG
 ═══════════════════════════════════════════════════════════════ */
 
-function GearSVG({ active }: { active: boolean }) {
+function GearSVG({ active, mobile = false }: { active: boolean; mobile?: boolean }) {
   const teeth = 16;
   const outer = 46;
   const inner = 37.5;
@@ -265,15 +309,15 @@ function GearSVG({ active }: { active: boolean }) {
     <svg
       viewBox="0 0 100 100"
       className="h-full w-full overflow-visible"
-      style={{ color: "currentColor" }}
+      style={{ color: mobile ? "#e8e8e8" : "currentColor" }}
     >
       {/* Outer gear body */}
       <polygon
         points={points.join(" ")}
         fill="currentColor"
-        fillOpacity={active ? 0.04 : 0.02}
+        fillOpacity={mobile ? (active ? 0.09 : 0.05) : active ? 0.04 : 0.02}
         stroke="currentColor"
-        strokeOpacity={active ? 0.45 : 0.16}
+        strokeOpacity={mobile ? (active ? 0.65 : 0.4) : active ? 0.45 : 0.16}
         strokeWidth="0.7"
         className="transition-all duration-500"
       />
@@ -285,7 +329,7 @@ function GearSVG({ active }: { active: boolean }) {
         r="29"
         fill="none"
         stroke="currentColor"
-        strokeOpacity={active ? 0.28 : 0.1}
+        strokeOpacity={mobile ? (active ? 0.4 : 0.22) : active ? 0.28 : 0.1}
         strokeWidth="0.55"
         className="transition-all duration-500"
       />
@@ -296,9 +340,9 @@ function GearSVG({ active }: { active: boolean }) {
         cy="50"
         r="12"
         fill="currentColor"
-        fillOpacity={active ? 0.05 : 0.025}
+        fillOpacity={mobile ? (active ? 0.12 : 0.06) : active ? 0.05 : 0.025}
         stroke="currentColor"
-        strokeOpacity={active ? 0.35 : 0.14}
+        strokeOpacity={mobile ? (active ? 0.5 : 0.3) : active ? 0.35 : 0.14}
         strokeWidth="0.7"
         className="transition-all duration-500"
       />
@@ -309,7 +353,7 @@ function GearSVG({ active }: { active: boolean }) {
         cy="50"
         r="3.8"
         fill="currentColor"
-        fillOpacity={active ? 0.25 : 0.12}
+        fillOpacity={mobile ? (active ? 0.4 : 0.22) : active ? 0.25 : 0.12}
         className="transition-all duration-500"
       />
 
@@ -322,7 +366,7 @@ function GearSVG({ active }: { active: boolean }) {
           x2="50"
           y2="64"
           stroke="currentColor"
-          strokeOpacity={active ? 0.25 : 0.09}
+          strokeOpacity={mobile ? (active ? 0.35 : 0.18) : active ? 0.25 : 0.09}
           strokeWidth="0.65"
           transform={`rotate(${deg} 50 50)`}
           className="transition-all duration-500"
