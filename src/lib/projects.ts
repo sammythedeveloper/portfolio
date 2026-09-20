@@ -29,32 +29,6 @@ export const projects = [
     repo: "https://github.com/sammythedeveloper/hassistance",
   },
   {
-    title: "Slate",
-    description:
-      "Saas style infrastructure intelligence platform designed to bridge the gap between complex backend services and actionable user analytics",
-
-    purpose:
-      "Slate is a production-grade SaaS infrastructure intelligence platform that connects subscriber management, service monitoring, billing, and administrative oversight through a unified control plane",
-
-    image: "/projects/slate.png",
-
-    techStack: ["Next.js", "TypeScript", "Express.js", "Node.js", "PostgreSQL"],
-
-    features: [
-      "Provides two dedicated dashboards: a user dashboard for monitoring service instances and subscriptions, and an admin control plane for platform-wide user, financial, and operational management.",
-      "Implements role-based access control (RBAC) to separate standard subscriber access from elevated administrative capabilities and protected infrastructure operations",
-      "Uses a signature-verified Stripe webhook architecture to securely synchronize billing events with platform state while reducing race conditions and preventing unverified financial updates",
-      "Admin Control Plane",
-      "Built with React, Tailwind, shadcn/ui, Node.js, Express, and PostgreSQL to deliver a data-heavy SaaS interface with persistent relational state and real-time operational visibility.",
-    ],
-
-    documentation:
-      "https://www.notion.so/Slate-39a8bd3daece80b78818ce543a883d8c?source=copy_link",
-    live: "https://slate-fawn-one.vercel.app/",
-    repo: "https://github.com/sammythedeveloper/Slate_backend/tree/main/membership-server",
-  },
-
-  {
     title: "Finance Accounting Dashboard",
     description:
       "A financial dashboard designed to visualize and manage personal finances.",
@@ -88,7 +62,31 @@ export const projects = [
     live: "https://finflow-client-one.vercel.app/",
     repo: "https://github.com/sammythedeveloper/finflow_client",
   },
+  {
+    title: "Slate",
+    description:
+      "Saas style infrastructure intelligence platform designed to bridge the gap between complex backend services and actionable user analytics",
 
+    purpose:
+      "Slate is a production-grade SaaS infrastructure intelligence platform that connects subscriber management, service monitoring, billing, and administrative oversight through a unified control plane",
+
+    image: "/projects/slate.png",
+
+    techStack: ["Next.js", "TypeScript", "Express.js", "Node.js", "PostgreSQL"],
+
+    features: [
+      "Provides two dedicated dashboards: a user dashboard for monitoring service instances and subscriptions, and an admin control plane for platform-wide user, financial, and operational management.",
+      "Implements role-based access control (RBAC) to separate standard subscriber access from elevated administrative capabilities and protected infrastructure operations",
+      "Uses a signature-verified Stripe webhook architecture to securely synchronize billing events with platform state while reducing race conditions and preventing unverified financial updates",
+      "Admin Control Plane",
+      "Built with React, Tailwind, shadcn/ui, Node.js, Express, and PostgreSQL to deliver a data-heavy SaaS interface with persistent relational state and real-time operational visibility.",
+    ],
+
+    documentation:
+      "https://www.notion.so/Slate-39a8bd3daece80b78818ce543a883d8c?source=copy_link",
+    live: "https://slate-fawn-one.vercel.app/",
+    repo: "https://github.com/sammythedeveloper/Slate_backend/tree/main/membership-server",
+  },
   {
     title: "Stacky",
     description:
