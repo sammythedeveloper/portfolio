@@ -27,28 +27,28 @@ export default function Home() {
       </ParallaxSection>
 
       <ParallaxSection>
-        <Experience/>
+        <Experience />
       </ParallaxSection>
 
-      <ParallaxSection>
-        <Education/>
-      </ParallaxSection>
-      
       <ParallaxSection>
         <About />
       </ParallaxSection>
-      
+
       <ParallaxSection>
-        <Certificates/>
-      </ParallaxSection>
-      <ParallaxSection>
-        <Contact/>
+        <Education />
       </ParallaxSection>
 
       <ParallaxSection>
-        <Footer/>
+        <Certificates />
       </ParallaxSection>
       
+      <ParallaxSection>
+        <Contact />
+      </ParallaxSection>
+
+      <ParallaxSection>
+        <Footer />
+      </ParallaxSection>
     </main>
   );
 }
