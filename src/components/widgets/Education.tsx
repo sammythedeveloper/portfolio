@@ -107,15 +107,15 @@ export default function Education() {
                   {item.credential}
                 </p>
 
-                <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+                <h3 className="mt-2 text-3xl font-semibold tracking-tight text-black md:text-4xl">
                   {item.institution}
                 </h3>
 
-                <p className="mt-2 text-lg text-sub-rich">
+                <p className="mt-2 text-lg text-gray-500">
                   {item.field}
                 </p>
 
-                <p className="mt-6 max-w-2xl text-sm leading-relaxed text-sub-rich md:text-base">
+                <p className="mt-6 max-w-2xl text-sm leading-relaxed text-gray-500 md:text-base">
                   {item.description}
                 </p>
 

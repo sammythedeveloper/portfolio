@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-charcoal-base: #000000;
-  --color-second-base: #000000;
+  --color-charcoal-base: #FFFFFF;
+  --color-second-base: #FFFFFF;
   --color-bar-surface: #000000;
 
-  --color-co-rich: #c89549;
-  --color-sub-rich: #a1a1aa;
+  --color-co-rich: #2273F4;
+  --color-sub-rich: #000000;
   --color-co-dark: #a05a2c;
-  --color-co-light: #c98a4a;
+  --color-co-light: #000000;
   --color-co-simple: #10b981;
 
   --color-text-main: #f5f5f5;

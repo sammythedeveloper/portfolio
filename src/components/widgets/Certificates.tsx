@@ -94,7 +94,7 @@ export default function Certificates() {
             Credentials
           </span>
 
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white tracking-tight">
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-black tracking-tight">
             Certifications & Training
           </h2>
 
@@ -139,7 +139,7 @@ export default function Certificates() {
                   {/* Main content */}
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <h3 className="text-lg md:text-xl font-semibold text-white tracking-tight">
+                      <h3 className="text-lg md:text-xl font-semibold text-black tracking-tight">
                         {activeCertificate.title}
                       </h3>
 

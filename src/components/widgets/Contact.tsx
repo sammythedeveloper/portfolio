@@ -61,7 +61,8 @@ export default function Contact() {
 
   return (
     <section id="contact" className="w-full px-6 py-24 md:py-28">
-      <div className="max-w-5xl mx-auto">
+      <div className="mx-auto max-w-5xl">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -69,326 +70,333 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <span className="text-xs font-semibold tracking-[0.25em] uppercase text-co-rich">
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-co-rich  ">
             Contact
           </span>
 
-          <h2 className="mt-4 text-4xl md:text-5xl font-bold text-white tracking-tight">
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-black md:text-5xl">
             Let&apos;s talk.
           </h2>
 
-          <p className="mt-4 max-w-xl text-sub-rich leading-relaxed">
-          Seeking Backend / Full-Stack opportunities · Toronto, ON · Open to remote, hybrid, or onsite
+          <p className="mt-4 max-w-xl leading-relaxed text-black/50">
+            Seeking Backend / Full-Stack opportunities · Toronto, ON · Open to
+            remote, hybrid, or onsite
           </p>
         </motion.div>
 
-        {/* Contact Meta */}
+        {/* Unified Contact Container */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
-        >
-          {/* Location */}
-          <div className="flex items-center gap-2 text-sm text-sub-rich">
-            <MapPin size={15} className="text-co-rich" />
-            <span>Toronto, ON</span>
-            <span className="text-white/20">·</span>
-            <span>Open to Remote</span>
-          </div>
-
-          {/* Social Links */}
-          <div className="flex items-center gap-5">
-            <a
-              href="https://github.com/sammythedeveloper"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                group
-                inline-flex
-                items-center
-                gap-1.5
-                text-sm
-                text-sub-rich
-                transition-colors
-                hover:text-co-rich
-              "
-            >
-              <FaGithub size={15} />
-              GitHub
-              <ArrowUpRight
-                size={13}
-                className="
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-0.5
-                  group-hover:-translate-y-0.5
-                "
-              />
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/samson-daba-29b877231/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                group
-                inline-flex
-                items-center
-                gap-1.5
-                text-sm
-                text-sub-rich
-                transition-colors
-                hover:text-co-rich
-              "
-            >
-              <FaLinkedin size={15} />
-              LinkedIn
-              <ArrowUpRight
-                size={13}
-                className="
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-0.5
-                  group-hover:-translate-y-0.5
-                "
-              />
-            </a>
-          </div>
-        </motion.div>
-
-        {/* Divider */}
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          viewport={{ once: true }}
-          className="mt-10 h-px bg-white/10 origin-left"
-        />
-
-        {/* Form */}
-        <motion.form
-          onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
-          className="mt-10"
+          className="
+            mt-10
+            rounded-2xl
+            border
+            border-black/[0.08]
+            bg-black/[0.015]
+            p-6
+            md:p-8
+          "
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Name */}
-            <div className="group">
-              <label
-                htmlFor="name"
+          {/* Contact Meta */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            {/* Location */}
+            <div className="flex items-center gap-2 text-sm text-black/50">
+              <MapPin size={15} className="text-black" />
+              <span>Toronto, ON</span>
+              <span className="text-black/20">·</span>
+              <span>Open to Remote</span>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-5">
+              <a
+                href="https://github.com/sammythedeveloper"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="
-                  block
+                  group
+                  inline-flex
+                  items-center
+                  gap-1.5
+                  text-sm
+                  text-black/50
+                  transition-colors
+                  hover:text-black
+                "
+              >
+                <FaGithub size={15} />
+                GitHub
+                <ArrowUpRight
+                  size={13}
+                  className="
+                    transition-transform
+                    duration-200
+                    group-hover:translate-x-0.5
+                    group-hover:-translate-y-0.5
+                  "
+                />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/samson-daba-29b877231/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  group
+                  inline-flex
+                  items-center
+                  gap-1.5
+                  text-sm
+                  text-black/50
+                  transition-colors
+                  hover:text-black
+                "
+              >
+                <FaLinkedin size={15} />
+                LinkedIn
+                <ArrowUpRight
+                  size={13}
+                  className="
+                    transition-transform
+                    duration-200
+                    group-hover:translate-x-0.5
+                    group-hover:-translate-y-0.5
+                  "
+                />
+              </a>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="mt-8 h-px bg-black/[0.08]" />
+
+          {/* Form */}
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            viewport={{ once: true }}
+            className="mt-8"
+          >
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              {/* Name */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="
+                    mb-2
+                    block
+                    text-xs
+                    font-medium
+                    uppercase
+                    tracking-[0.15em]
+                    text-black
+                  "
+                >
+                  Name
+                </label>
+
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  value={formState.name}
+                  onChange={(e) =>
+                    setFormState({
+                      ...formState,
+                      name: e.target.value,
+                    })
+                  }
+                  placeholder="Your name"
+                  className="
+                    w-full
+                    border-b
+                    border-black/10
+                    bg-transparent
+                    px-0
+                    py-3
+                    text-sm
+                    text-black
+                    outline-none
+                    placeholder:text-black/20
+                    transition-colors
+                    duration-300
+                    focus:border-black
+                  "
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="
+                    mb-2
+                    block
+                    text-xs
+                    font-medium
+                    uppercase
+                    tracking-[0.15em]
+                    text-black
+                  "
+                >
+                  Email
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  value={formState.email}
+                  onChange={(e) =>
+                    setFormState({
+                      ...formState,
+                      email: e.target.value,
+                    })
+                  }
+                  placeholder="you@example.com"
+                  className="
+                    w-full
+                    border-b
+                    border-black/10
+                    bg-transparent
+                    px-0
+                    py-3
+                    text-sm
+                    text-black
+                    outline-none
+                    placeholder:text-black/20
+                    transition-colors
+                    duration-300
+                    focus:border-black
+                  "
+                />
+              </div>
+            </div>
+
+            {/* Message */}
+            <div className="mt-8">
+              <label
+                htmlFor="message"
+                className="
                   mb-2
+                  block
                   text-xs
                   font-medium
                   uppercase
                   tracking-[0.15em]
-                  text-sub-rich/60
+                  text-black
                 "
               >
-                Name
+                Message
               </label>
 
-              <input
-                type="text"
-                id="name"
+              <textarea
+                id="message"
                 required
-                value={formState.name}
+                rows={4}
+                value={formState.message}
                 onChange={(e) =>
                   setFormState({
                     ...formState,
-                    name: e.target.value,
+                    message: e.target.value,
                   })
                 }
-                placeholder="Your name"
+                placeholder="Tell me about the opportunity, project, or idea..."
                 className="
                   w-full
-                  bg-transparent
-                  border-0
+                  resize-none
                   border-b
-                  border-white/10
+                  border-black/10
+                  bg-transparent
                   px-0
                   py-3
-                  text-white
-                  placeholder-white/20
                   text-sm
+                  text-black
                   outline-none
+                  placeholder:text-black/20
                   transition-colors
                   duration-300
-                  focus:border-co-rich
+                  focus:border-black
                 "
               />
             </div>
 
-            {/* Email */}
-            <div className="group">
-              <label
-                htmlFor="email"
-                className="
-                  block
-                  mb-2
-                  text-xs
-                  font-medium
-                  uppercase
-                  tracking-[0.15em]
-                  text-sub-rich/60
-                "
-              >
-                Email
-              </label>
+            {/* Bottom Action */}
+            <div className="mt-8 flex items-center justify-between">
+              <p className="hidden text-xs text-black sm:block">
+                I&apos;ll get back to you as soon as I can.
+              </p>
 
-              <input
-                type="email"
-                id="email"
-                required
-                value={formState.email}
-                onChange={(e) =>
-                  setFormState({
-                    ...formState,
-                    email: e.target.value,
-                  })
-                }
-                placeholder="you@example.com"
+              <button
+                type="submit"
+                disabled={isSubmitting || submitted}
                 className="
-                  w-full
-                  bg-transparent
-                  border-0
-                  border-b
-                  border-white/10
-                  px-0
+                  group
+                  ml-auto
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  bg-black
+                  px-5
                   py-3
-                  text-white
-                  placeholder-white/20
                   text-sm
-                  outline-none
+                  font-semibold
+                  text-white
                   transition-colors
                   duration-300
-                  focus:border-co-rich
+                  hover:bg-green-500 
+                  disabled:pointer-events-none
+                  disabled:opacity-50
                 "
-              />
+              >
+                {isSubmitting ? (
+                  <>
+                    <span>Sending...</span>
+
+                    <div
+                      className="
+                        h-4
+                        w-4
+                        animate-spin
+                        rounded-full
+                        border-2
+                        border-white/20
+                        border-t-white
+                      "
+                    />
+                  </>
+                ) : submitted ? (
+                  <>
+                    <span>Message sent</span>
+                    <Check size={15} />
+                  </>
+                ) : (
+                  <>
+                    <span>Send message</span>
+
+                    <Send
+                      size={14}
+                      className="
+                        transition-transform
+                        duration-200
+                        group-hover:translate-x-1
+                      "
+                    />
+                  </>
+                )}
+              </button>
             </div>
-          </div>
-
-          {/* Message */}
-          <div className="mt-8">
-            <label
-              htmlFor="message"
-              className="
-                block
-                mb-2
-                text-xs
-                font-medium
-                uppercase
-                tracking-[0.15em]
-                text-sub-rich/60
-              "
-            >
-              Message
-            </label>
-
-            <textarea
-              id="message"
-              required
-              rows={4}
-              value={formState.message}
-              onChange={(e) =>
-                setFormState({
-                  ...formState,
-                  message: e.target.value,
-                })
-              }
-              placeholder="Tell me about the opportunity, project, or idea..."
-              className="
-                w-full
-                bg-transparent
-                border-0
-                border-b
-                border-white/10
-                px-0
-                py-3
-                text-white
-                placeholder-white/20
-                text-sm
-                outline-none
-                resize-none
-                transition-colors
-                duration-300
-                focus:border-co-rich
-              "
-            />
-          </div>
-
-          {/* Bottom Action */}
-          <div className="mt-8 flex items-center justify-between">
-            <p className="hidden sm:block text-xs text-sub-rich/40">
-              I&apos;ll get back to you as soon as I can.
-            </p>
-
-            <button
-              type="submit"
-              disabled={isSubmitting || submitted}
-              className="
-                group
-                ml-auto
-                inline-flex
-                items-center
-                gap-2
-                text-sm
-                font-semibold
-                text-white
-                transition-colors
-                duration-300
-                hover:text-co-rich
-                disabled:opacity-50
-                disabled:pointer-events-none
-              "
-            >
-              {isSubmitting ? (
-                <>
-                  <span>Sending...</span>
-
-                  <div
-                    className="
-                      h-4
-                      w-4
-                      rounded-full
-                      border-2
-                      border-white/20
-                      border-t-co-rich
-                      animate-spin
-                    "
-                  />
-                </>
-              ) : submitted ? (
-                <>
-                  <span className="text-co-rich">Message sent</span>
-                  <Check size={15} className="text-co-rich" />
-                </>
-              ) : (
-                <>
-                  <span>Send message</span>
-
-                  <Send
-                    size={14}
-                    className="
-                      transition-transform
-                      duration-200
-                      group-hover:translate-x-1
-                    "
-                  />
-                </>
-              )}
-            </button>
-          </div>
-        </motion.form>
+          </motion.form>
+        </motion.div>
 
         {/* Bottom Rule */}
-        <div className="mt-16 h-px bg-white/5" />
+        <div className="mt-16 h-px bg-black/[0.05]" />
       </div>
     </section>
   );

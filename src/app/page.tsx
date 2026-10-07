@@ -13,39 +13,30 @@ import Footer from "@/components/widgets/Footer";
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen md:ml-28">
+    <main className="flex flex-col min-h-screen ">
       <SidebarNav />
-
       <Hero />
-
       <ParallaxSection>
         <TechStack />
       </ParallaxSection>
-
       <ParallaxSection>
         <Projects />
       </ParallaxSection>
-
       <ParallaxSection>
         <Experience />
       </ParallaxSection>
-
       <ParallaxSection>
         <About />
       </ParallaxSection>
-
       <ParallaxSection>
         <Education />
       </ParallaxSection>
-
       <ParallaxSection>
         <Certificates />
       </ParallaxSection>
-      
       <ParallaxSection>
         <Contact />
       </ParallaxSection>
-
       <ParallaxSection>
         <Footer />
       </ParallaxSection>

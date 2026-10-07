@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 
 const focusAreas = [
   {
@@ -64,7 +63,7 @@ export default function About() {
           </span>
 
           <p className="mt-5 max-w-2xl text-xl leading-relaxed text-sub-rich md:text-2xl">
-            Evidence over hype—what I build and how I approach software.
+            what I build and how I approach software.
           </p>
         </motion.div>
 
