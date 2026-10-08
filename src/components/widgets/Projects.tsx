@@ -16,7 +16,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative w-full overflow-hidden bg-charcoal-base text-co-rich"
+      className="relative w-full overflow-hidden bg-charcoal-base text-black"
     >
       <div className="mx-auto max-w-[1400px] px-5 py-28 md:px-12 lg:px-20 lg:py-36">
         {/* HEADER */}
@@ -34,9 +34,9 @@ export default function Projects() {
             </span>
           </div>
 
-          <h5 className="mt-5 max-w-3xl text-[clamp(2.8rem,6vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.05em]">
-            My builds.
-          </h5>
+          <h3 className="mt-5 max-w-3xl text-[clamp(2.8rem,6vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.05em]">
+            Full stack projects.
+          </h3>
 
           <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-sub-rich md:text-base">
             A collection of applications, systems, and experiments built across
@@ -47,7 +47,7 @@ export default function Projects() {
         {/* GEAR SYSTEM */}
         <div className="relative mx-auto max-w-[1050px]">
           {/* CENTRAL AXIS - desktop only */}
-          <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/[0.09] to-transparent md:block" />
+          <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-black/10 to-transparent md:block" />
 
           <div className="relative space-y-12 md:space-y-20">
             {projects.map((project, index) => {
@@ -74,7 +74,7 @@ export default function Projects() {
 
         {/* FOOTER */}
         <div className="mt-24 flex items-center justify-between border-t border-white/[0.07] pt-7 text-xs uppercase tracking-[0.16em] text-sub-rich/40">
-          <span>Things I’ve built</span>
+          <span>Built and Deployed</span>
           <span>{String(projects.length).padStart(2, "0")} Projects</span>
         </div>
       </div>
@@ -213,7 +213,7 @@ function GearProject({
               <span
                 className={`
                   text-[11px] font-medium tracking-[0.18em] transition-colors duration-300
-                  ${hovered ? "text-co-rich" : "text-sub-rich/50"}
+                  ${hovered ? "text-black" : "text-sub-rich/50"}
                 `}
               >
                 {String(index + 1).padStart(2, "0")}

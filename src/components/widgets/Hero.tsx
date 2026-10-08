@@ -54,9 +54,7 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen overflow-hidden bg-white text-black"
     >
-      {/* =========================================================
-          TOP LOCATION / TIME
-      ========================================================= */}
+      {/* TOP LOCATION / TIME */}
       <div className="absolute left-0 right-0 top-0 z-20">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
           <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-black/45">
@@ -68,10 +66,10 @@ export default function Hero() {
           </div>
         </div>
       </div>
-          {/* HERO CONTENT */}
+      {/* HERO CONTENT */}
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6 pt-24 lg:px-10 lg:pt-16">
         <div className="grid w-full items-center gap-16 lg:grid-cols-[1fr_0.9fr] lg:gap-8">
-              {/* LEFT SIDE */}
+          {/* LEFT SIDE */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,7 +97,7 @@ export default function Hero() {
               I build reliable APIs, production web applications, and
               data-driven systems.
             </p>
-                {/* TECHNOLOGIES */}
+            {/* TECHNOLOGIES */}
             <div className="mt-8 flex max-w-xl flex-wrap gap-2">
               {technologies.map((tech) => (
                 <div
@@ -112,7 +110,7 @@ export default function Hero() {
               ))}
             </div>
 
-{/* Button */}
+            {/* Button */}
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <a
                 href="#projects"
@@ -134,7 +132,7 @@ export default function Hero() {
                 Resume
               </a>
             </div>
-                {/*SOCIAL LINKS */}
+            {/*SOCIAL LINKS */}
             <div className="mt-8 flex items-center gap-5">
               <a
                 href="https://github.com/sammythedeveloper"
@@ -165,21 +163,13 @@ export default function Hero() {
               </a>
             </div>
           </motion.div>
-
-          {/* =====================================================
-              RIGHT SIDE — ORGANIC PHOTO
-              Hidden below lg
-          ===================================================== */}
-          <div className="relative hidden min-h-[540px] items-center justify-center lg:flex lg:min-h-[650px]">
+          {/* RIGHT SIDE  */}
+          <div className="relative order-first flex items-center justify-center lg:order-last lg:min-h-[650px]">
             <motion.div
               initial={{ opacity: 0, scale: 0.94, y: 25 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{
-                duration: 0.9,
-                delay: 0.15,
-                ease: "easeOut",
-              }}
-              className="relative h-[610px] w-[520px]"
+              transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
+              className="relative aspect-[520/610] w-full max-w-[260px] sm:max-w-[320px] lg:h-[610px] lg:w-[520px] lg:max-w-none"
             >
               <motion.svg
                 viewBox="0 0 560 650"
@@ -196,10 +186,7 @@ export default function Hero() {
                 }}
               >
                 <defs>
-
-                  {/* =================================================
-                      GLASS EDGE
-                  ================================================= */}
+                  {/* GLASS EDGE */}
                   <linearGradient
                     id="glassBorder"
                     x1="0%"
@@ -207,46 +194,19 @@ export default function Hero() {
                     x2="100%"
                     y2="100%"
                   >
-                    <stop
-                      offset="0%"
-                      stopColor="white"
-                      stopOpacity="0.9"
-                    />
+                    <stop offset="0%" stopColor="white" stopOpacity="0.9" />
 
-                    <stop
-                      offset="18%"
-                      stopColor="white"
-                      stopOpacity="0.35"
-                    />
+                    <stop offset="18%" stopColor="white" stopOpacity="0.35" />
 
-                    <stop
-                      offset="40%"
-                      stopColor="black"
-                      stopOpacity="0.12"
-                    />
+                    <stop offset="40%" stopColor="black" stopOpacity="0.12" />
 
-                    <stop
-                      offset="58%"
-                      stopColor="white"
-                      stopOpacity="0.7"
-                    />
+                    <stop offset="58%" stopColor="white" stopOpacity="0.7" />
 
-                    <stop
-                      offset="75%"
-                      stopColor="white"
-                      stopOpacity="0.25"
-                    />
+                    <stop offset="75%" stopColor="white" stopOpacity="0.25" />
 
-                    <stop
-                      offset="100%"
-                      stopColor="black"
-                      stopOpacity="0.12"
-                    />
+                    <stop offset="100%" stopColor="black" stopOpacity="0.12" />
                   </linearGradient>
-
-                  {/* =================================================
-                      ORGANIC PHOTO CLIP
-                  ================================================= */}
+                  {/* ORGANIC PHOTO CLIP} */}
                   <clipPath id="portraitClip">
                     <motion.path
                       animate={{
