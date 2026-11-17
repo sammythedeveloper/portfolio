@@ -62,31 +62,43 @@ export const projects = [
     live: "https://finflow-client-one.vercel.app/",
     repo: "https://github.com/sammythedeveloper/finflow_client",
   },
-  {
-    title: "Slate",
-    description:
-      "Saas style infrastructure intelligence platform designed to bridge the gap between complex backend services and actionable user analytics",
+{
+  title: "TeamOp",
 
-    purpose:
-      "Slate is a production-grade SaaS infrastructure intelligence platform that connects subscriber management, service monitoring, billing, and administrative oversight through a unified control plane",
+  description:
+    "Full-stack team operations platform that centralizes employee requests, approval workflows, and organizational management in one workspace.",
 
-    image: "/projects/slate.png",
+  purpose:
+    "TeamOp is a multi-tenant SaaS platform designed to simplify internal team operations for growing organizations. It provides a centralized workspace where employees can submit and track requests while managers and administrators manage approvals, team members, and operational activity through role-based dashboards.",
 
-    techStack: ["Next.js", "TypeScript", "Express.js", "Node.js", "PostgreSQL"],
+  image: "/projects/teamop.png",
 
-    features: [
-      "Provides two dedicated dashboards: a user dashboard for monitoring service instances and subscriptions, and an admin control plane for platform-wide user, financial, and operational management.",
-      "Implements role-based access control (RBAC) to separate standard subscriber access from elevated administrative capabilities and protected infrastructure operations",
-      "Uses a signature-verified Stripe webhook architecture to securely synchronize billing events with platform state while reducing race conditions and preventing unverified financial updates",
-      "Admin Control Plane",
-      "Built with React, Tailwind, shadcn/ui, Node.js, Express, and PostgreSQL to deliver a data-heavy SaaS interface with persistent relational state and real-time operational visibility.",
-    ],
+  techStack: [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Express.js",
+    "PostgreSQL",
+    "Drizzle ORM",
+    "Clerk",
+    "Azure cloud",
+    "Azure Function App",
+  ],
 
-    documentation:
-      "https://www.notion.so/Slate-39a8bd3daece80b78818ce543a883d8c?source=copy_link",
-    live: "https://slate-fawn-one.vercel.app/",
-    repo: "https://github.com/sammythedeveloper/Slate_backend/tree/main/membership-server",
-  },
+  features: [
+    "Implements multi-tenant organization architecture to ensure users can only access data belonging to their respective workspaces.",
+    "Provides dedicated employee and management experiences with role-based access control for Owners, Managers, and Employees.",
+    "Implements an employee request management system supporting equipment, time off, workplace reports, IT support, and payroll or HR inquiries.",
+    "Supports request lifecycle management, including submission, review, approval, rejection, cancellation, and resolution, with event-based audit tracking.",
+    "Implements organization membership and invitation workflows with secure invitation tokens, expiration handling, and membership management.",
+    "Uses subscription-plan entitlements to control organization limits, features, and administrative permissions.",
+    "Built with React, TypeScript, Express.js, PostgreSQL, and Drizzle ORM, with Clerk handling authentication and JWT-based API authorization.",
+  ],
+
+  documentation: "",
+  live: "https://teamopfn21002.z22.web.core.windows.net/",
+  repo: "",
+},
   {
     title: "Stacky",
     description:
