@@ -72,7 +72,7 @@ export const caseStudies: CaseStudyEntry[] = [
     title: cenlume.title,
     category: "Mobile",
     summary: cenlume.summary,
-    image: "/case-studies/Projects/Cenlume.jpeg",
+    image: "/Projects/Cenlume.jpeg",
     data: cenlume,
   },
   // To add a case study: create data/case-studies/<slug>.ts, import it here,

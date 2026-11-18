@@ -12,15 +12,15 @@ export const cenlume: CaseStudyData = {
 
   heroImages: [
     {
-      src: "/cenlume/signup.png",
+      src: "/cenlume/signup.PNG",
       alt: "Cenlume account creation screen",
     },
     {
-      src: "/cenlume/dashboard.png",
+      src: "/cenlume/dashboard.PNG",
       alt: "Cenlume expense management dashboard",
     },
     {
-      src: "/cenlume/reminder.png",
+      src: "/cenlume/reminder.PNG",
       alt: "Cenlume payment reminders screen",
     },
   ],
