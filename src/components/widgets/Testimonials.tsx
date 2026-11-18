@@ -8,25 +8,27 @@ import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 type Testimonial = {
   quote: string;
   name: string;
-  role: string;
   company?: string;
-  avatar?: string; // optional local path, e.g. "/testimonials/name.jpg"
 };
 
-// Replace these placeholders with real quotes you have permission to publish.
 const testimonials: Testimonial[] = [
   {
-    quote: "[Replace with a real quote from a manager or teammate]",
-    name: "[Full Name]",
-    role: "[Job title]",
-    company: "[Company]",
+    quote: "Samson approached the project with a clear understanding of the business problem we wanted to solve. From designing the user experience to implementing the backend functionality, he was focused on delivering something practical rather than just making it look good.",
+    name: "Freelance Client",
+    company: "",
   },
   {
-    quote: "[A second quote, about a different part of your work]",
-    name: "[Full Name]",
-    role: "[Job title]",
-    company: "[Company]",
+    quote: "Working with Sam was a great experience. He understands both frontend and backend development and knows how to bring the pieces together into a reliable application. His attention to functionality, usability, and maintainable code makes him a valuable contributor to any development team.",
+    name: "Biruk K.",
+    company: "EvangadiNet",
   },
+  {
+    quote: "That combination of his technical ability and practical thinking is valuable to any organization",
+    name: "Ziran.",
+    company: "Intractmet",
+  },
+ 
+ 
 ];
 
 const INTERVAL_MS = 6000;
@@ -34,13 +36,16 @@ const serif = { fontFamily: "var(--font-serif)" } as const;
 
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [paused, setPaused] = useState(false);
+
   const total = testimonials.length;
 
   useEffect(() => {
     if (paused || total < 2) return;
 
     const timer = setInterval(() => {
+      setDirection(1);
       setIndex((current) => (current + 1) % total);
     }, INTERVAL_MS);
 
@@ -49,23 +54,26 @@ export default function Testimonials() {
 
   if (total === 0) return null;
 
-  const item = testimonials[index];
-  const initials = item.name
-    .split(" ")
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+  const visibleTestimonials = [0, 1, 2].map(
+    (offset) => testimonials[(index + offset) % total]
+  );
 
-  const goPrev = () => setIndex((i) => (i - 1 + total) % total);
-  const goNext = () => setIndex((i) => (i + 1) % total);
+  const goPrev = () => {
+    setDirection(-1);
+    setIndex((current) => (current - 1 + total) % total);
+  };
+
+  const goNext = () => {
+    setDirection(1);
+    setIndex((current) => (current + 1) % total);
+  };
 
   return (
     <section
       id="testimonials"
       className="w-full bg-second-base px-6 py-20 text-text-main md:py-24"
     >
-      <div className="mx-auto w-full max-w-4xl">
+      <div className="mx-auto w-full max-w-5xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,76 +88,121 @@ export default function Testimonials() {
           >
             What People Say
           </span>
+
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-text-muted">
             Feedback from people I&apos;ve worked with.
           </p>
         </motion.div>
 
-        {/* Card */}
+        {/* Testimonial container */}
         <div
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          className="relative overflow-hidden rounded-3xl border border-black/10 bg-charcoal-base p-8 md:p-12 dark:border-white/10"
+          className="relative overflow-hidden rounded-3xl border border-black/10 bg-charcoal-base p-6 md:p-10 dark:border-white/10"
         >
-          <Quote
-            size={40}
-            strokeWidth={1}
-            className="mb-6 text-text-main/15"
-            aria-hidden="true"
-          />
-
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.figure
-              key={index}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="min-h-[180px] md:min-h-[160px]"
-            >
-              <blockquote
-                style={serif}
-                className="text-2xl leading-snug md:text-3xl"
+          {/* Three-column carousel */}
+          <div className="px-2 md:px-4">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={index}
+                initial={{
+                  opacity: 0,
+                  x: direction * 60,
+                }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  x: direction * -60,
+                }}
+                transition={{
+                  duration: 0.45,
+                  ease: "easeInOut",
+                }}
+                className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
               >
-                {item.quote}
-              </blockquote>
+                {visibleTestimonials.map((item, i) => {
+                  const initials = item.name
+                    .split(" ")
+                    .map((part) => part[0])
+                    .slice(0, 2)
+                    .join("")
+                    .toUpperCase();
 
-              <figcaption className="mt-8 flex items-center gap-4">
-                {item.avatar ? (
-                  <Image
-                    src={item.avatar}
-                    alt={item.name}
-                    width={48}
-                    height={48}
-                    className="h-12 w-12 rounded-full object-cover"
-                  />
-                ) : (
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/10 text-xs font-medium dark:border-white/10">
-                    {initials}
-                  </div>
-                )}
+                  return (
+                    <motion.figure
+                      key={`${index}-${i}`}
+                      className="flex min-h-[180px] flex-col rounded-2xl border border-gray-200 bg-white/[0.03] p-6 transition-colors dark:border-white/10"
+                    >
+                      <Quote
+                        size={18}
+                        strokeWidth={1}
+                        className="mb-6 text-text-main/25"
+                        aria-hidden="true"
+                      />
 
-                <div>
-                  <p className="text-sm font-medium">{item.name}</p>
-                  <p className="text-xs text-text-muted">
-                    {item.role}
-                    {item.company ? ` · ${item.company}` : ""}
-                  </p>
-                </div>
-              </figcaption>
-            </motion.figure>
-          </AnimatePresence>
+                      <blockquote
+                        style={serif}
+                        className="flex-1 text-lg leading-snug md:text-lg"
+                      >
+                        {item.quote}
+                      </blockquote>
 
-          {/* Controls: hidden when there's only one quote */}
+                      <figcaption className="mt-8 flex items-center gap-3">
+
+                        <div className="min-w-0">
+                          <p className="truncate text-sm font-medium">
+                            {item.name}
+                          </p>
+                          <p className="truncate text-xs text-text-muted">
+                            {item.company ? ` ${item.company}` : ""}
+                          </p>
+                        </div>
+                      </figcaption>
+                    </motion.figure>
+                  );
+                })}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Bottom-centered navigation */}
           {total > 1 && (
-            <div className="mt-10 flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
+            <div className="mt-9 flex flex-col items-center gap-5">
+              {/* Arrows */}
+              <div className="flex items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={goPrev}
+                  aria-label="Previous testimonials"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 transition-colors hover:bg-black/[0.04] dark:border-white/15 dark:hover:bg-white/[0.06]"
+                >
+                  <ArrowLeft size={15} strokeWidth={1.5} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={goNext}
+                  aria-label="Next testimonials"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 transition-colors hover:bg-black/[0.04] dark:border-white/15 dark:hover:bg-white/[0.06]"
+                >
+                  <ArrowRight size={15} strokeWidth={1.5} />
+                </button>
+              </div>
+
+              {/* Pagination */}
+              <div className="flex items-center justify-center gap-1.5">
                 {testimonials.map((_, i) => (
                   <button
                     key={i}
                     type="button"
-                    aria-label={`Show testimonial ${i + 1}`}
-                    onClick={() => setIndex(i)}
+                    aria-label={`Show testimonial group ${i + 1}`}
+                    onClick={() => {
+                      setDirection(i > index ? 1 : -1);
+                      setIndex(i);
+                    }}
                     className="flex items-center justify-center p-1"
                   >
                     <span
@@ -161,25 +214,6 @@ export default function Testimonials() {
                     />
                   </button>
                 ))}
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={goPrev}
-                  aria-label="Previous testimonial"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-black/15 transition-colors hover:bg-black/[0.04] dark:border-white/15 dark:hover:bg-white/[0.06]"
-                >
-                  <ArrowLeft size={16} strokeWidth={1.5} />
-                </button>
-                <button
-                  type="button"
-                  onClick={goNext}
-                  aria-label="Next testimonial"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-black/15 transition-colors hover:bg-black/[0.04] dark:border-white/15 dark:hover:bg-white/[0.06]"
-                >
-                  <ArrowRight size={16} strokeWidth={1.5} />
-                </button>
               </div>
             </div>
           )}
