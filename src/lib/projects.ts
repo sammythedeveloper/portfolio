@@ -26,7 +26,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Built a mobile application that combines expense management, shared expense splitting, and bill reminders in one experience.",
     result:
       "Delivered an Android application with three integrated financial systems, AWS serverless infrastructure, and Google Play closed testing with 12 testers.",
-    image: "/Projects/Cenlume.jpeg",
+    image: "/case-studies/Projects/Cenlume.jpeg",
     techStack: [
       "React Native",
       "Expo",
@@ -51,7 +51,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Built a multi-tenant SaaS platform that centralizes employee requests, approval workflows, and organization management in one workspace.",
     result:
       "Delivered a full-stack platform with role-based access, request lifecycle management, secure invitations, audit tracking, and subscription-based feature controls.",
-    image: "/Projects/TeamOp.png",
+    image: "/case-studies/Projects/TeamOp.png",
     techStack: [
       "React",
       "TypeScript",
@@ -74,7 +74,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Built an AI-powered assistant that processes developer telemetry through rule-based retrieval and Gemini to generate personalized, context-aware recommendations.",
     result:
       "Delivered a full-stack AI application with four or more telemetry signals, session-isolated conversations, and automated CI/CD with testing and production-build validation.",
-    image: "/Projects/Devpulse.png",
+    image: "/case-studies/Projects/Devpulse.png",
     techStack: [
       "Next.js",
       "TypeScript",
