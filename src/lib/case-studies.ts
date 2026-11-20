@@ -1,6 +1,6 @@
 import type { CaseStudyData } from "@/components/case-study/types";
 import { cenlume } from "@/lib/case-studies/cenlume";
-
+import { devpulse } from "@/lib/case-studies/devpulse";
 export const QUADRANTS = [
   { title: "Discover", subtitle: "Where work gets lost or repeated" },
   { title: "Experiment", subtitle: "Small tests before big builds" },
@@ -44,7 +44,8 @@ export const WALL_NOTES: WallNote[] = [
   {
     quadrant: "Discover",
     text: "Wellness tips that ignore workload",
-    tag: "Devpulse",
+    tag: "DevPulse",
+    href: "/case-studies/devpulse",
     color: BLUE,
     rotate: 1,
   },
@@ -74,6 +75,14 @@ export const caseStudies: CaseStudyEntry[] = [
     summary: cenlume.summary,
     image: "/Projects/Cenlume.jpeg",
     data: cenlume,
+  },
+  {
+    slug: "devpulse",
+    title: devpulse.title,
+    category: "AI Engineering",
+    summary: devpulse.summary,
+    image: "/case-studies/Projects/devpulse.jpeg",
+    data: devpulse,
   },
   // To add a case study: create data/case-studies/<slug>.ts, import it here,
   // and add an entry. To put a note on the wall, add it to WALL_NOTES.

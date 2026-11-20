@@ -14,7 +14,20 @@ export type IconName =
   | "Bell"
   | "Star"
   | "Layers"
-  | "Shield";
+  | "Shield"
+  | "Brain"
+  | "Sparkles"
+  | "Code"
+  | "NextJS"
+  | "PostgreSQL"
+  | "Docker"
+  | "TailwindCSS"
+  | "Prisma"
+  | "Gemini"
+  | "RadixUI"
+  | "ShadcnUI"
+  | "GitHub"
+  | "JavaScript";
 
 export type CaseStudyData = {
   title: string;

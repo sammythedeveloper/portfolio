@@ -62,7 +62,7 @@ const quadrants: Quadrant[] = [
       {
         text: "Wellness tips that ignore workload",
         tag: "Devpulse",
-        slug: "Soon",
+        slug: "devpulse",
         color: BLUE,
         rotate: 1,
       },
