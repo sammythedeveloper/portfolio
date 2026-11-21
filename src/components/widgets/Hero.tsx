@@ -113,11 +113,10 @@ export default function Hero() {
 
           <a
             href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            download="SDR.pdf"
             className="rounded-full border border-black/15 px-6 py-3 text-sm font-medium transition-colors duration-300 hover:bg-black/[0.04] dark:border-white/15 dark:hover:bg-white/[0.06]"
           >
-            Resume
+            Download Resume
           </a>
         </div>
 
