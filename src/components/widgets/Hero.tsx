@@ -110,14 +110,6 @@ export default function Hero() {
               className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
           </a>
-
-          <a
-            href="/resume.pdf"
-            download="SDR.pdf"
-            className="rounded-full border border-black/15 px-6 py-3 text-sm font-medium transition-colors duration-300 hover:bg-black/[0.04] dark:border-white/15 dark:hover:bg-white/[0.06]"
-          >
-            Download Resume
-          </a>
         </div>
 
         {/* Contact */}
