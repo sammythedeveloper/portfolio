@@ -40,7 +40,7 @@ export const featuredProjects: FeaturedProject[] = [
       "GitHub Actions",
       "EAS",
     ],
-    live: "https://play.google.com/store/apps/details?id=com.justsam2026.cenlume",
+    live: "https://www.cenlume.app/",
   },
   {
     title: "TeamOp",
