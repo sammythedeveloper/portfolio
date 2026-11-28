@@ -69,23 +69,45 @@ function PhoneFrame({
   src,
   alt,
   className = "",
+  platform = "android",
 }: {
   src: string;
   alt: string;
   className?: string;
+  platform?: "ios" | "android";
 }) {
+  const outer =
+    platform === "android" ? "rounded-[1.1rem]" : "rounded-[1.9rem]";
+  const inner =
+    platform === "android" ? "rounded-[0.95rem]" : "rounded-[1.7rem]";
+
   return (
     <div
-      className={`w-24 shrink-0 rounded-[1.9rem] bg-[#111418] p-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.25)] ring-1 ring-black/20 sm:w-32 sm:rounded-[2.4rem] sm:p-2 md:w-52 ${className}`}
+      className={`relative w-[28%] max-w-[170px] shrink-0 md:w-[200px] md:max-w-none ${className}`}
     >
-      <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[1.5rem] bg-black sm:rounded-[2rem]">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(min-width: 768px) 208px, (min-width: 640px) 128px, 96px"
-          className="object-cover object-top"
-        />
+      {/* Side buttons: Android usually has power on the right, volume on the left */}
+      <span className="absolute -left-[2px] top-[22%] h-[6%] w-[2px] rounded-l bg-[#2a2e34]" />
+      <span className="absolute -left-[2px] top-[32%] h-[9%] w-[2px] rounded-l bg-[#2a2e34]" />
+      <span className="absolute -right-[2px] top-[28%] h-[12%] w-[2px] rounded-r bg-[#2a2e34]" />
+
+      {/* Body */}
+      <div
+        className={`${outer} bg-gradient-to-b from-[#2b2f36] via-[#101216] to-[#1a1d22] p-[3px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)]`}
+      >
+        {/* Screen */}
+        <div
+          className={`relative aspect-[9/19.5] w-full overflow-hidden ${inner} bg-black`}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="(min-width: 768px) 200px, 28vw"
+            className="object-cover object-top"
+          />
+          {/* Glass reflection */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/15 via-transparent to-transparent" />
+        </div>
       </div>
     </div>
   );
@@ -141,7 +163,7 @@ export default function CaseStudy({ data }: { data: CaseStudyData }) {
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 border-b border-text-main/30 pb-0.5 font-medium transition hover:border-text-main"
               >
-               Pre release <ArrowUpRight size={14} />
+                Pre release <ArrowUpRight size={14} />
               </a>
             )}
           </Reveal>
@@ -172,13 +194,13 @@ export default function CaseStudy({ data }: { data: CaseStudyData }) {
 
         {/* Phone screenshots */}
         {data.heroImages && (
-          <Reveal className="flex items-end justify-center gap-3 pb-6 sm:gap-5 md:gap-8">
+          <Reveal className="flex items-end justify-center gap-2 pb-6 sm:gap-4 md:gap-8">
             {data.heroImages.map((img, i) => (
               <PhoneFrame
                 key={img.src}
                 src={img.src}
                 alt={img.alt}
-                className={i === 1 ? "-translate-y-6 md:-translate-y-10" : ""}
+                className={i === 1 ? "-translate-y-3 md:-translate-y-8" : ""}
               />
             ))}
           </Reveal>
